@@ -51,12 +51,49 @@ body {
   background-color: #383838;
 }
 
+.loading {
+  pointer-events: none;
+  user-select: none;
+}
+
 .container {
   max-width: 1920px;
   height: 100vh;
   margin: 0 auto;
   position: relative;
   background-color: #181818;
+}
+
+.skeleton__none {
+  display: none;
+}
+
+.skeleton__big {
+  height: 100%;
+  width: 100%;
+  background: #313131;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+.skeleton__text {
+  height: 20px;
+  width: 100%;
+  background: #313131;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 ._btn-text:hover {
@@ -138,6 +175,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  cursor: pointer;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -150,6 +188,7 @@ body {
 .nav__menu {
   display: block;
   visibility: visible;
+  transition: opacity 0.25s ease;
 }
 
 .logo__image {
@@ -296,7 +335,13 @@ body {
   margin-right: 15px;
 }
 
+.filter__item:not(:last-child) {
+  margin-right: 10px;
+}
+
 .filter__button {
+  background: transparent;
+  color: #fff;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -306,8 +351,56 @@ body {
   padding: 6px 20px;
 }
 
-.filter__button:not(:last-child) {
-  margin-right: 10px;
+.filter__button--active {
+  border-color: #ad61ff;
+  color: #ad61ff;
+}
+
+.filter__dropdown {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background: #222;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 100px;
+  z-index: 10;
+  padding: 8px 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.filter__dropdown-item {
+  padding: 9px 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.filter__dropdown-item:hover {
+  color: #ad61ff;
+
+}
+
+/* Кастомизация скроллбара для Webkit-браузеров (Chrome, Edge, Safari) */
+.filter__dropdown::-webkit-scrollbar {
+  width: 4px;
+  background: #222;
+}
+
+.filter__dropdown::-webkit-scrollbar-thumb {
+  background: #ad61ff;
+  border-radius: 4px;
+}
+
+.filter__dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Для Firefox */
+.filter__dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: #acacac transparent;
 }
 
 .content__title {
@@ -578,11 +671,11 @@ body {
 }
 
 .bar {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(28, 28, 28, 0.5);
+  background: rgba(28, 28, 28, 1);
 }
 
 .bar__content {

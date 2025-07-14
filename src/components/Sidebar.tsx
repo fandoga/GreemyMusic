@@ -1,6 +1,15 @@
-
+import { useLoading } from "../LoadingContext";
+import SidebarSkeleton from "./SidebarSkeleton";
 
 const Sidebar = () => {
+    const loading = useLoading();
+
+    if (loading) {
+        return (
+            <SidebarSkeleton />
+        );
+    }
+
     return (
         <div className="main__sidebar sidebar">
             <div className="sidebar__personal">

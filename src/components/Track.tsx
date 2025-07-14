@@ -1,5 +1,6 @@
-import { time } from "console";
+import { useLoading } from "../LoadingContext";
 import React from "react";
+import TrackSkeleton from "./TrackSkeleton";
 
 interface TrackData {
     Name: string,
@@ -10,6 +11,14 @@ interface TrackData {
 }
 
 const Track: React.FC<TrackData> = ({ Name, Album, Author, Time, Info }) => {
+    const loading = useLoading();
+
+    if (loading) {
+        return (
+            <TrackSkeleton />
+        )
+    }
+
     return (
         <div className="playlist__item">
             <div className="playlist__track track">

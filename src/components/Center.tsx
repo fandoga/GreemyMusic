@@ -1,3 +1,4 @@
+import FilterBar from "./FilterBar";
 import Searchbar from "./Searchbar";
 import Track from "./Track";
 
@@ -6,7 +7,8 @@ const Center = () => {
         <div className="main__centerblock centerblock">
             <Searchbar />
             <h2 className="centerblock__h2">Треки</h2>
-            <div className="centerblock__filter filter">
+            <FilterBar />
+            {/* <div className="centerblock__filter filter">
                 <div className="filter__title">Искать по:</div>
                 <div className="filter__button button-author _btn-text">
                     исполнителю
@@ -15,7 +17,7 @@ const Center = () => {
                     году выпуска
                 </div>
                 <div className="filter__button button-genre _btn-text">жанру</div>
-            </div>
+            </div> */}
             <div className="centerblock__content">
                 <div className="content__title playlist-title">
                     <div className="playlist-title__col col01">Трек</div>
