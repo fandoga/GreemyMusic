@@ -14,15 +14,22 @@ const Main = () => {
         const accessToken = localStorage.getItem('access-token');
 
         const fetchLiked = async () => {
-            const res = await fetch('https://api.spotify.com/v1/me/tracks', {
+            const res = await fetch('https://api.spotify.com/v1/me/tracks?limit=50', {
                 headers: { Authorization: `Bearer ${accessToken}` },
             });
+
             const data = await res.json();
-            setLikedTracks(data.items.map((item: any) => item.track.id));
+            const likedIds = data.items.map((item: any) => item.track.id);
+            setLikedTracks(likedIds);
+
+            if (likedIds.length > 0) {
+                const randomSeeds = likedIds.sort(() => 0.5 - Math.random()).slice(0, 5);
+                fetchRecommendations(randomSeeds);
+            }
         };
 
         fetchLiked();
-    }, [])
+    }, []);
 
     const fetchRecommendations = async (seedIds: string[]) => {
         const accessToken = localStorage.getItem('access-token');
