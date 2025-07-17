@@ -19,7 +19,6 @@ const Sidebar = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 SetUser(data.display_name)
             })
 

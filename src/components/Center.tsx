@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FilterBar from "./FilterBar";
 import Searchbar from "./Searchbar";
 import Track from "./Track";
@@ -19,6 +19,26 @@ interface CenterProps {
 }
 
 const Center: React.FC<CenterProps> = ({ title, tracks, loading }) => {
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('access-token');
+        console.log('accessToken', accessToken);
+        if (!accessToken) return;
+
+        fetch('https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA', {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+
+            .catch(err => {
+                console.error('Ошибка:', err);
+            });
+    }, [])
 
 
     return (
