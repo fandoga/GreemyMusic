@@ -514,7 +514,6 @@ body {
 .track__title-image {
   width: 51px;
   height: 51px;
-  padding: 16px;
   background: #313131;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -526,6 +525,13 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 17px;
+}
+
+.track_title-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .track__title-svg {

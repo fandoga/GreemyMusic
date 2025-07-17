@@ -32,7 +32,7 @@ const Main = () => {
     }, []);
 
     adaptedTracks = RecommendedTracks.map(item => {
-        const track = item.track;
+        const track = item.track; s
         return {
             Img: track.album.images[2].url,
             Name: track.name,
