@@ -18,7 +18,6 @@ const Login = () => {
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         const code = params.get('code');
-        console.log(code);
 
         if (code) {
             sendCodeToBackend(code);
@@ -70,7 +69,7 @@ const Login = () => {
 
         const data = await res.json();
         console.log(data);
-        localStorage.setItem('spotify-token', data)
+        localStorage.setItem('spotify-token', JSON.stringify(data));
         navigate('/')
     };
 
