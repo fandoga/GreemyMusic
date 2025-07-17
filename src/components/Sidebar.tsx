@@ -7,7 +7,10 @@ const Sidebar = () => {
     const loading = useLoading();
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('access-token')
+        const accessToken = localStorage.getItem('spotify-access-token');
+        console.log('accessToken:', accessToken);
+        if (!accessToken) return;
+
         fetch('https://api.spotify.com/v1/me', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -19,9 +22,9 @@ const Sidebar = () => {
             })
 
             .catch(err => {
-                console.error('Ошибка при получении данных пользователя:', err);
+                console.error('Ошибка:', err);
             });
-    }, [])
+    }, []);
 
     if (loading) {
         return (
