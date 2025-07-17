@@ -6,24 +6,39 @@ import Sidebar from '../../components/Sidebar';
 
 const Main = () => {
 
-    const [tracks, setTracks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [LikedTracks, setLikedTracks] = useState([])
+    const [RecommendedTracks, setRecommendedTracks] = useState<any[]>([]);
 
     useEffect(() => {
-        setLoading(true);
-        fetch("data/recomendations.json")
-            .then(res => res.json())
-            .then(data => {
-                setTracks(data)
-                setLoading(false)
+        const accessToken = localStorage.getItem('access-token');
+
+        const fetchLiked = async () => {
+            const res = await fetch('https://api.spotify.com/v1/me/tracks?limit=50', {
+                headers: { Authorization: `Bearer ${accessToken}` },
             });
-    }, []);
+            const data = await res.json();
+            setLikedTracks(data.items.map((item: any) => item.track.id));
+        };
+
+        fetchLiked();
+    }, [])
+
+    const fetchRecommendations = async (seedIds: string[]) => {
+        const accessToken = localStorage.getItem('access-token');
+        const res = await fetch(`https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${seedIds.join(',')}`, {
+            headers: { Authorization: `Bearer ${accessToken}` },
+        });
+        const data = await res.json();
+        setRecommendedTracks((prev: any[]) => [...prev, ...data.tracks]);
+    };
+
 
     return (
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title="Треки" tracks={tracks} loading={loading} />
+                <Center title="Треки" tracks={RecommendedTracks} loading={loading} />
                 <Sidebar />
             </main>
             <Bar />
