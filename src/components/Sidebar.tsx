@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoading } from "../LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
-import { data, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     const loading = useLoading();
@@ -19,6 +19,7 @@ const Sidebar = () => {
         })
             .then(res => res.json())
             .then(data => {
+                console.log(data);
                 SetUser(data.display_name)
             })
 
