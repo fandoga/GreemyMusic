@@ -31,8 +31,11 @@ const Main = () => {
         });
         const data = await res.json();
         setRecommendedTracks((prev: any[]) => [...prev, ...data.tracks]);
+        console.log(123);
     };
 
+    console.log(RecommendedTracks);
+    console.log(LikedTracks);
 
     return (
         <div className="container">
