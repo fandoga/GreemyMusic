@@ -8,7 +8,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const clientId = '5de0e892cfa54797a83e15261b1dadae'
-    const redirectUri = 'http://26.34.62.38:3000/login'
+    const redirectUri = 'https://fandymusic.vercel.app/login'
     const [isSingup, setSignup] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
