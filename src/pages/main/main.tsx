@@ -19,27 +19,36 @@ const Main = () => {
             });
 
             const data = await res.json();
-            const likedIds = data.items.map((item: any) => item.track.id);
-            setLikedTracks(likedIds);
+            const trackIds = data.items
+                .map((item: any) => item.track?.id)
+                .filter((id: string | undefined) => !!id)
+                .slice(0, 5); // максимум 5 треков
 
-            if (likedIds.length > 0) {
-                const randomSeeds = likedIds.sort(() => 0.5 - Math.random()).slice(0, 5);
-                fetchRecommendations(randomSeeds);
-            }
+            setLikedTracks(trackIds);
+
+            // теперь вызываем рекомендации
+            fetchRecommendations(trackIds);
+        };
+
+        const fetchRecommendations = async (seedIds: string[]) => {
+            if (seedIds.length === 0) return;
+
+            const accessToken = localStorage.getItem('access-token');
+            const res = await fetch(
+                `https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${seedIds.join(',')}`,
+                {
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                }
+            );
+
+            const data = await res.json();
+            setRecommendedTracks((prev: any[]) => [...prev, ...data.tracks]);
+            console.log('Recommendations loaded:', data.tracks);
         };
 
         fetchLiked();
     }, []);
 
-    const fetchRecommendations = async (seedIds: string[]) => {
-        const accessToken = localStorage.getItem('access-token');
-        const res = await fetch(`https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${seedIds.join(',')}`, {
-            headers: { Authorization: `Bearer ${accessToken}` },
-        });
-        const data = await res.json();
-        setRecommendedTracks((prev: any[]) => [...prev, ...data.tracks]);
-        console.log(123);
-    };
 
     console.log(RecommendedTracks);
     console.log(LikedTracks);
