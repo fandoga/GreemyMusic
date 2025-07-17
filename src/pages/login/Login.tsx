@@ -8,6 +8,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const clientId = '5de0e892cfa54797a83e15261b1dadae'
+    const redirectUri = 'http://26.34.62.38:3000/login'
     const [isSingup, setSignup] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -45,7 +46,7 @@ const Login = () => {
     }
 
     const handleSpotify = () => {
-        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000/login&scope=user-read-private%20user-read-email`
+        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}/login&scope=user-read-private%20user-read-email`
     }
 
 
