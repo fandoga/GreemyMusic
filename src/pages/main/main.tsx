@@ -6,7 +6,7 @@ import Sidebar from '../../components/Sidebar';
 
 const Main = () => {
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [RecommendedTracks, setRecommendedTracks] = useState<any[]>([]);
     let adaptedTracks
 
@@ -14,6 +14,7 @@ const Main = () => {
         const Recommendations = async () => {
 
             const accessToken = localStorage.getItem('access-token');
+            setLoading(true)
             const res = await fetch(
                 `https://api.spotify.com/v1/playlists/1vCsCr74SWGrwv3RMNcBPg/tracks?limit=20`,
                 {
@@ -22,6 +23,7 @@ const Main = () => {
             );
 
             const data = await res.json();
+            setLoading(false)
             setRecommendedTracks(data.items)
         };
 
