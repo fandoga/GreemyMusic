@@ -70,8 +70,8 @@ const Login = () => {
         const data = await res.json();
         const accessToken = data.access_token;
         const refreshToken = data.refresh_token;
-        localStorage.setItem('spotify-token', JSON.stringify(accessToken));
-        localStorage.setItem('spotify-token', JSON.stringify(refreshToken));
+        localStorage.setItem('access-token', JSON.stringify(accessToken));
+        localStorage.setItem('refresh-token', JSON.stringify(refreshToken));
         navigate('/')
     };
 
