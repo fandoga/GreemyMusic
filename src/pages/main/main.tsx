@@ -31,19 +31,17 @@ const Main = () => {
         };
 
         const fetchRecommendations = async (seedIds: string[]) => {
-            if (seedIds.length === 0) return;
 
             const accessToken = localStorage.getItem('access-token');
             const res = await fetch(
-                `https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${seedIds.join(',')}`,
+                `https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n`,
                 {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
             );
 
             const data = await res.json();
-            setRecommendedTracks((prev: any[]) => [...prev, ...data.tracks]);
-            console.log('Recommendations loaded:', data.tracks);
+            setRecommendedTracks(data)
         };
 
         fetchLiked();
