@@ -5,6 +5,7 @@ import Track from "./Track";
 import TrackSkeleton from "./TrackSkeleton";
 
 interface TrackData {
+    Img: string;
     Name: string;
     Author: string;
     Album: string;
@@ -45,6 +46,7 @@ const Center: React.FC<CenterProps> = ({ title, tracks, loading }) => {
                         : tracks.map((track, idx) => (
                             <Track
                                 key={idx}
+                                Img={track.Img}
                                 Name={track.Name}
                                 Author={track.Author}
                                 Album={track.Album}

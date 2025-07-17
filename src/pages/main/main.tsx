@@ -34,6 +34,7 @@ const Main = () => {
     adaptedTracks = RecommendedTracks.map(item => {
         const track = item.track;
         return {
+            Img: track.name,
             Name: track.name,
             Author: track.artists.map((a: any) => a.name).join(', '),
             Album: track.album.name,
@@ -41,7 +42,7 @@ const Main = () => {
             Info: track.id,
         };
     });
-
+    console.log(RecommendedTracks);
     console.log(adaptedTracks);
 
     return (

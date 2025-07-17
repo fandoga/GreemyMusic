@@ -3,6 +3,7 @@ import React from "react";
 import TrackSkeleton from "./TrackSkeleton";
 
 interface TrackData {
+    Img: string,
     Name: string,
     Author: string,
     Album: string,
@@ -10,7 +11,7 @@ interface TrackData {
     Info: string
 }
 
-const Track: React.FC<TrackData> = ({ Name, Album, Author, Time, Info }) => {
+const Track: React.FC<TrackData> = ({ Img, Name, Album, Author, Time, Info }) => {
     const loading = useLoading();
 
     if (loading) {
@@ -25,7 +26,7 @@ const Track: React.FC<TrackData> = ({ Name, Album, Author, Time, Info }) => {
                 <div className="track__title">
                     <div className="track__title-image">
                         <svg className="track__title-svg" >
-                            <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+                            <use xlinkHref={Img}></use>
                         </svg>
                     </div>
                     <div className="track__title-text">
