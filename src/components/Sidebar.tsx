@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoading } from "../LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 
 const Sidebar = () => {
     const loading = useLoading();
+    const [User, SetUser] = useState(null);
 
     useEffect(() => {
         const accessToken = localStorage.getItem('access-token');
@@ -18,7 +19,7 @@ const Sidebar = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                SetUser(data)
             })
 
             .catch(err => {
@@ -35,7 +36,7 @@ const Sidebar = () => {
     return (
         <div className="main__sidebar sidebar">
             <div className="sidebar__personal">
-                <p className="sidebar__personal-name">{localStorage.getItem('email')}</p>
+                <p className="sidebar__personal-name">{User}</p>
                 <div className="sidebar__icon">
                     <Link to={"/login"}>
                         <svg>
