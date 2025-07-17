@@ -14,6 +14,7 @@ const Sidebar = () => {
         console.log('accessToken', accessToken);
         if (!accessToken) return;
 
+        setLoading(true)
         fetch('https://api.spotify.com/v1/me', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -22,6 +23,7 @@ const Sidebar = () => {
             .then(res => res.json())
             .then(data => {
                 SetUser(data.display_name)
+                setLoading(false)
             })
 
             .catch(err => {
