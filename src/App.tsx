@@ -39,6 +39,36 @@ function App() {
   }, [])
 
 
+  useEffect(() => {
+    const refreshToken = localStorage.getItem('refresh-token');
+    const expiresIn = localStorage.getItem('expires-in');
+
+    if (!refreshToken || !expiresIn) return;
+
+    const refreshAccessToken = async () => {
+      const res = await fetch('/api/refresh', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ refresh_token: refreshToken }),
+      });
+
+      const data = await res.json();
+      if (data.access_token) {
+        localStorage.setItem('access-token', data.access_token);
+        localStorage.setItem('expires-in', data.expires_in);
+        console.log('🎉 Token refreshed');
+      } else {
+        console.error('Failed to refresh token:', data);
+      }
+    };
+
+    // Обновим токен за 1 минуту до истечения
+    const timeout = setTimeout(refreshAccessToken, (Number(expiresIn) - 60) * 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+
 
   return (
     <LoadingContext.Provider value={loading}>
@@ -47,6 +77,7 @@ function App() {
       </div>
     </LoadingContext.Provider >
   );
+
 }
 
 export default App; 

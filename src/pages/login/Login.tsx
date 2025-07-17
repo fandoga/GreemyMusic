@@ -67,10 +67,13 @@ const Login = () => {
         });
 
         const data = await res.json();
+        console.log(data);
         const accessToken = data.access_token;
         const refreshToken = data.refresh_token;
+        const expiresIn = data.expires_in;
         localStorage.setItem('access-token', accessToken);
         localStorage.setItem('refresh-token', refreshToken);
+        localStorage.setItem('expires-in', expiresIn);
         navigate('/')
     };
 

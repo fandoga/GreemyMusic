@@ -8,7 +8,7 @@ const Sidebar = () => {
 
     useEffect(() => {
         const accessToken = localStorage.getItem('access-token');
-        console.log('accessToken:', accessToken);
+        console.log('accessToken', accessToken);
         if (!accessToken) return;
 
         fetch('https://api.spotify.com/v1/me', {
