@@ -1,9 +1,26 @@
+import { useEffect } from "react";
 import { useLoading } from "../LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     const loading = useLoading();
+
+    useEffect(() => {
+        fetch('https://api.spotify.com/v1/me', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+
+            .catch(err => {
+                console.error('Ошибка при получении данных пользователя:', err);
+            });
+    }, [])
 
     if (loading) {
         return (
