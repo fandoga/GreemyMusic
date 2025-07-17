@@ -1,17 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { LoadingContext } from './LoadingContext';
 import './App.css';
-import Bar from './components/Bar';
-import Nav from './components/Nav';
-import Center from './components/Center';
-import Sidebar from './components/Sidebar';
+import AppRoutes from './routes';
 
 function App() {
 
   const [loading, setLoading] = useState(true);
+  const clientId = '5de0e892cfa54797a83e15261b1dadae';
+  const clientSecret = 'ea627852a76640508c1dd1991aa02523';
+  const credentials = btoa(`${clientId}:${clientSecret}`);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 700);
+    // fetch('https://accounts.spotify.com/api/token', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded',
+    //     'Authorization': `Basic ${credentials}`,
+    //   },
+    //   body: 'grant_type=client_credentials'
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log(data);
+    //   });
+
+    fetch("https://api.spotify.com/v1/search?q=drake&type=track", {
+      headers: {
+        Authorization: "Bearer BQCmNhKUWop6uX6tK0qU-thLPjaqwYGErp9KSRaBRUxidZo4Ogfvhkpg3RCljelAn79Nksq4zTBlnAVyMHf9G_WnEjEK6W5isnfq0p7XBHbfZEkP7hqZTAoWmAkwXgsX2gOsf2k6rvY"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+
+    const timer = setTimeout(() => setLoading(false), 300);
     return () => clearTimeout(timer);
   }, [])
 
@@ -20,15 +43,7 @@ function App() {
   return (
     <LoadingContext.Provider value={loading}>
       <div className={`wrapper ${loading ? "loading" : ""}`}>
-        <div className="container">
-          <main className="main">
-            <Nav />
-            <Center />
-            <Sidebar />
-          </main>
-          <Bar />
-          <footer className="footer"></footer>
-        </div>
+        <AppRoutes />
       </div>
     </LoadingContext.Provider >
   );

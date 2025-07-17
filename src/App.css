@@ -64,7 +64,8 @@ body {
   background-color: #181818;
 }
 
-.skeleton__none {
+.skeleton__none,
+.hidden {
   display: none;
 }
 
@@ -138,7 +139,6 @@ body {
   flex-wrap: wrap;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
 }
 
 .main__nav {
@@ -148,6 +148,7 @@ body {
 }
 
 .main__centerblock {
+  max-width: 1250px;
   width: auto;
   -webkit-box-flex: 3;
   -ms-flex-positive: 3;
@@ -221,6 +222,7 @@ body {
 }
 
 .centerblock__search {
+
   width: 100%;
   border-bottom: 1px solid #4e4e4e;
   margin-bottom: 51px;
@@ -278,6 +280,7 @@ body {
 }
 
 .search__text {
+  outline: none;
   -webkit-box-flex: 100;
   -ms-flex-positive: 100;
   flex-grow: 100;
@@ -349,9 +352,16 @@ body {
   border: 1px solid #ffffff;
   border-radius: 60px;
   padding: 6px 20px;
+  transition: color, border-color 0.1s ease;
 }
 
-.filter__button--active {
+.filter__button:hover {
+  color: #d9b6ff;
+  border-color: #d9b6ff;
+
+}
+
+.filter__button:active {
   border-color: #ad61ff;
   color: #ad61ff;
 }
@@ -366,7 +376,7 @@ body {
   min-width: 100px;
   z-index: 10;
   padding: 8px 0;
-  max-height: 250px;
+  max-height: 240px;
   overflow-y: auto;
 }
 
@@ -969,4 +979,123 @@ body {
 
 .volume__progress-line {
   width: 109px;
+  height: 4px;
+  background: transparent;
+  accent-color: #fff;
+  /* Для современных браузеров */
+  outline: none;
+  border-radius: 2px;
+  /* Скрыть стандартный стиль */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Track (фон) */
+.volume__progress-line::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #4e4e4e;
+  border-radius: 2px;
+}
+
+.volume__progress-line::-moz-range-track {
+  height: 4px;
+  background: #4e4e4e;
+  border-radius: 2px;
+}
+
+.volume__progress-line::-ms-fill-lower,
+.volume__progress-line::-ms-fill-upper {
+  height: 4px;
+  background: #4e4e4e;
+  border-radius: 2px;
+}
+
+/* Акцентная часть (до бегунка) — белая */
+.volume__progress-line::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #181818;
+  /* Чёрный центр */
+  border: 3px solid #fff;
+  /* Белая обводка */
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: -7px;
+  /* Центрировать по треку */
+}
+
+.volume__progress-line:focus::-webkit-slider-thumb {
+  outline: none;
+}
+
+.volume__progress-line::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #181818;
+  /* Чёрный центр */
+  border: 3px solid #fff;
+  /* Белая обводка */
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.volume__progress-line::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #181818;
+  /* Чёрный центр */
+  border: 3px solid #fff;
+  /* Белая обводка */
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Убрать стандартный стиль в Firefox */
+.volume__progress-line::-moz-focus-outer {
+  border: 0;
+}
+
+/* Для IE */
+.volume__progress-line:focus {
+  outline: none;
+}
+
+/* Скрыть стандартный трек в IE */
+.volume__progress-line::-ms-tooltip {
+  display: none;
+}
+
+/* Для акцентной части (до бегунка) — только в Firefox */
+.volume__progress-line::-moz-range-progress {
+  background-color: #fff;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.volume__progress-line::-moz-range-track {
+  background-color: #4e4e4e;
+  height: 4px;
+  border-radius: 2px;
+}
+
+/* Для IE/Edge */
+.volume__progress-line::-ms-fill-lower {
+  background: #fff;
+}
+
+.volume__progress-line::-ms-fill-upper {
+  background: #4e4e4e;
+}
+
+/* Общие стили */
+.volume__progress-line {
+  background: transparent;
 }

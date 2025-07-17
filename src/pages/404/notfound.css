@@ -1,0 +1,61 @@
+.main__notfound {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.notfound__title {
+    font-family: "StratosSkyeng", sans-serif;
+    font-weight: 400;
+    font-size: 160px;
+    line-height: 105%;
+    color: #fff;
+}
+
+.notfound__subtitle {
+    font-family: "StratosSkyeng", sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 125%;
+    color: #fff;
+    padding-bottom: 8px;
+}
+
+.notfound__text {
+    padding-bottom: 36px;
+    max-width: 380px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #4e4e4e;
+}
+
+.notfound__button {
+    cursor: pointer;
+    border: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    letter-spacing: 0em;
+    color: #fff;
+
+    border-radius: 6px;
+    width: 278px;
+    height: 52px;
+    background: #580ea2;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: #3f007d;
+        ;
+    }
+
+    &:active {
+        background: #271a58;
+        ;
+    }
+}

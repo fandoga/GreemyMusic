@@ -1,5 +1,6 @@
 import { useLoading } from "../LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     const loading = useLoading();
@@ -13,41 +14,43 @@ const Sidebar = () => {
     return (
         <div className="main__sidebar sidebar">
             <div className="sidebar__personal">
-                <p className="sidebar__personal-name">Sergey.Ivanov</p>
+                <p className="sidebar__personal-name">{localStorage.getItem('email')}</p>
                 <div className="sidebar__icon">
-                    <svg>
-                        <use xlinkHref="img/icon/sprite.svg#logout"></use>
-                    </svg>
+                    <Link to={"/login"}>
+                        <svg>
+                            <use xlinkHref="/img/icon/sprite.svg#logout"></use>
+                        </svg>
+                    </Link>
                 </div>
             </div>
             <div className="sidebar__block">
                 <div className="sidebar__list">
                     <div className="sidebar__item">
-                        <a className="sidebar__link" href="#">
+                        <Link className="sidebar__link" to="/picks/1">
                             <img
                                 className="sidebar__img"
-                                src="img/playlist01.png"
+                                src="/img/playlist01.png"
                                 alt="day's playlist"
                             />
-                        </a>
+                        </Link>
                     </div>
                     <div className="sidebar__item">
-                        <a className="sidebar__link" href="#">
+                        <Link className="sidebar__link" to="/picks/2">
                             <img
                                 className="sidebar__img"
-                                src="img/playlist02.png"
+                                src="/img/playlist02.png"
                                 alt="day's playlist"
                             />
-                        </a>
+                        </Link>
                     </div>
                     <div className="sidebar__item">
-                        <a className="sidebar__link" href="#">
+                        <Link className="sidebar__link" to="/picks/3">
                             <img
                                 className="sidebar__img"
-                                src="img/playlist03.png"
+                                src="/img/playlist03.png"
                                 alt="day's playlist"
                             />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,4 @@
-
-
 const BarSkeleton = () => {
-
     return (
         <div className="bar">
             <div className="bar__content">

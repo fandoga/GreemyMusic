@@ -1,0 +1,158 @@
+.login {
+    padding: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 12px;
+    width: 366px;
+    height: 439px;
+    background: #fff;
+}
+
+.login__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1920px;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+}
+
+.login__inputs {
+    padding-top: 42px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.error__text {
+    color: rgba(81, 11, 0, 0.897);
+}
+
+.login__input {
+    outline: none;
+    padding: 8px 0 8px 0;
+    font-family: "StratosSkyeng", sans-serif;
+    border: none;
+    border-bottom: 2px solid #D0CECE;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    letter-spacing: 0em;
+    color: #313131;
+
+    &::placeholder {
+        color: #cecece;
+        opacity: 1;
+    }
+
+    &:focus::-webkit-input-placeholder {
+        color: #565656;
+    }
+
+    &:focus::-moz-placeholder {
+        color: #565656;
+    }
+
+    &:focus:-ms-input-placeholder {
+        color: #565656;
+    }
+
+    &:focus::placeholder {
+        color: #565656;
+    }
+}
+
+.login__input:not(:last-of-type) {
+    margin-bottom: 28px;
+}
+
+.login__buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.login__button {
+    outline: none;
+    border: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    letter-spacing: 0em;
+    color: #fff;
+
+    border-radius: 6px;
+    width: 278px;
+    height: 52px;
+    background: #580ea2;
+    transition: background-color 0.2s ease;
+
+    &:nth-child(2) {
+        margin-top: 20px;
+    }
+
+    &:hover {
+        background: #3f007d;
+    }
+
+    &:active {
+        background: #271a58;
+    }
+
+    &.signin__button {
+        color: #000;
+        border: 2px solid #d0cece;
+        background: transparent;
+
+        &:hover {
+            background: #f4f5f6;
+        }
+
+        &:active {
+            background: #d9d9d9;
+        }
+    }
+}
+
+.links__block {
+    padding-top: 20px;
+}
+
+.spotify-link__button {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    letter-spacing: 0em;
+    color: #fff;
+
+    border-radius: 10px;
+    width: 250px;
+    height: 45px;
+    background: #1ED760;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: #2ec965;
+    }
+
+    &:active {
+        background: #32bd63;
+    }
+}
+
+.spotify__icon img {
+    padding-top: 5px;
+    width: 27px;
+    height: 27px;
+}

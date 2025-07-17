@@ -1,0 +1,86 @@
+[
+    {
+        "Name": "Blinding Lights",
+        "Author": "The Weeknd",
+        "Album": "After Hours",
+        "Time": "3:20",
+        "Info": ""
+    },
+    {
+        "Name": "Levitating",
+        "Author": "Dua Lipa",
+        "Album": "Future Nostalgia",
+        "Time": "3:23",
+        "Info": "(feat. DaBaby)"
+    },
+    {
+        "Name": "bad guy",
+        "Author": "Billie Eilish",
+        "Album": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
+        "Time": "3:14",
+        "Info": ""
+    },
+    {
+        "Name": "Shape of You",
+        "Author": "Ed Sheeran",
+        "Album": "÷ (Divide)",
+        "Time": "3:53",
+        "Info": ""
+    },
+    {
+        "Name": "Dance Monkey",
+        "Author": "Tones and I",
+        "Album": "The Kids Are Coming",
+        "Time": "3:29",
+        "Info": ""
+    },
+    {
+        "Name": "Don't Start Now",
+        "Author": "Dua Lipa",
+        "Album": "Future Nostalgia",
+        "Time": "3:03",
+        "Info": ""
+    },
+    {
+        "Name": "Sunflower",
+        "Author": "Post Malone, Swae Lee",
+        "Album": "Spider-Man: Into the Spider-Verse",
+        "Time": "2:38",
+        "Info": ""
+    },
+    {
+        "Name": "Believer",
+        "Author": "Imagine Dragons",
+        "Album": "Evolve",
+        "Time": "3:24",
+        "Info": ""
+    },
+    {
+        "Name": "Goosebumps",
+        "Author": "Travis Scott",
+        "Album": "Birds In The Trap Sing McKnight",
+        "Time": "4:03",
+        "Info": "(feat. Kendrick Lamar)"
+    },
+    {
+        "Name": "Stressed Out",
+        "Author": "Twenty One Pilots",
+        "Album": "Blurryface",
+        "Time": "3:22",
+        "Info": ""
+    },
+    {
+        "Name": "Old Town Road",
+        "Author": "Lil Nas X",
+        "Album": "7 EP",
+        "Time": "2:37",
+        "Info": "(feat. Billy Ray Cyrus)"
+    },
+    {
+        "Name": "Wake Me Up",
+        "Author": "Avicii",
+        "Album": "True",
+        "Time": "4:09",
+        "Info": ""
+    }
+]
