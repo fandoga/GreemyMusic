@@ -7,9 +7,10 @@ const Sidebar = () => {
     const loading = useLoading();
 
     useEffect(() => {
+        const accessToken = localStorage.getItem('access-token')
         fetch('https://api.spotify.com/v1/me', {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                Authorization: `Bearer ${accessToken}`
             }
         })
             .then(res => res.json())
