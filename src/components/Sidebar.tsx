@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLoading } from "../LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
+import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-    const loading = useLoading();
+    const loadingGlobal = useLoading();
+    const [loading, setLoading] = useState(false);
     const [user, SetUser] = useState(null);
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const Sidebar = () => {
             });
     }, []);
 
-    if (loading) {
+    if (loadingGlobal) {
         return (
             <SidebarSkeleton />
         );
@@ -35,16 +37,22 @@ const Sidebar = () => {
 
     return (
         <div className="main__sidebar sidebar">
-            <div className="sidebar__personal">
-                <p className="sidebar__personal-name">{user}</p>
-                <div className="sidebar__icon">
-                    <Link to={"/login"}>
-                        <svg>
-                            <use xlinkHref="/img/icon/sprite.svg#logout"></use>
-                        </svg>
-                    </Link>
-                </div>
-            </div>
+            {loading
+                ? <UserSkeleton />
+                : (
+                    <div className="sidebar__personal">
+                        <p className="sidebar__personal-name">{user}</p>
+                        <div className="sidebar__icon">
+                            <Link to={"/login"}>
+                                <svg>
+                                    <use xlinkHref="/img/icon/sprite.svg#logout"></use>
+                                </svg>
+                            </Link>
+                        </div>
+                    </div>
+                )
+            }
+
             <div className="sidebar__block">
                 <div className="sidebar__list">
                     <div className="sidebar__item">
