@@ -24,7 +24,7 @@ const Center: React.FC<CenterProps> = ({ title, tracks, loading }) => {
         const accessToken = localStorage.getItem('access-token');
         if (!accessToken) return;
 
-        fetch('https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA', {
+        fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
