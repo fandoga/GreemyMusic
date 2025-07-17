@@ -55,7 +55,7 @@ const Login = () => {
     }
 
     const handleSpotify = () => {
-        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=user-read-private%20user-read-email`
+        window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=user-read-private%20user-read-email%20user-library-read%20user-library-modify%20user-read-recently-played%20playlist-read-private%20playlist-read-collaborative%20playlist-modify-private%20playlist-modify-public%20user-top-read%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing&show_dialog=true`
     }
 
     const sendCodeToBackend = async (code: string) => {
