@@ -16,15 +16,12 @@ const Login = () => {
     const [error, setError] = useState('')
 
     useEffect(() => {
-        const hash = window.location.hash;
-        const params = new URLSearchParams(hash.replace('#', ''));
-        const token = params.get('access_token');
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        console.log(code);
 
-        if (token) {
-            localStorage.setItem('spotify_token', token);
-            navigate("/"); // вернуться на главную
-        }
-    }, [navigate]);
+        if (code) sendCodeToBackend(code);
+    }, []);
 
     const handleSignup = () => {
         if (repeatPassword === password) {
@@ -59,6 +56,18 @@ const Login = () => {
     const handleSpotify = () => {
         window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=user-read-private%20user-read-email`
     }
+
+    const sendCodeToBackend = async (code: string) => {
+        const res = await fetch('/api/auth', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code }),
+        });
+
+        const data = await res.json();
+        console.log(data);
+        localStorage.setItem('spotify-token', data)
+    };
 
 
     return (

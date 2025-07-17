@@ -17,7 +17,6 @@ const Main = () => {
                 setTracks(data)
                 setLoading(false)
             });
-        console.log(tracks);
     }, []);
 
     return (
