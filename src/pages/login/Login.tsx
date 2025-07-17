@@ -20,7 +20,10 @@ const Login = () => {
         const code = params.get('code');
         console.log(code);
 
-        if (code) sendCodeToBackend(code);
+        if (code) {
+            sendCodeToBackend(code);
+            console.log('code is here');
+        }
     }, []);
 
     const handleSignup = () => {
@@ -58,6 +61,7 @@ const Login = () => {
     }
 
     const sendCodeToBackend = async (code: string) => {
+        console.log("we are in sending");
         const res = await fetch('/api/auth', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -67,6 +71,7 @@ const Login = () => {
         const data = await res.json();
         console.log(data);
         localStorage.setItem('spotify-token', data)
+        navigate('/')
     };
 
 
