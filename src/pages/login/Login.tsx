@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './login.module.css'
 import './login.css'
 
 
@@ -70,8 +69,8 @@ const Login = () => {
         const data = await res.json();
         const accessToken = data.access_token;
         const refreshToken = data.refresh_token;
-        localStorage.setItem('access-token', JSON.stringify(accessToken));
-        localStorage.setItem('refresh-token', JSON.stringify(refreshToken));
+        localStorage.setItem('access-token', accessToken);
+        localStorage.setItem('refresh-token', refreshToken);
         navigate('/')
     };
 
