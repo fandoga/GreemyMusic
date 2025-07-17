@@ -15,6 +15,17 @@ const Login = () => {
     const [repeatPassword, setRepeatPassword] = useState('')
     const [error, setError] = useState('')
 
+    useEffect(() => {
+        const hash = window.location.hash;
+        const params = new URLSearchParams(hash.replace('#', ''));
+        const token = params.get('access_token');
+
+        if (token) {
+            localStorage.setItem('spotify_token', token);
+            navigate("/"); // вернуться на главную
+        }
+    }, [navigate]);
+
     const handleSignup = () => {
         if (repeatPassword === password) {
             if (password !== '' && email !== '') {
