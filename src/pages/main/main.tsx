@@ -10,11 +10,11 @@ const Main = () => {
     const [RecommendedTracks, setRecommendedTracks] = useState<any[]>([]);
 
     useEffect(() => {
-        const Recommendations = async (seedIds: string[]) => {
+        const Recommendations = async () => {
 
             const accessToken = localStorage.getItem('access-token');
             const res = await fetch(
-                `https://api.spotify.com/v1/playlists/1vCsCr74SWGrwv3RMNcBPg/tracks`,
+                `https://api.spotify.com/v1/playlists/1vCsCr74SWGrwv3RMNcBPg`,
                 {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
