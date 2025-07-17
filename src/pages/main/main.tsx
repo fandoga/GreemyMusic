@@ -34,12 +34,12 @@ const Main = () => {
     adaptedTracks = RecommendedTracks.map(item => {
         const track = item.track;
         return {
-            Img: track.name,
+            Img: track.album.images[0],
             Name: track.name,
             Author: track.artists.map((a: any) => a.name).join(', '),
             Album: track.album.name,
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
-            Info: track.id,
+            Info: '',
         };
     });
     console.log(RecommendedTracks);
