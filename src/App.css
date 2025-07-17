@@ -527,7 +527,7 @@ body {
   margin-right: 17px;
 }
 
-.track_title-image img {
+.track__title-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
