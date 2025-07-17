@@ -21,13 +21,13 @@ const Main = () => {
             const data = await res.json();
             const trackIds = data.items
                 .map((item: any) => item.track?.id)
-                .filter((id: string | undefined) => !!id)
-                .slice(0, 5); // максимум 5 треков
+                .filter((id: string | undefined) => !!id);
 
             setLikedTracks(trackIds);
 
-            // теперь вызываем рекомендации
-            fetchRecommendations(trackIds);
+            if (trackIds.length > 0) {
+                fetchRecommendations(trackIds.slice(0, 5));
+            }
         };
 
         const fetchRecommendations = async (seedIds: string[]) => {
