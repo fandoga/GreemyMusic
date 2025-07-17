@@ -25,9 +25,7 @@ const Track: React.FC<TrackData> = ({ Img, Name, Album, Author, Time, Info }) =>
             <div className="playlist__track track">
                 <div className="track__title">
                     <div className="track__title-image">
-                        <svg className="track__title-svg" >
-                            <use xlinkHref={Img}></use>
-                        </svg>
+                        <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">
                         <a className="track__title-link" href="http://">

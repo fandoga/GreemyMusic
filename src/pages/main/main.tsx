@@ -34,7 +34,7 @@ const Main = () => {
     adaptedTracks = RecommendedTracks.map(item => {
         const track = item.track;
         return {
-            Img: track.album.images[0].url,
+            Img: track.album.images[2].url,
             Name: track.name,
             Author: track.artists.map((a: any) => a.name).join(', '),
             Album: track.album.name,
