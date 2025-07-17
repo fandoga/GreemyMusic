@@ -5,7 +5,7 @@ import { data, Link } from "react-router-dom";
 
 const Sidebar = () => {
     const loading = useLoading();
-    const [User, SetUser] = useState(null);
+    const [user, SetUser] = useState(null);
 
     useEffect(() => {
         const accessToken = localStorage.getItem('access-token');
@@ -19,7 +19,7 @@ const Sidebar = () => {
         })
             .then(res => res.json())
             .then(data => {
-                SetUser(data)
+                SetUser(data.display_name)
             })
 
             .catch(err => {
@@ -36,7 +36,7 @@ const Sidebar = () => {
     return (
         <div className="main__sidebar sidebar">
             <div className="sidebar__personal">
-                <p className="sidebar__personal-name">{User}</p>
+                <p className="sidebar__personal-name">{user}</p>
                 <div className="sidebar__icon">
                     <Link to={"/login"}>
                         <svg>
