@@ -20,24 +20,7 @@ interface CenterProps {
 
 const Center: React.FC<CenterProps> = ({ title, tracks, loading }) => {
 
-    useEffect(() => {
-        const accessToken = localStorage.getItem('access-token');
-        if (!accessToken) return;
 
-        fetch('https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks', {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
-
-            .catch(err => {
-                console.error('Ошибка:', err);
-            });
-    }, [])
 
 
     return (

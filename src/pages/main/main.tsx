@@ -14,7 +14,7 @@ const Main = () => {
         const accessToken = localStorage.getItem('access-token');
 
         const fetchLiked = async () => {
-            const res = await fetch('https://api.spotify.com/v1/me/tracks?limit=50', {
+            const res = await fetch('https://api.spotify.com/v1/me/tracks', {
                 headers: { Authorization: `Bearer ${accessToken}` },
             });
             const data = await res.json();
