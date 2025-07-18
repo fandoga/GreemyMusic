@@ -269,13 +269,10 @@ body {
 }
 
 .centerblock__filter {
-  position: sticky;
+  /* position: sticky;
   top: 80px;
-  /* высота шапки/поиска, чтобы фильтр не перекрывал их */
   z-index: 5;
-  /* выше треков, но ниже шапки */
-  background: #181818;
-  /* чтобы не просвечивал контент под ним */
+  background: #181818; */
 
   display: -webkit-box;
   display: -ms-flexbox;
@@ -511,6 +508,8 @@ body {
 }
 
 .playlist__track {
+  cursor: pointer;
+  border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -524,6 +523,11 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.playlist__track:hover {
+  background: #2e2e2e;
 }
 
 .track__title {
