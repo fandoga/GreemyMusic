@@ -150,7 +150,7 @@ body {
 
 .main__centerblock {
   position: absolute;
-  top: 80px;
+  top: 0;
   left: 244px;
   right: 418px;
   bottom: 73px;
