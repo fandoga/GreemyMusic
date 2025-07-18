@@ -56,12 +56,16 @@ body {
   user-select: none;
 }
 
-.container {
+.container::-webkit-scrollbar {
   max-width: 1920px;
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   position: relative;
   background-color: #181818;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .skeleton__none,
@@ -142,21 +146,24 @@ body {
 }
 
 .main__nav {
+  position: fixed;
   width: 244px;
   background-color: #181818;
   padding: 20px 0 20px 36px;
 }
 
 .main__centerblock {
-  max-width: 1250px;
+  max-width: 1400px;
   width: auto;
   -webkit-box-flex: 3;
   -ms-flex-positive: 3;
   flex-grow: 3;
-  padding: 20px 40px 20px 111px;
+  padding: 20px 40px 20px 280px;
 }
 
 .main__sidebar {
+  position: fixed;
+  right: 0;
   max-width: 418px;
   padding: 20px 90px 20px 78px;
 }
