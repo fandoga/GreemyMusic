@@ -510,6 +510,7 @@ body {
 .playlist__track {
   cursor: pointer;
   border-radius: 8px;
+  padding: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
