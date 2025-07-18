@@ -58,7 +58,7 @@ body {
 
 .container {
   max-width: 1920px;
-  /* height: 100vh; */
+  height: 100vh;
   margin: 0 auto;
   position: relative;
   background-color: #181818;
@@ -269,6 +269,14 @@ body {
 }
 
 .centerblock__filter {
+  position: sticky;
+  top: 80px;
+  /* высота шапки/поиска, чтобы фильтр не перекрывал их */
+  z-index: 5;
+  /* выше треков, но ниже шапки */
+  background: #181818;
+  /* чтобы не просвечивал контент под ним */
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
