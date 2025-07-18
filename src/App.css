@@ -64,10 +64,6 @@ body {
   background-color: #181818;
 }
 
-.container::-webkit-scrollbar {
-  display: none;
-}
-
 .skeleton__none,
 .hidden {
   display: none;
@@ -153,12 +149,30 @@ body {
 }
 
 .main__centerblock {
-  max-width: 1400px;
+  position: absolute;
+  top: 80px;
+  left: 244px;
+  right: 418px;
+  bottom: 73px;
+  overflow-y: auto;
+  padding: 20px 40px;
+
+  /* max-width: 1400px;
   width: auto;
   -webkit-box-flex: 3;
   -ms-flex-positive: 3;
   flex-grow: 3;
-  padding: 20px 40px 20px 280px;
+  padding: 20px 40px 20px 280px; */
+}
+
+.main__centerblock::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.main__centerblock {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .main__sidebar {
