@@ -6,14 +6,26 @@ import PrivateRoute from "./components/PrivateRoute";
 import Playlist from "./pages/playlist/playlist";
 import Picks from "./pages/Picks/Picks";
 import NotFoundPage from "./pages/404/NotFoundPage";
+import NeedVpn from "./components/NeedVpn";
+import { useState } from "react";
 
 const AppRoutes = () => {
+
+    const [vpn, setVpn] = useState(false);
+
+    fetch('https://ipinfo.io/json?token=663adf1cf972e9')
+        .then(res => res.json())
+        .then(data => {
+            const country = data.country;
+            country === "RU" ? setVpn(false) : setVpn(true);
+        });
+
     return (
         <Routes>
             <Route path="/"
                 element={
                     <PrivateRoute>
-                        <Main />
+                        {vpn ? <Main /> : <NeedVpn />}
                     </PrivateRoute>
                 }
             />
