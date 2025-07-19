@@ -40,6 +40,15 @@ function App() {
 
 
   useEffect(() => {
+
+
+    fetch('https://ipinfo.io/json?token=663adf1cf972e9')
+      .then(res => res.json())
+      .then(data => {
+        console.log('IP:', data.ip);
+        console.log('Страна:', data.country);
+      });
+
     const refreshToken = localStorage.getItem('refresh-token');
     const expiresIn = localStorage.getItem('expires-in');
 
@@ -62,7 +71,7 @@ function App() {
       }
     };
 
-    // Обновим токен за 1 минуту до истечения
+
     const timeout = setTimeout(refreshAccessToken, (Number(expiresIn) - 60) * 1000);
 
     return () => clearTimeout(timeout);
