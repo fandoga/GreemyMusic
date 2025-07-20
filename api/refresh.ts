@@ -2,6 +2,16 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import axios from 'axios';
 
+function toBase64(str: string) {
+    if (typeof Buffer !== "undefined") {
+        return Buffer.from(str, 'utf-8').toString('base64');
+    } else if (typeof btoa !== "undefined") {
+        return btoa(str);
+    } else {
+        throw new Error('No base64 encoding available');
+    }
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -26,7 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             params, // <-- передаём объект, а не строку!
             {
                 headers: {
-                    'Authorization': 'Basic ' + Buffer.from(`${client_id}:${client_secret}`).toString('base64'),
+                    'Authorization': 'Basic ' + toBase64(`${client_id}:${client_secret}`),
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }
             }
