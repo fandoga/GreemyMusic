@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 function toBase64(str) {
     if (typeof Buffer !== "undefined") {
@@ -10,7 +10,7 @@ function toBase64(str) {
     }
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
@@ -57,4 +57,4 @@ module.exports = async (req, res) => {
             details: error?.response?.data || error?.message || String(error)
         });
     }
-};
+}
