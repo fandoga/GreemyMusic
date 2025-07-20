@@ -30,7 +30,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             });
 
         res.status(200).json(response.data);
-    } catch (error) {
-        res.status(400).json({ error: 'Failed to refresh token', details: error });
+    } catch (error: any) {
+        console.error(error);
+        res.status(400).json({
+            error: 'Failed to refresh token',
+            details: error?.response?.data || error?.message || String(error)
+        });
     }
 }
