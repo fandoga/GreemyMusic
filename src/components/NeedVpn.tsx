@@ -11,9 +11,9 @@ const NeedVpn = () => {
             <main className="main">
                 <Nav />
 
-                <Sidebar />
+
             </main>
-            <Bar />
+            <Bar state={true} />
             <footer className="footer"></footer>
         </div>
     );
