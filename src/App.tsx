@@ -69,7 +69,7 @@ function App() {
     // Проверяем токен каждый час (3600 секунд = 1 час)
     intervalId = setInterval(() => {
       refreshAccessToken();
-    }, 60 * 60 * 10); // 1 час
+    }, 60 * 60 * 1000); // 1 час
 
     // Можно вызвать сразу при запуске, если нужно
     // refreshAccessToken();
