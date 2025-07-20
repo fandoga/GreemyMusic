@@ -1,7 +1,20 @@
+import Nav from "./Nav";
+
+import Sidebar from "./Sidebar";
+import Bar from "./Bar";
+
+
 const NeedVpn = () => {
+
     return (
-        <div className="IpError__block">
-            <h1>похоже что впн выключен</h1>
+        <div className="container">
+            <main className="main">
+                <Nav />
+
+                <Sidebar />
+            </main>
+            <Bar />
+            <footer className="footer"></footer>
         </div>
     );
 }

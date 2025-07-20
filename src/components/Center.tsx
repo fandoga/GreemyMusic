@@ -16,7 +16,7 @@ interface TrackData {
 interface CenterProps {
     loading?: boolean;
     title: string;
-    tracks: TrackData[];
+    tracks?: TrackData[];
 }
 
 const Center: React.FC<CenterProps> = ({ title, tracks, loading }) => {
