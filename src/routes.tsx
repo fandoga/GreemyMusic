@@ -20,18 +20,32 @@ const AppRoutes = () => {
             country === "RU" ? setVpn(false) : setVpn(true);
         });
 
+    const accessToken = localStorage.getItem('access-token');
+
     return (
         <Routes>
             <Route path="/"
                 element={
                     <PrivateRoute>
-                        {vpn ? <Main /> : <NeedVpn />}
+                        {
+                            accessToken ?
+                                (vpn ? <Main /> : <NeedVpn />)
+                                : <Login />
+                        }
                     </PrivateRoute>
                 }
             />
             <Route path="/login" element={<Login />} />
-            <Route path="/playlist" element={<Playlist />} />
-            <Route path="/picks/:id" element={<Picks />} />
+            <Route path="/playlist" element={
+                <PrivateRoute>
+                    <Playlist />
+                </PrivateRoute>
+            } />
+            <Route path="/picks/:id" element={
+                <PrivateRoute>
+                    <Picks />
+                </PrivateRoute>
+            } />
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
