@@ -41,7 +41,7 @@ function App() {
 
 
   useEffect(() => {
-    let intervalId;
+    let intervalId: ReturnType<typeof setInterval>;
 
     async function refreshAccessToken() {
       const refreshToken = localStorage.getItem('refresh-token');
