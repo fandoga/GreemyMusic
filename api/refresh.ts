@@ -1,6 +1,6 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import axios from 'axios';
+const axios = require('axios');
 
 function toBase64(str: string) {
     if (typeof Buffer !== "undefined") {

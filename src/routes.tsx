@@ -11,7 +11,7 @@ import { useState } from "react";
 
 const AppRoutes = () => {
 
-    const [vpn, setVpn] = useState(false);
+    const [vpn, setVpn] = useState(true);
 
     fetch('https://ipinfo.io/json?token=663adf1cf972e9')
         .then(res => res.json())
