@@ -41,14 +41,12 @@ function App() {
 
 
   useEffect(() => {
+    let intervalId;
 
+    async function refreshAccessToken() {
+      const refreshToken = localStorage.getItem('refresh-token');
+      if (!refreshToken) return;
 
-    const refreshToken = localStorage.getItem('refresh-token');
-    const expiresIn = localStorage.getItem('expires-in');
-
-    if (!refreshToken || !expiresIn) return;
-
-    const refreshAccessToken = async () => {
       const res = await fetch('/api/refresh', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,17 +56,25 @@ function App() {
       const data = await res.json();
       if (data.access_token) {
         localStorage.setItem('access-token', data.access_token);
-        localStorage.setItem('expires-in', data.expires_in);
+        localStorage.setItem('expires-in', data.expires_in); // если сервер возвращает expires_in (в секундах)
         console.log('🎉 Token refreshed');
       } else {
-        console.error('Failed to refresh token:', data);
+        // refresh token невалиден — разлогинь пользователя
+        localStorage.removeItem('access-token');
+        localStorage.removeItem('refresh-token');
+        window.location.href = '/login';
       }
-    };
+    }
 
+    // Проверяем токен каждый час (3600 секунд = 1 час)
+    intervalId = setInterval(() => {
+      refreshAccessToken();
+    }, 60 * 60 * 10); // 1 час
 
-    const timeout = setTimeout(refreshAccessToken, (Number(expiresIn) - 60) * 1000);
+    // Можно вызвать сразу при запуске, если нужно
+    // refreshAccessToken();
 
-    return () => clearTimeout(timeout);
+    return () => clearInterval(intervalId);
   }, []);
 
 
