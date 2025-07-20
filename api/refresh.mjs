@@ -1,8 +1,6 @@
-
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 const axios = require('axios');
 
-function toBase64(str: string) {
+function toBase64(str) {
     if (typeof Buffer !== "undefined") {
         return Buffer.from(str, 'utf-8').toString('base64');
     } else if (typeof btoa !== "undefined") {
@@ -12,7 +10,7 @@ function toBase64(str: string) {
     }
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+module.exports = async (req, res) => {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
@@ -33,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         const response = await axios.post(
             'https://accounts.spotify.com/api/token',
-            params, // <-- передаём объект, а не строку!
+            params,
             {
                 headers: {
                     'Authorization': 'Basic ' + toBase64(`${client_id}:${client_secret}`),
@@ -42,7 +40,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             }
         );
 
-        // Spotify может не вернуть новый refresh_token, тогда возвращаем старый
         const access_token = response.data.access_token;
         const new_refresh_token = response.data.refresh_token || refresh_token;
 
@@ -53,11 +50,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             scope: response.data.scope,
             token_type: response.data.token_type,
         });
-    } catch (error: any) {
+    } catch (error) {
         console.error(error?.response?.data || error?.message || error);
         res.status(400).json({
             error: 'Failed to refresh token',
             details: error?.response?.data || error?.message || String(error)
         });
     }
-}
+};
