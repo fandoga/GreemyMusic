@@ -6,7 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Playlist from "./pages/playlist/playlist";
 import Picks from "./pages/Picks/Picks";
 import NotFoundPage from "./pages/404/NotFoundPage";
-import NeedVpn from "./components/NeedVpn";
+import NeedVpn from "./pages/IpCheck/NeedVpnPage";
 import { useState } from "react";
 
 const AppRoutes = () => {
