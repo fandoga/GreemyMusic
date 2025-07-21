@@ -25,7 +25,9 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
         )
     }
 
-    console.log(track);
+    setTimeout(() => {
+        console.log(track);
+    }, 3000);
 
     return (
         <div className="bar">
