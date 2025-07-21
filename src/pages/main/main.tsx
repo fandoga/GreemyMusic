@@ -16,7 +16,8 @@ const Main = () => {
             const accessToken = localStorage.getItem('access-token');
             setLoading(true)
             const res = await fetch(
-                `https://api.spotify.com/v1/playlists/1vCsCr74SWGrwv3RMNcBPg/tracks?limit=20`,
+                // `https://api.spotify.com/v1/playlists/1vCsCr74SWGrwv3RMNcBPg/tracks?limit=20`,
+                'https://api.spotify.com/v1/recommendations?seed_tracks=7gLAsZ9ZLXPzwhXefnvKcg',
                 {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
