@@ -64,4 +64,9 @@
     text-align: center;
     color: #4e4e4e;
     text-transform: lowercase;
+
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

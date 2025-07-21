@@ -14,7 +14,7 @@ const NeedVpn = () => {
             <h2 className="ip__subtitle">Нужен VPN</h2>
             <p className="ip__text">Посколько сервис Spotify не работает в России, для работы через аккаунт сервиса понадобиться прокси
             </p>
-            <button onClick={() => navigate('/')} className="ip__button">Обновить страницу</button>
+            <button onClick={() => window.location.reload()} className="ip__button">Обновить страницу</button>
             <Link className="ip__link" to={"/login"}>Или использовать локальный аккаунт</Link>
         </div>
     );
