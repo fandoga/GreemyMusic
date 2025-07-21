@@ -70,7 +70,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 </div>
                                 <div className="track-play__author">
                                     <a className="track-play__author-link" href="http://"
-                                    >{ }</a>
+                                    >{track?.Name}</a>
                                 </div>
                                 <div className="track-play__album">
                                     <a className="track-play__album-link" href="http://">Баста</a>
