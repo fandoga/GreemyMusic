@@ -71,8 +71,7 @@ function App() {
       refreshAccessToken();
     }, 60 * 60 * 1000); // 1 час
 
-    // Можно вызвать сразу при запуске, если нужно
-    // refreshAccessToken();
+    refreshAccessToken();
 
     return () => clearInterval(intervalId);
   }, []);
