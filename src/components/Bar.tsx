@@ -25,9 +25,9 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
         )
     }
 
-    setTimeout(() => {
-        console.log(track);
-    }, 3000);
+
+    console.log(track);
+
 
     return (
         <div className="bar">
@@ -75,7 +75,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                     >{track?.Name}</a>
                                 </div>
                                 <div className="track-play__album">
-                                    <a className="track-play__album-link" href="http://">Баста</a>
+                                    <a className="track-play__album-link" href="http://">{track?.Author}</a>
                                 </div>
                             </div>
 
