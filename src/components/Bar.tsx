@@ -1,15 +1,8 @@
 import React from "react";
 import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../LoadingContext";
+import TrackData from "../pages/main/TrackData";
 
-interface TrackData {
-    Img: string;
-    Name: string;
-    Author: string;
-    Album: string;
-    Time: string;
-    Info: string;
-}
 
 interface BarProps {
     state?: boolean
@@ -66,9 +59,9 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                         <div className="player__track-play track-play">
                             <div className="track-play__contain">
                                 <div className="track-play__image">
-                                    <svg className="track-play__svg" >
-                                        <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-                                    </svg>
+                                    <div className="track-play__svg" >
+                                        <img src={track?.ImgMed} alt="" />
+                                    </div>
                                 </div>
                                 <div className="track-play__author">
                                     <a className="track-play__author-link" href="http://"

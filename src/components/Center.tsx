@@ -3,15 +3,16 @@ import FilterBar from "./FilterBar";
 import Searchbar from "./Searchbar";
 import Track from "./Track";
 import TrackSkeleton from "./TrackSkeleton";
+import TrackData from "../pages/main/TrackData";
 
-interface TrackData {
-    Img: string;
-    Name: string;
-    Author: string;
-    Album: string;
-    Time: string;
-    Info: string;
-}
+// interface TrackData {
+//     Img: string;
+//     Name: string;
+//     Author: string;
+//     Album: string;
+//     Time: string;
+//     Info: string;
+// }
 
 interface CenterProps {
     loading?: boolean;

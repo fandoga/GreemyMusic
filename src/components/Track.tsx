@@ -1,16 +1,17 @@
 import { useLoading } from "../LoadingContext";
 import React from "react";
 import TrackSkeleton from "./TrackSkeleton";
+import TrackData from "../pages/main/TrackData";
 
-interface TrackData {
-    Img: string,
-    Name: string,
-    Author: string,
-    Album: string,
-    Time: string;
-    Info: string
-    onSelect?: () => void
-}
+// interface TrackData {
+//     Img: string,
+//     Name: string,
+//     Author: string,
+//     Album: string,
+//     Time: string;
+//     Info: string
+//     onSelect?: () => void
+// }
 
 const Track: React.FC<TrackData> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();

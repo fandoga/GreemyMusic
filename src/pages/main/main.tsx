@@ -3,16 +3,18 @@ import Bar from '../../components/Bar';
 import Nav from '../../components/Nav';
 import Center from '../../components/Center';
 import Sidebar from '../../components/Sidebar';
+import { TrackData } from "./TrackData";
 
 
-interface TrackData {
-    Img: string;
-    Name: string;
-    Author: string;
-    Album: string;
-    Time: string;
-    Info: string;
-}
+// interface TrackData {
+//     Img: string;
+//     Name: string;
+//     Author: string;
+//     Album: string;
+//     Time: string;
+//     Info: string;
+// }
+
 
 
 const Main = () => {
@@ -50,7 +52,9 @@ const Main = () => {
     adaptedTracks = tracks.map(item => {
         const track = item.track;
         return {
-            Img: track.album.images[2].url,
+            Img: track.album.images[2].url || "",
+            ImgMed: track.album.images[1].url || "",
+            ImgBig: track.album.images[0].url || "",
             Name: track.name,
             Author: track.artists.map((a: any) => a.name).join(', '),
             Album: track.album.name,
