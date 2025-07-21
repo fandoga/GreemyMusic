@@ -143,10 +143,14 @@ body {
 }
 
 .main__nav {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   position: fixed;
   width: 244px;
   background-color: #181818;
-  padding: 20px 0 20px 36px;
+  padding: 20px 0 60px 36px;
 }
 
 .main__centerblock {
