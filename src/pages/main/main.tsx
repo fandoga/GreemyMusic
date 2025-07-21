@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Bar from '../../components/Bar';
 import Nav from '../../components/Nav';
 import Center from '../../components/Center';
@@ -7,32 +7,65 @@ import Sidebar from '../../components/Sidebar';
 const Main = () => {
 
     const [loading, setLoading] = useState(false);
-    const [RecommendedTracks, setRecommendedTracks] = useState<any[]>([]);
+    // const [RecommendedTracks, setRecommendedTracks] = useState<any[]>([]);
     let adaptedTracks
+    const [tracks, setTracks] = useState<any[]>([]);
+    const [offset, setOffset] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    const loaderRef = useRef<HTMLDivElement>(null);
+    const limit = 20;
+
+    const loadTracks = async () => {
+        const accessToken = localStorage.getItem('access-token');
+        setLoading(true);
+        const res = await fetch(
+            `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        const data = await res.json();
+        setTracks(prev => [...prev, ...data.items]);
+        setOffset(prev => prev + limit);
+        setLoading(false);
+        if (!data.next) setHasMore(false);
+    };
 
     useEffect(() => {
-        const Recommendations = async () => {
+        // const Recommendations = async () => {
 
-            const accessToken = localStorage.getItem('access-token');
-            setLoading(true)
-            const res = await fetch(
-                `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks`,
-                // `https://api.spotify.com/v1/playlists/37i9dQZF1E366gZNq84Mhw/tracks?limit=20`,
-                {
-                    headers: { Authorization: `Bearer ${accessToken}` },
-                }
-            );
+        //     const accessToken = localStorage.getItem('access-token');
+        //     setLoading(true)
+        //     const res = await fetch(
+        //         `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=20`,
+        //         {
+        //             headers: { Authorization: `Bearer ${accessToken}` },
+        //         }
+        //     );
 
-            const data = await res.json();
-            setLoading(false)
-            setRecommendedTracks(data.items)
-        };
+        //     const data = await res.json();
+        //     setLoading(false)
+        //     setRecommendedTracks(data.items)
+        // };
 
-        Recommendations()
+        // Recommendations()
 
+
+        loadTracks();
     }, []);
 
-    adaptedTracks = RecommendedTracks.map(item => {
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => {
+                if (entries[0].isIntersecting && hasMore) {
+                    loadTracks();
+                }
+            },
+            { threshold: 1 }
+        );
+        if (loaderRef.current) observer.observe(loaderRef.current);
+        return () => observer.disconnect();
+    }, [loaderRef, hasMore]);
+
+    adaptedTracks = tracks.map(item => {
         const track = item.track;
         return {
             Img: track.album.images[2].url,
@@ -43,14 +76,14 @@ const Main = () => {
             Info: '',
         };
     });
-    console.log(RecommendedTracks);
+    console.log(tracks);
     console.log(adaptedTracks);
 
     return (
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title="Треки" tracks={adaptedTracks} loading={loading} />
+                <Center title="Главная" tracks={adaptedTracks} loading={loading} loaderRef={loaderRef} />
                 <Sidebar />
             </main>
             <Bar />
