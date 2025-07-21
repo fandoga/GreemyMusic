@@ -12,28 +12,6 @@ function App() {
   const credentials = btoa(`${clientId}:${clientSecret}`);
 
   useEffect(() => {
-    // fetch('https://accounts.spotify.com/api/token', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //     'Authorization': `Basic ${credentials}`,
-    //   },
-    //   body: 'grant_type=client_credentials'
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     localStorage.setItem('access-token', data.access_token)
-    //   });
-
-    // fetch("https://api.spotify.com/v1/search?q=drake&type=track", {
-    //   headers: {
-    //     Authorization: "Bearer BQCmNhKUWop6uX6tK0qU-thLPjaqwYGErp9KSRaBRUxidZo4Ogfvhkpg3RCljelAn79Nksq4zTBlnAVyMHf9G_WnEjEK6W5isnfq0p7XBHbfZEkP7hqZTAoWmAkwXgsX2gOsf2k6rvY"
-    //   }
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data);
-    //   })
 
     const timer = setTimeout(() => setLoading(false), 300);
     return () => clearTimeout(timer);
