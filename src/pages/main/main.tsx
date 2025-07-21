@@ -17,7 +17,7 @@ const Main = () => {
             setLoading(true)
             const res = await fetch(
                 // `https://api.spotify.com/v1/playlists/1vCsCr74SWGrwv3RMNcBPg/tracks?limit=20`,
-                'https://api.spotify.com/v1/recommendations?seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=classical%2Ccountry&seed_tracks=0c6xIDDpzE81m2q797ordA',
+                'https://api.spotify.com/v1/playlists/37i9dQZF1E366gZNq84Mhw/tracks',
                 {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 }
