@@ -11,7 +11,7 @@
 .ip__subtitle {
     font-family: "StratosSkyeng", sans-serif;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 42px;
     line-height: 125%;
     color: #fff;
     padding-bottom: 8px;
@@ -21,11 +21,11 @@
     padding-bottom: 36px;
     max-width: 380px;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 21px;
     line-height: 133%;
     letter-spacing: 0em;
     text-align: center;
-    color: #4e4e4e;
+    color: #a4a4a4;
 }
 
 .ip__button {
@@ -55,7 +55,7 @@
 }
 
 .ip__link {
-    padding-bottom: 8px;
+    padding-top: 8px;
     max-width: 380px;
     font-weight: 400;
     font-size: 16px;
@@ -63,4 +63,5 @@
     letter-spacing: 0em;
     text-align: center;
     color: #4e4e4e;
+    text-transform: lowercase;
 }

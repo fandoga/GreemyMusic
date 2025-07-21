@@ -1,4 +1,3 @@
-import Nav from "../../components/Nav";
 import NeedVpn from "./NeedVpn";
 import Bar from "../../components/Bar";
 
@@ -6,7 +5,7 @@ import Bar from "../../components/Bar";
 const NeedVpnPage = () => {
 
     return (
-        <div className="container loading">
+        <div className="container">
             <main className="main">
                 {/* <Nav /> */}
                 <NeedVpn />
