@@ -17,7 +17,7 @@ interface CenterProps {
     loading?: boolean;
     title: string;
     tracks: TrackData[];
-    loaderRef: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
+    loaderRef?: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
 }
 
 const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef }) => {
