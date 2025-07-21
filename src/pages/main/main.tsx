@@ -3,18 +3,7 @@ import Bar from '../../components/Bar';
 import Nav from '../../components/Nav';
 import Center from '../../components/Center';
 import Sidebar from '../../components/Sidebar';
-import { TrackData } from "./TrackData";
-
-
-// interface TrackData {
-//     Img: string;
-//     Name: string;
-//     Author: string;
-//     Album: string;
-//     Time: string;
-//     Info: string;
-// }
-
+import TrackData from "./TrackData";
 
 
 const Main = () => {
@@ -77,7 +66,9 @@ const Main = () => {
                 />
                 <Sidebar />
             </main>
-            <Bar track={currentTrack} />
+            {currentTrack && (
+                <Bar track={currentTrack} />
+            )}
             <footer className="footer"></footer>
         </div>
     );

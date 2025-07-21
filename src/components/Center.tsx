@@ -50,6 +50,8 @@ const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef, onTr
                             <Track
                                 key={idx}
                                 Img={track.Img}
+                                ImgMed={track.ImgMed}
+                                ImgBig={track.ImgBig}
                                 Name={track.Name}
                                 Author={track.Author}
                                 Album={track.Album}
