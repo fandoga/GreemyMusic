@@ -943,6 +943,7 @@ body {
 }
 
 .track-play__album {
+  width: max-content;
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: album;
