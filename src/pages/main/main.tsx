@@ -7,13 +7,11 @@ import Sidebar from '../../components/Sidebar';
 const Main = () => {
 
     const [loading, setLoading] = useState(false);
-    // const [RecommendedTracks, setRecommendedTracks] = useState<any[]>([]);
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-    const loaderRef = useRef<HTMLDivElement>(null);
-    const limit = 20;
+    const limit = 50;
 
     const loadTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
@@ -30,39 +28,11 @@ const Main = () => {
     };
 
     useEffect(() => {
-        // const Recommendations = async () => {
-
-        //     const accessToken = localStorage.getItem('access-token');
-        //     setLoading(true)
-        //     const res = await fetch(
-        //         `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=20`,
-        //         {
-        //             headers: { Authorization: `Bearer ${accessToken}` },
-        //         }
-        //     );
-
-        //     const data = await res.json();
-        //     setLoading(false)
-        //     setRecommendedTracks(data.items)
-        // };
-
-        // Recommendations()
 
         loadTracks();
     }, []);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            entries => {
-                if (entries[0].isIntersecting && hasMore) {
-                    loadTracks();
-                }
-            },
-            { threshold: 1 }
-        );
-        if (loaderRef.current) observer.observe(loaderRef.current);
-        return () => observer.disconnect();
-    }, [loaderRef, hasMore]);
+
 
     adaptedTracks = tracks.map(item => {
         const track = item.track;
@@ -82,7 +52,7 @@ const Main = () => {
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title="Главная" tracks={adaptedTracks} loading={loading} loaderRef={loaderRef} />
+                <Center title="Главная" tracks={adaptedTracks} loading={loading} />
                 <Sidebar />
             </main>
             <Bar />
