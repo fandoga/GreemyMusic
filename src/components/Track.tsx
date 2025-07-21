@@ -9,9 +9,10 @@ interface TrackData {
     Album: string,
     Time: string;
     Info: string
+    onSelect?: () => void
 }
 
-const Track: React.FC<TrackData> = ({ Img, Name, Album, Author, Time, Info }) => {
+const Track: React.FC<TrackData> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();
 
     if (loading) {
@@ -20,9 +21,10 @@ const Track: React.FC<TrackData> = ({ Img, Name, Album, Author, Time, Info }) =>
         )
     }
 
+
     return (
         <div className="playlist__item">
-            <div className="playlist__track track">
+            <div onClick={() => onSelect} className="playlist__track track">
                 <div className="track__title">
                     <div className="track__title-image">
                         <img src={Img} alt="" />

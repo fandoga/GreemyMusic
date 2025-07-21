@@ -18,9 +18,10 @@ interface CenterProps {
     title: string;
     tracks: TrackData[];
     loaderRef?: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
+    onTrackSelect?: (track: TrackData) => void
 }
 
-const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef }) => {
+const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef, onTrackSelect }) => {
 
 
 
@@ -53,6 +54,7 @@ const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef }) =>
                                 Album={track.Album}
                                 Time={track.Time}
                                 Info={track.Info}
+                                onSelect={() => onTrackSelect && onTrackSelect(track)}
                             />
                         ))}
                     <div ref={loaderRef} style={{ height: 1 }}></div>

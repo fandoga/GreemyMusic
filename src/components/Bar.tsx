@@ -2,11 +2,21 @@ import React from "react";
 import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../LoadingContext";
 
-interface BarProps {
-    state?: boolean
+interface TrackData {
+    Img: string;
+    Name: string;
+    Author: string;
+    Album: string;
+    Time: string;
+    Info: string;
 }
 
-const Bar: React.FC<BarProps> = ({ state }) => {
+interface BarProps {
+    state?: boolean
+    track?: TrackData;
+}
+
+const Bar: React.FC<BarProps> = ({ state, track }) => {
     const loading = useLoading();
 
     if (loading || state) {
@@ -14,6 +24,8 @@ const Bar: React.FC<BarProps> = ({ state }) => {
             <BarSkeleton />
         )
     }
+
+    console.log(track);
 
     return (
         <div className="bar">
@@ -58,7 +70,7 @@ const Bar: React.FC<BarProps> = ({ state }) => {
                                 </div>
                                 <div className="track-play__author">
                                     <a className="track-play__author-link" href="http://"
-                                    >Ты та...</a>
+                                    >{ }</a>
                                 </div>
                                 <div className="track-play__album">
                                     <a className="track-play__album-link" href="http://">Баста</a>

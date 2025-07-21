@@ -4,8 +4,20 @@ import Nav from '../../components/Nav';
 import Center from '../../components/Center';
 import Sidebar from '../../components/Sidebar';
 
+
+interface TrackData {
+    Img: string;
+    Name: string;
+    Author: string;
+    Album: string;
+    Time: string;
+    Info: string;
+}
+
+
 const Main = () => {
 
+    const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const [loading, setLoading] = useState(false);
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
@@ -52,10 +64,15 @@ const Main = () => {
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title="Главная" tracks={adaptedTracks} loading={loading} />
+                <Center
+                    title="Главная"
+                    tracks={adaptedTracks}
+                    loading={loading}
+                    onTrackSelect={setCurrentTrack}
+                />
                 <Sidebar />
             </main>
-            <Bar />
+            <Bar track={currentTrack} />
             <footer className="footer"></footer>
         </div>
     );
