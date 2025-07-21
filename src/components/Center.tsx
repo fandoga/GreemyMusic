@@ -49,14 +49,7 @@ const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef, onTr
                         : tracks.map((track, idx) => (
                             <Track
                                 key={idx}
-                                Img={track.Img}
-                                ImgMed={track.ImgMed}
-                                ImgBig={track.ImgBig}
-                                Name={track.Name}
-                                Author={track.Author}
-                                Album={track.Album}
-                                Time={track.Time}
-                                Info={track.Info}
+                                {...track}
                                 onSelect={() => onTrackSelect && onTrackSelect(track)}
                             />
                         ))}
