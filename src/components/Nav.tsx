@@ -10,6 +10,7 @@ const Nav = () => {
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
     const [loading, setLoading] = useState(false)
+    const [playlists, setPlaylists] = useState<any[]>([]);
     let adaptedPlaylists: any[]
 
     const loadPlaylists = async () => {
@@ -21,21 +22,23 @@ const Nav = () => {
         );
         const data = await res.json();
         setLoading(false);
-        const playlists: any[] = data.items
-        adaptedPlaylists = playlists.map(item => {
-            const playlist = item;
-            return {
-                Name: playlist.name || "",
-                Id: playlist.id || "",
-                TracksUrl: playlist.tracks.href || ""
-            };
-        });
+        setPlaylists(data.items)
     };
 
     useEffect(() => {
         loadPlaylists();
-        console.log(adaptedPlaylists);
     }, [])
+
+    adaptedPlaylists = playlists.map(item => {
+        const playlist = item;
+        return {
+            Name: playlist.name || "",
+            Id: playlist.id || "",
+            TracksUrl: playlist.tracks.href || ""
+        };
+    });
+
+    console.log(adaptedPlaylists);
 
 
     const toggleMenu = () => {
