@@ -31,9 +31,9 @@ const Nav = () => {
 
     adaptedPlaylists = playlists.map(item => {
         const playlist = item;
-        const imgUrl = playlist.images[2] ? playlist.images[2].url || "" : playlist.images[0].url || ""
+        const imgUrl = playlist.images[2].url ? playlist.images[2].url || "" : playlist.images[0].url || ""
         return {
-            Img: { imgUrl },
+            Img: imgUrl,
             Name: playlist.name || "",
             Id: playlist.id || "",
             TracksUrl: playlist.tracks.href || ""
