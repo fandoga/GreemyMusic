@@ -241,8 +241,6 @@ body {
 }
 
 .playlist-list__item {
-  display: flex;
-  align-items: center;
   margin-bottom: 8px;
   cursor: pointer;
   border-radius: 8px;
@@ -256,7 +254,6 @@ body {
 }
 
 .playlist__img {
-  margin-right: 6px;
   width: 51px;
   height: 51px;
 
@@ -273,6 +270,20 @@ body {
 }
 
 .menu__link {
+  text-align: left;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.playlist__button {
+  display: flex;
+  gap: 6px;
+  align-items: center;
   text-align: left;
   width: 100%;
   background-color: transparent;

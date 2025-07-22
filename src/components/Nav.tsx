@@ -77,7 +77,7 @@ const Nav = () => {
                         {loading ? loading :
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
-                                    <button onClick={() => navigate('/playlist')} className="menu__link">
+                                    <button onClick={() => navigate('/playlist')} className="playlist__button">
                                         <div className="playlist__img">
                                             <img src={playlist.Img} alt="" />
                                         </div>
