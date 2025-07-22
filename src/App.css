@@ -241,6 +241,7 @@ body {
 }
 
 .playlist-list__item {
+  cursor: pointer;
   border-radius: 8px;
   padding: 9px;
   margin-left: -9px;
@@ -257,6 +258,8 @@ body {
 }
 
 .menu__link {
+  background-color: transparent;
+  border: none;
   color: #ffffff;
   font-weight: 400;
   font-size: 16px;
