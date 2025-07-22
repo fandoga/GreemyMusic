@@ -41,7 +41,7 @@ const Nav = () => {
                         </li>
                     </ul>
                     <ul className="playlist__list">
-                        <li className="playlist__item">
+                        <li className="playlist-list__item">
                             <Link to="/playlist" className="menu__link">Мой плейлист</Link>
                         </li>
                     </ul>
