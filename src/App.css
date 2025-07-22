@@ -148,7 +148,7 @@ body {
   justify-content: space-between;
   flex-direction: column;
   position: fixed;
-  width: 244px;
+  width: 264px;
   background-color: #181818;
   padding: 20px 0 110px 36px;
 }
@@ -254,8 +254,8 @@ body {
 }
 
 .playlist__img {
-  width: 51px;
-  height: 51px;
+  width: 42px;
+  height: 42px;
 
   & img {
     object-fit: contain;
