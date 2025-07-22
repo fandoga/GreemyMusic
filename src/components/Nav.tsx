@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 
 
 const Nav = () => {
-
+    const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
 
@@ -42,7 +42,8 @@ const Nav = () => {
                     </ul>
                     <ul className="playlist__list">
                         <li className="playlist-list__item">
-                            <Link to="/playlist" className="menu__link">Мой плейлист</Link>
+                            {/* <Link to="/playlist" className="menu__link">Мой плейлист</Link> */}
+                            <button onClick={() => navigate('/playlist')} className="menu__link">Мой плейлист</button>
                         </li>
                     </ul>
                 </div>
