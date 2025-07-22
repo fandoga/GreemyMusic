@@ -240,8 +240,18 @@ body {
   border-bottom: 1px solid #2e2e2e;
 }
 
-.menu__item,
 .playlist-list__item {
+  border-radius: 8px;
+  padding: 6px;
+  margin-left: -6px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: #2e2e2e;
+  }
+}
+
+.menu__item {
   padding: 5px 0;
   margin-bottom: 16px;
 }
