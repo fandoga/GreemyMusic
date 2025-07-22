@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
+import Playlist from "../pages/playlist/playlist";
 
 
 const Nav = () => {
@@ -9,6 +10,7 @@ const Nav = () => {
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
     const [loading, setLoading] = useState(false)
+    let adaptedPlaylists: any[]
 
     const loadPlaylists = async () => {
         const accessToken = localStorage.getItem('access-token');
@@ -19,12 +21,22 @@ const Nav = () => {
         );
         const data = await res.json();
         setLoading(false);
-        console.log(data);
+        const playlists: any[] = data.items
+        adaptedPlaylists = playlists.map(item => {
+            const playlist = item;
+            return {
+                Name: playlist.name || "",
+                Id: playlist.id || "",
+                TracksUrl: playlist.tracks.href || ""
+            };
+        });
     };
 
     useEffect(() => {
         loadPlaylists();
+        console.log(adaptedPlaylists);
     }, [])
+
 
     const toggleMenu = () => {
         if (menuOpen) {
