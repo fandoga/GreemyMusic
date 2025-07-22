@@ -19,6 +19,7 @@ const Nav = () => {
         );
         const data = await res.json();
         setLoading(false);
+        return data;
     };
 
     useEffect(() => {
