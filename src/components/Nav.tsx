@@ -77,12 +77,16 @@ const Nav = () => {
                         {loading ? loading :
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
-                                    <div className="playlist__img">
-                                        <img src={playlist.Img} alt="" />
-                                    </div>
-                                    <button onClick={() => navigate('/playlist')} className="menu__link">{playlist.Name && playlist.Name.length > 22
-                                        ? playlist.Name.slice(0, 22) + "..."
-                                        : playlist.Name || ""}</button>
+                                    <button onClick={() => navigate('/playlist')} className="menu__link">
+                                        <div className="playlist__img">
+                                            <img src={playlist.Img} alt="" />
+                                        </div>
+                                        {
+                                            playlist.Name && playlist.Name.length > 22
+                                                ? playlist.Name.slice(0, 22) + "..."
+                                                : playlist.Name || ""
+                                        }
+                                    </button>
                                 </li>
                             ))}
                     </ul>
