@@ -82,8 +82,8 @@ const Nav = () => {
                                             <img src={playlist.Img} alt="" />
                                         </div>
                                         {
-                                            playlist.Name && playlist.Name.length > 22
-                                                ? playlist.Name.slice(0, 22) + "..."
+                                            playlist.Name && playlist.Name.length > 19
+                                                ? playlist.Name.slice(0, 19) + "..."
                                                 : playlist.Name || ""
                                         }
                                     </button>
