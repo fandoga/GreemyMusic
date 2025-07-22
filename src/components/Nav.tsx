@@ -19,11 +19,11 @@ const Nav = () => {
         );
         const data = await res.json();
         setLoading(false);
-        return data;
+        console.log(data);
     };
 
     useEffect(() => {
-        console.log(loadPlaylists());
+        loadPlaylists();
     }, [])
 
     const toggleMenu = () => {
