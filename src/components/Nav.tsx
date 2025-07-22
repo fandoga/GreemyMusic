@@ -75,7 +75,7 @@ const Nav = () => {
                         {loading
                             ? Array.from({ length: 10 }).map((_, i) => <Playlist key={i} />)
                             : adaptedPlaylists.map((playlist, idx) => (
-                                <li className="playlist-list__item">
+                                <li key={idx} className="playlist-list__item">
                                     <button onClick={() => navigate('/playlist')} className="menu__link">{playlist.Name}</button>
                                 </li>
                             ))}
