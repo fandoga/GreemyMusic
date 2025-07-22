@@ -237,7 +237,7 @@ body {
 }
 
 .menu__list {
-  border-bottom: 1px solid #2e2e2e;
+  border-bottom: 1px solid #696969;
 }
 
 .playlist-list__item {
@@ -258,6 +258,8 @@ body {
 }
 
 .menu__link {
+  text-align: left;
+  width: 100%;
   background-color: transparent;
   border: none;
   color: #ffffff;
