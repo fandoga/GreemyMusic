@@ -237,7 +237,7 @@ body {
 }
 
 .menu__item,
-.playlist__item {
+.playlist-list__item {
   padding: 5px 0;
   margin-bottom: 16px;
 }
