@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 
 
 const Nav = () => {
+
     const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
+    const [loading, setLoading] = useState(false)
+
+    const loadPlaylists = async () => {
+        const accessToken = localStorage.getItem('access-token');
+        setLoading(true);
+        const res = await fetch(
+            `https://api.spotify.com/v1/me/playlists`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        const data = await res.json();
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        console.log(loadPlaylists());
+    }, [])
 
     const toggleMenu = () => {
         if (menuOpen) {
