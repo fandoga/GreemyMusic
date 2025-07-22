@@ -38,8 +38,6 @@ const Nav = () => {
         };
     });
 
-    console.log(adaptedPlaylists);
-
 
     const toggleMenu = () => {
         if (menuOpen) {
@@ -74,10 +72,14 @@ const Nav = () => {
                         </li>
                     </ul>
                     <ul className="playlist__list">
-                        <li className="playlist-list__item">
-                            {/* <Link to="/playlist" className="menu__link">Мой плейлист</Link> */}
-                            <button onClick={() => navigate('/playlist')} className="menu__link">Мой плейлист</button>
-                        </li>
+                        {loading
+                            ? Array.from({ length: 10 }).map((_, i) => <Playlist key={i} />)
+                            : adaptedPlaylists.map((playlist, idx) => (
+                                <li className="playlist-list__item">
+                                    <button onClick={() => navigate('/playlist')} className="menu__link">{playlist.Name}</button>
+                                </li>
+                            ))}
+
                     </ul>
                 </div>
             </div>
