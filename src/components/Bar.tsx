@@ -19,7 +19,6 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
 
-    console.log(track);
 
 
     return (

@@ -253,6 +253,8 @@ body {
   }
 }
 
+.playlist__img {}
+
 .menu__item {
   padding: 5px 0;
   margin-bottom: 16px;

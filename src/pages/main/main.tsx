@@ -9,7 +9,6 @@ import TrackData from "./TrackData";
 const Main = () => {
 
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
-    console.log(currentTrack);
     const [loading, setLoading] = useState(false);
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
