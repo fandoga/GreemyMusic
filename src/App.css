@@ -233,7 +233,11 @@ body {
 
 .menu__list,
 .playlist__list {
-  padding: 18px 0 10px 0;
+  padding: 18px 0 0 0;
+}
+
+.menu__list {
+  border-bottom: 1px solid #2e2e2e;
 }
 
 .menu__item,
