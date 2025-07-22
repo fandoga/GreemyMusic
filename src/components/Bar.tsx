@@ -67,8 +67,8 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 </div>
                                 <div className="track-play__album">
                                     <a className="track-play__album-link" href="http://">{
-                                        track?.Author && track.Author.length > 25
-                                            ? track.Author.slice(0, 25) + "..."
+                                        track?.Author && track.Author.length > 28
+                                            ? track.Author.slice(0, 28) + "..."
                                             : track?.Author || ""}</a>
                                 </div>
                             </div>

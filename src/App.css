@@ -231,11 +231,13 @@ body {
   background-color: #d3d3d3;
 }
 
-.menu__list {
+.menu__list,
+.playlist__list {
   padding: 18px 0 10px 0;
 }
 
-.menu__item {
+.menu__item,
+.playlist__item {
   padding: 5px 0;
   margin-bottom: 16px;
 }

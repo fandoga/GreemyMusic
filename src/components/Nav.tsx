@@ -39,7 +39,9 @@ const Nav = () => {
                         <li className="menu__item">
                             <Link to="/" className="menu__link">Главная</Link>
                         </li>
-                        <li className="menu__item">
+                    </ul>
+                    <ul className="playlist__list">
+                        <li className="playlist__item">
                             <Link to="/playlist" className="menu__link">Мой плейлист</Link>
                         </li>
                     </ul>
