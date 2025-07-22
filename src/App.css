@@ -242,8 +242,8 @@ body {
 
 .playlist-list__item {
   border-radius: 8px;
-  padding: 6px;
-  margin-left: -6px;
+  padding: 9px;
+  margin-left: -9px;
   transition: background-color 0.2s ease;
 
   &:hover {
