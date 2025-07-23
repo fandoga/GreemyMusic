@@ -4,7 +4,11 @@ import React from "react";
 import Playlist from "../pages/playlist/playlist";
 
 
-const Nav = () => {
+interface NavProps {
+    setPlaylistId?: React.Dispatch<React.SetStateAction<string>> | undefined;
+}
+
+const Nav: React.FC<NavProps> = ({ setPlaylistId }) => {
 
     const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);
@@ -39,7 +43,6 @@ const Nav = () => {
             TracksUrl: playlist.tracks.href || ""
         };
     });
-
 
     const toggleMenu = () => {
         if (menuOpen) {
@@ -77,7 +80,10 @@ const Nav = () => {
                         {loading ? loading :
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
-                                    <button onClick={() => navigate('/playlist')} className="playlist__button">
+                                    <button onClick={() => {
+                                        navigate('/playlist')
+                                        setPlaylistId?.(playlist.Id)
+                                    }} className="playlist__button">
                                         <div className="playlist__img">
                                             <img src={playlist.Img} alt="" />
                                         </div>

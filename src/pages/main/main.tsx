@@ -31,7 +31,6 @@ const Main = () => {
     };
 
     useEffect(() => {
-
         loadTracks();
     }, []);
 

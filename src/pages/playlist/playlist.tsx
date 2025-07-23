@@ -6,25 +6,47 @@ import Bar from "../../components/Bar";
 
 const Playlist = () => {
 
-    const [tracks, setTracks] = useState([]);
+    const [tracksId, setTracksId] = useState<string>("undefined");
+    const [tracks, setTracks] = useState<any[]>([]);
+    const [title, setTitle] = useState<string>("Ваш плейлист");
     const [loading, setLoading] = useState(false);
 
+    const loadTracks = async () => {
+        console.log(tracksId);
+        const accessToken = localStorage.getItem('access-token');
+        setLoading(true);
+        const res = await fetch(
+            `https://api.spotify.com/v1/playlists/${tracksId}/`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        const data = await res.json();
+        setTracks(data.items);
+        setLoading(false);
+    };
+
     useEffect(() => {
-        setLoading(true)
-        fetch('data/playlist.json')
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                setTracks(data)
-                setLoading(false)
-            });
+        loadTracks();
     }, []);
+
+    const adaptedTracks = tracks.map(item => {
+        const track = item.track;
+        return {
+            Img: track.album.images[2].url || "",
+            ImgMed: track.album.images[1].url || "",
+            ImgBig: track.album.images[0].url || "",
+            Name: track.name,
+            Author: track.artists.map((a: any) => a.name).join(', '),
+            Album: track.album.name,
+            Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
+            Info: '',
+        };
+    });
 
     return (
         <div className="container">
             <main className="main">
-                <Nav />
-                <Center title="Мой плейлист" tracks={tracks} />
+                <Nav setPlaylistId={setTracksId} />
+                <Center title={title} loading={loading} tracks={adaptedTracks} />
                 <Sidebar />
             </main>
             <Bar />
