@@ -11,7 +11,7 @@ const PlaylistContext = createContext<PlaylistContextType | undefined>(undefined
 
 export const PlaylistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [playlistId, setPlaylistId] = useState("");
-    const [playlistTitle, setPlaylistTitle] = useState("")
+    const [playlistTitle, setPlaylistTitle] = useState("Ваш плейлист")
 
     return (
         <PlaylistContext.Provider value={{ playlistId, setPlaylistId, playlistTitle, setPlaylistTitle }}>
