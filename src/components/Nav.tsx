@@ -5,7 +5,7 @@ import Playlist from "../pages/playlist/playlist";
 
 
 interface NavProps {
-    setPlaylistId?: React.Dispatch<React.SetStateAction<string>>;
+    setPlaylistId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Nav: React.FC<NavProps> = ({ setPlaylistId }) => {
@@ -81,7 +81,7 @@ const Nav: React.FC<NavProps> = ({ setPlaylistId }) => {
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
-                                        setPlaylistId?.(playlist.Id)
+                                        setPlaylistId(playlist.Id)
                                         navigate('/playlist')
                                     }} className="playlist__button">
                                         <div className="playlist__img">

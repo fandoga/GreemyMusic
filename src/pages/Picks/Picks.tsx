@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 const Picks = () => {
 
     const [tracks, setTracks] = useState([]);
+    const [tracksId, setTracksId] = useState<string>("test");
     const [loading, setLoading] = useState(true);
 
     const { id } = useParams();
@@ -45,7 +46,7 @@ const Picks = () => {
     return (
         <div className="container">
             <main className="main">
-                <Nav />
+                <Nav setPlaylistId={setTracksId} />
                 <Center title={title} tracks={tracks} loading={loading} />
             </main>
             <Bar />
