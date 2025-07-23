@@ -3,9 +3,11 @@ import Nav from "../../components/Nav";
 import Center from "../../components/Center";
 import Sidebar from "../../components/Sidebar";
 import Bar from "../../components/Bar";
+import TrackData from "../main/TrackData";
 import { usePlaylist } from "../../context/PlaylistContext";
 
 const Playlist = () => {
+    const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const { playlistId } = usePlaylist();
     const [tracks, setTracks] = useState<any[]>([]);
     const [title, setTitle] = useState<string>("Ваш плейлист");
@@ -49,7 +51,9 @@ const Playlist = () => {
                 <Center title={title} loading={loading} tracks={adaptedTracks} />
                 <Sidebar />
             </main>
-            <Bar />
+            {currentTrack && (
+                <Bar track={currentTrack} />
+            )}
             <footer className="footer"></footer>
         </div>
     );
