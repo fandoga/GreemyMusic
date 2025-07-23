@@ -48,7 +48,11 @@ const Playlist = () => {
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title={title} loading={loading} tracks={adaptedTracks} />
+                <Center
+                    title={title}
+                    loading={loading}
+                    tracks={adaptedTracks}
+                    onTrackSelect={setCurrentTrack} />
                 <Sidebar />
             </main>
             {currentTrack && (
