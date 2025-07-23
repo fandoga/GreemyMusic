@@ -8,7 +8,7 @@ import { usePlaylist } from "../context/PlaylistContext";
 const Nav = () => {
 
     const { setPlaylistId } = usePlaylist()
-
+    const { setPlaylistTitle } = usePlaylist();
     const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
@@ -81,6 +81,7 @@ const Nav = () => {
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
                                         setPlaylistId(playlist.Id)
+                                        setPlaylistTitle(playlist.Name)
                                         navigate('/playlist')
                                     }} className="playlist__button">
                                         <div className="playlist__img">

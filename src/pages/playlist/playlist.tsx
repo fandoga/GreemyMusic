@@ -9,8 +9,8 @@ import { usePlaylist } from "../../context/PlaylistContext";
 const Playlist = () => {
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const { playlistId } = usePlaylist();
+    const { playlistTitle } = usePlaylist();
     const [tracks, setTracks] = useState<any[]>([]);
-    const [title, setTitle] = useState<string>("Ваш плейлист");
     const [loading, setLoading] = useState(false);
 
     const loadTracks = async () => {
@@ -49,7 +49,7 @@ const Playlist = () => {
             <main className="main">
                 <Nav />
                 <Center
-                    title={title}
+                    title={playlistTitle}
                     loading={loading}
                     tracks={adaptedTracks}
                     onTrackSelect={setCurrentTrack} />
