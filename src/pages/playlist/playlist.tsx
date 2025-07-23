@@ -14,14 +14,15 @@ const Playlist = () => {
     const [loading, setLoading] = useState(false);
 
     const loadTracks = async () => {
-        console.log(playlistId);
+
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
-            `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+            `https://api.spotify.com/v1/playlists/${playlistId ? playlistId : localStorage.getItem("last-playlist")}/tracks`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
+        localStorage.setItem("last-playlist", playlistId)
         setTracks(data.items);
         setLoading(false);
     };

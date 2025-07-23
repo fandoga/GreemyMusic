@@ -80,6 +80,7 @@ const Nav = () => {
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
+                                        localStorage.removeItem('last-playlist')
                                         setPlaylistId(playlist.Id)
                                         setPlaylistTitle(playlist.Name)
                                         navigate('/playlist')
