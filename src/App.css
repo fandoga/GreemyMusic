@@ -241,7 +241,7 @@ body {
 }
 
 .playlist-list__item {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   cursor: pointer;
   border-radius: 8px;
   padding: 9px;
