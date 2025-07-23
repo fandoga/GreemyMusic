@@ -6,7 +6,7 @@ import Bar from "../../components/Bar";
 
 const Playlist = () => {
 
-    const [tracksId, setTracksId] = useState<string>("undefined");
+    const [tracksId, setTracksId] = useState<string>("");
     const [tracks, setTracks] = useState<any[]>([]);
     const [title, setTitle] = useState<string>("Ваш плейлист");
     const [loading, setLoading] = useState(false);
