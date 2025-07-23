@@ -3,20 +3,20 @@ import Nav from "../../components/Nav";
 import Center from "../../components/Center";
 import Sidebar from "../../components/Sidebar";
 import Bar from "../../components/Bar";
+import { usePlaylist } from "../../context/PlaylistContext";
 
 const Playlist = () => {
-
-    const [tracksId, setTracksId] = useState<string>("test");
+    const { playlistId } = usePlaylist();
     const [tracks, setTracks] = useState<any[]>([]);
     const [title, setTitle] = useState<string>("Ваш плейлист");
     const [loading, setLoading] = useState(false);
 
     const loadTracks = async () => {
-        console.log(tracksId);
+        console.log(playlistId);
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
-            `https://api.spotify.com/v1/playlists/${tracksId}/tracks`,
+            `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
@@ -45,7 +45,7 @@ const Playlist = () => {
     return (
         <div className="container">
             <main className="main">
-                <Nav setPlaylistId={setTracksId} />
+                <Nav />
                 <Center title={title} loading={loading} tracks={adaptedTracks} />
                 <Sidebar />
             </main>

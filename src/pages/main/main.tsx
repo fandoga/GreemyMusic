@@ -7,7 +7,6 @@ import TrackData from "./TrackData";
 
 
 const Main = () => {
-    const [tracksId, setTracksId] = useState<string>("test");
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const [loading, setLoading] = useState(false);
     let adaptedTracks
@@ -55,7 +54,7 @@ const Main = () => {
     return (
         <div className="container">
             <main className="main">
-                <Nav setPlaylistId={setTracksId} />
+                <Nav />
                 <Center
                     title="Главная"
                     tracks={adaptedTracks}

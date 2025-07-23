@@ -1,6 +1,6 @@
 import React from "react";
 import BarSkeleton from "./BarSkeleton"
-import { useLoading } from "../LoadingContext";
+import { useLoading } from "../context/LoadingContext";
 import TrackData from "../pages/main/TrackData";
 
 

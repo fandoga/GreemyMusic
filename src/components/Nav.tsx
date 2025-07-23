@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
-import Playlist from "../pages/playlist/playlist";
+import { usePlaylist } from "../context/PlaylistContext";
 
 
-interface NavProps {
-    setPlaylistId: React.Dispatch<React.SetStateAction<string>>;
-}
 
-const Nav: React.FC<NavProps> = ({ setPlaylistId }) => {
+const Nav = () => {
+
+    const { setPlaylistId } = usePlaylist()
 
     const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);

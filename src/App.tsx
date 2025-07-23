@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { LoadingContext } from './LoadingContext';
+import { LoadingContext } from './context/LoadingContext';
+import { PlaylistProvider } from './context/PlaylistContext';
 import './App.css';
 import AppRoutes from './routes';
 
@@ -7,6 +8,7 @@ import AppRoutes from './routes';
 function App() {
 
   const [loading, setLoading] = useState(true);
+  const [tracksId, setTracksId] = useState<string>("test");
   const clientId = '5de0e892cfa54797a83e15261b1dadae';
   const clientSecret = 'ea627852a76640508c1dd1991aa02523';
   const credentials = btoa(`${clientId}:${clientSecret}`);
@@ -58,9 +60,11 @@ function App() {
 
   return (
     <LoadingContext.Provider value={loading}>
-      <div className={`wrapper ${loading ? "loading" : ""}`}>
-        <AppRoutes />
-      </div>
+      <PlaylistProvider>
+        <div className={`wrapper ${loading ? "loading" : ""}`}>
+          <AppRoutes />
+        </div>
+      </PlaylistProvider>
     </LoadingContext.Provider >
   );
 

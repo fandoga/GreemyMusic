@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoading } from "../LoadingContext";
+import { useLoading } from "../context/LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
 import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
