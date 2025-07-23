@@ -16,7 +16,7 @@ const Playlist = () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
-            `https://api.spotify.com/v1/playlists/${tracksId}`,
+            `https://api.spotify.com/v1/playlists/${tracksId}/tracks`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
