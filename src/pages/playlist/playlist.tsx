@@ -28,7 +28,7 @@ const Playlist = () => {
 
     useEffect(() => {
         loadTracks();
-    }, []);
+    }, [playlistId]);
 
     const adaptedTracks = tracks.map(item => {
         const track = item.track;
