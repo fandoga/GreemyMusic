@@ -27,7 +27,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const VolumeHandle = () => {
-        audioRef.current.volume = (volume <= 0.02 ? 0 : (volume / 100))
+        audioRef.current.volume = (volume === 0.01 ? 0 : (volume / 100))
         console.log((volume / 100));
     }
 
