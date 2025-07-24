@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../context/LoadingContext";
 import TrackData from "../pages/main/TrackData";
@@ -12,11 +12,19 @@ interface BarProps {
 const Bar: React.FC<BarProps> = ({ state, track }) => {
     const loading = useLoading();
     const audioRef = useRef<any>(null);
+    const [isPlaying, setPlaying] = useState(false);
 
     const PlayHandle = () => {
         audioRef.current.play()
-        console.log(audioRef.current);
+        setPlaying(true)
     }
+
+    const StopHandle = () => {
+        audioRef.current.stop()
+        setPlaying(false)
+    }
+
+    const togglePlay = isPlaying ? StopHandle : PlayHandle;
 
     if (loading || state) {
         return (
@@ -41,7 +49,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                                     </svg>
                                 </div>
-                                <div onClick={() => PlayHandle()} className="player__btn-play _btn">
+                                <div onClick={togglePlay} className="player__btn-play _btn">
                                     <svg className="player__btn-play-svg" >
                                         <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
                                     </svg>
