@@ -128,7 +128,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         type="range"
                                         name="range"
                                         // value={50}
-                                        min={-1}
+                                        min={-2}
                                         step={1}
                                         max={100}
                                     />
