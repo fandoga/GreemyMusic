@@ -26,7 +26,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     return (
         <>
             <audio controls ref={audioRef}>
-                <source src="/public/audio/BLACKPINK.mp3" type="audio/mp3" />
+                <source src="/public/audio/BLACKPINK.mp3" />
             </audio>
 
             <div className="bar">
@@ -40,7 +40,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                                     </svg>
                                 </div>
-                                <div onClick={PlayHandle} className="player__btn-play _btn">
+                                <div onClick={() => PlayHandle()} className="player__btn-play _btn">
                                     <svg className="player__btn-play-svg" >
                                         <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
                                     </svg>
