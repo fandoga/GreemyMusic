@@ -124,7 +124,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                             setVolume(e.target.value)
                                             VolumeHandle()
                                         }}
-                                        className="volume__progress-line_btn"
+                                        className="volume__progress-line"
                                         type="range"
                                         name="range"
                                         value={50}
