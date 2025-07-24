@@ -10,6 +10,7 @@ interface BarProps {
 }
 
 const Bar: React.FC<BarProps> = ({ state, track }) => {
+    const [currentVolume, setVolume] = useState('50')
     const loading = useLoading();
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
@@ -25,8 +26,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const VolumeHandle = () => {
-
-        audioRef.current.volume = 0.5
+        audioRef.current.volume = currentVolume
     }
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
@@ -118,7 +118,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 <div className="volume__progress_btn">
                                     <input
                                         onChange={(e) => {
-                                            console.log(e.target.value);
+                                            setVolume(e.target.value)
                                             VolumeHandle()
                                         }}
                                         className="volume__progress-line _btn"
