@@ -25,7 +25,8 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const VolumeHandle = () => {
-        audioRef.current.volume(20)
+
+        audioRef.current.volume = 0.5
     }
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
@@ -114,8 +115,12 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
                                     </svg>
                                 </div>
-                                <div className="volume__progress _btn">
-                                    <input onChange={() => VolumeHandle()}
+                                <div className="volume__progress_btn">
+                                    <input
+                                        onChange={(e) => {
+                                            console.log(e.target.value);
+                                            VolumeHandle()
+                                        }}
                                         className="volume__progress-line _btn"
                                         type="range"
                                         name="range"
