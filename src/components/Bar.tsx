@@ -120,13 +120,16 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 <div className="volume__progress_btn">
                                     <input
                                         onChange={(e) => {
+                                            console.log(e.target.value);
                                             setVolume(e.target.value)
                                             VolumeHandle()
                                         }}
                                         className="volume__progress-line _btn"
                                         type="range"
                                         name="range"
+                                        value={50}
                                         min={0}
+                                        step={1}
                                         max={100}
                                     />
                                 </div>
