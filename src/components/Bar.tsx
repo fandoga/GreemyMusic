@@ -15,6 +15,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     const PlayHandle = () => {
         audioRef.current.play()
+        console.log(audioRef.current);
     }
 
     if (loading || state) {
