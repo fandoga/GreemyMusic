@@ -34,7 +34,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     return (
         <>
-            <audio controls ref={audioRef}>
+            <audio controls src="/audio/BLACKPINK.mp3" ref={audioRef}>
                 <source src="/audio/BLACKPINK.mp3" type="audio/mpeg" />
             </audio>
 
