@@ -50,7 +50,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 </div>
                                 <div onClick={togglePlay} className="player__btn-play _btn">
                                     <svg className="player__btn-play-svg" >
-                                        <use xlinkHref={isPlaying ? '/img/icon/pause.svg' : '/img/icon/sprite.svg#icon-play'} width="22" height="20"></use>
+                                        <use xlinkHref={isPlaying ? '/img/icon/sprite.svg#icon-pause' : '/img/icon/sprite.svg#icon-play'}></use>
                                     </svg>
                                 </div>
                                 <div className="player__btn-next">

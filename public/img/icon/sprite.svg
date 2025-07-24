@@ -33,6 +33,9 @@
     <symbol id="icon-play" viewBox="0 0 15 20"  xmlns="http://www.w3.org/2000/svg">
         <path d="M15 10L-1.01012e-06 0.47372L-1.84293e-06 19.5263L15 10Z" fill="#D9D9D9"/>
     </symbol>
+    <symbol id="icon-pause" viewBox="0 0 22 20"  xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 0h4v20H4V0zm10 0h4v20h-4V0z" fill="#D9D9D9" />
+    </symbol>
     <symbol id="icon-next" viewBox="0 0 16 14"  xmlns="http://www.w3.org/2000/svg">
         <path d="M15 2V12.5" stroke="white"/>
         <path d="M13 7L3.25 0.937823L3.25 13.0622L13 7Z" fill="#D9D9D9"/>
