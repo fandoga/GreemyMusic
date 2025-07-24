@@ -121,7 +121,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                     <input
                                         onChange={(e) => {
                                             console.log(e.target.value);
-                                            setVolume(prev => e.target.value)
+                                            setVolume(prev => prev = e.target.value)
                                             VolumeHandle()
                                         }}
                                         className="volume__progress-line"
