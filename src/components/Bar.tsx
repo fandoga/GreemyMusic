@@ -20,7 +20,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const StopHandle = () => {
-        audioRef.current.stop()
+        audioRef.current.pause()
         setPlaying(false)
     }
 
@@ -31,10 +31,9 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
             <BarSkeleton />
         )
     }
-
     return (
         <>
-            <audio controls src="/audio/BLACKPINK.mp3" ref={audioRef}>
+            <audio controls ref={audioRef}>
                 <source src="/audio/BLACKPINK.mp3" type="audio/mpeg" />
             </audio>
 
@@ -51,7 +50,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 </div>
                                 <div onClick={togglePlay} className="player__btn-play _btn">
                                     <svg className="player__btn-play-svg" >
-                                        <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
+                                        <use xlinkHref={isPlaying ? '/img/icon/sprite.svg#icon-pause' : '/img/icon/sprite.svg#icon-play'}></use>
                                     </svg>
                                 </div>
                                 <div className="player__btn-next">
