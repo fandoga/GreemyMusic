@@ -1041,6 +1041,10 @@ body {
   stroke: #696969;
 }
 
+.volume__progress_btn {
+  padding-bottom: 5px;
+}
+
 .volume__content {
   display: -webkit-box;
   display: -ms-flexbox;
