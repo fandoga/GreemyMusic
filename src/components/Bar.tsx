@@ -117,7 +117,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
                                     </svg>
                                 </div>
-                                <div className="volume__progress_btn">
+                                <div className="volume__progress">
                                     <input
                                         onChange={(e) => {
                                             console.log(e.target.value);
