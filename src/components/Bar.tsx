@@ -11,6 +11,7 @@ interface BarProps {
 
 const Bar: React.FC<BarProps> = ({ state, track }) => {
     const [currentVolume, setVolume] = useState('50')
+    const volume = Number(currentVolume)
     const loading = useLoading();
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
@@ -26,7 +27,8 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const VolumeHandle = () => {
-        audioRef.current.volume = (Number(currentVolume) / 100)
+        audioRef.current.volume = (volume === 0 ? volume : (volume / 100))
+        console.log((volume / 100));
     }
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
