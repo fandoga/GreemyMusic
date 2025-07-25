@@ -19,12 +19,12 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     const audio = audioRef.current
 
     const PlayHandle = () => {
-        audio.play()
+        audio?.play()
         setPlaying(true)
     }
 
     const StopHandle = () => {
-        audio.pause()
+        audio?.pause()
         setPlaying(false)
     }
 
