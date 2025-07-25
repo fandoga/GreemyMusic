@@ -76,7 +76,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                     </svg>
                                 </div>
                                 <div onClick={RepeatHandle} className="player__btn-repeat _btn-icon">
-                                    <svg style={{ stroke: isRepeated ? '#acacac' : '#696969' }} className="player__btn-repeat-svg">
+                                    <svg style={{ stroke: isRepeated ? '#d9d9d9' : '#696969' }} className="player__btn-repeat-svg">
                                         <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                                     </svg>
                                 </div>
