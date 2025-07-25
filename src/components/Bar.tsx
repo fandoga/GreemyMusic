@@ -17,28 +17,30 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
     const [isRepeated, setRepeat] = useState(false);
+    const audio = audioRef.current
 
     const PlayHandle = () => {
-        audioRef.current.play()
+        audio.play()
         setPlaying(true)
     }
 
     const StopHandle = () => {
-        audioRef.current.pause()
+        audio.pause()
         setPlaying(false)
     }
 
     const VolumeHandle = (newVolume: number) => {
-        audioRef.current.volume = newVolume / 100
+        audio.volume = newVolume / 100
     }
 
     const RepeatHandle = () => {
         if (isRepeated) {
             setRepeat(false)
-            audioRef.current.loop(false)
+            audio.loop(false)
         } else {
             setRepeat(true)
-            audioRef.current.loop(true)
+            audio.loop(true)
+            console.log(audio.duration());
         }
     }
 
@@ -57,7 +59,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
             <div className="bar">
                 <div className="bar__content">
-                    <ProgressBar duration={audioRef.current.duration} currentTime={audioRef.current.currentTime}></ProgressBar>
+                    <ProgressBar duration={audio.duration()} currentTime={audio.currentTime()}></ProgressBar>
                     <div className="bar__player-block">
                         <div className="bar__player player">
                             <div className="player__controls">
