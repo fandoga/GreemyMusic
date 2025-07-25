@@ -815,8 +815,8 @@ body {
     --thumb-width: 1px;
     position: relative;
     -webkit-appearance: none;
-    width: var(--thumb-width, var(--thumb-height));
-    box-shadow: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0 100vmax var(--progress-color);
+    width: 8px, 8px;
+    box-shadow: calc(-100vmax - 8px, 8px) 0 0 100vmax var(--progress-color);
   }
 
   &::-webkit-slider-runnable-track {

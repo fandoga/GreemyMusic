@@ -164,7 +164,6 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         className="volume__progress-line"
                                         type="range"
                                         name="range"
-                                        value={30}
                                         min={0}
                                         step={1}
                                         max={100}
