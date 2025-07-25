@@ -38,8 +38,8 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
             audio.loop(false)
         } else {
             setRepeat(true)
-            audio.loop(true)
             console.log(audio);
+            audioRef.current.loop(true)
         }
     }
 
