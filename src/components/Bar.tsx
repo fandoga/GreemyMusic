@@ -15,6 +15,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     const loading = useLoading();
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
+    const [isRepeated, setRepeat] = useState(false);
 
     const PlayHandle = () => {
         audioRef.current.play()
@@ -28,6 +29,16 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     const VolumeHandle = (newVolume: number) => {
         audioRef.current.volume = newVolume / 100
+    }
+
+    const RepeatHandle = () => {
+        if (isRepeated) {
+            setRepeat(false)
+            audioRef.current.loop(false)
+        } else {
+            setRepeat(true)
+            audioRef.current.loop(true)
+        }
     }
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
@@ -64,8 +75,8 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                                     </svg>
                                 </div>
-                                <div className="player__btn-repeat _btn-icon">
-                                    <svg className="player__btn-repeat-svg">
+                                <div onClick={RepeatHandle} className="player__btn-repeat _btn-icon">
+                                    <svg style={{ stroke: isRepeated ? '#acacac' : 'none' }} className="player__btn-repeat-svg">
                                         <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                                     </svg>
                                 </div>

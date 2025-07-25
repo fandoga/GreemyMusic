@@ -1079,10 +1079,8 @@ body {
   height: 4px;
   background: transparent;
   accent-color: #fff;
-  /* Для современных браузеров */
   outline: none;
   border-radius: 2px;
-  /* Скрыть стандартный стиль */
   -webkit-appearance: none;
   appearance: none;
 }
