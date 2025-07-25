@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../context/LoadingContext";
 import TrackData from "../pages/main/TrackData";
+import ProgressBar from "./ProgressBar";
 
 
 interface BarProps {
@@ -56,7 +57,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
             <div className="bar">
                 <div className="bar__content">
-                    <div className="bar__player-progress"></div>
+                    <ProgressBar></ProgressBar>
                     <div className="bar__player-block">
                         <div className="bar__player player">
                             <div className="player__controls">
