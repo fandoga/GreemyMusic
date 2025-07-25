@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../context/LoadingContext";
 import TrackData from "../pages/main/TrackData";
@@ -11,12 +11,31 @@ interface BarProps {
 }
 
 const Bar: React.FC<BarProps> = ({ state, track }) => {
-    const [currentVolume, setVolume] = useState(50)
     const loading = useLoading();
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
     const [isRepeated, setRepeat] = useState(false);
+    const [currentTime, setCurrentTime] = useState(0)
     const audio = audioRef.current
+
+    useEffect(() => {
+        let animationFrameId: number;
+
+        const updateTime = () => {
+            if (audioRef.current && !audioRef.current.paused) {
+                setCurrentTime(audioRef.current.currentTime);
+                animationFrameId = requestAnimationFrame(updateTime);
+            }
+        };
+
+        if (isPlaying) {
+            animationFrameId = requestAnimationFrame(updateTime);
+        }
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, [isPlaying])
 
     const PlayHandle = () => {
         audio?.play()
@@ -56,7 +75,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
             <div className="bar">
                 <div className="bar__content">
-                    <ProgressBar duration={audio?.duration} currentTime={audio?.currentTime}></ProgressBar>
+                    <ProgressBar duration={audio?.duration} currentTime={currentTime}></ProgressBar>
                     <div className="bar__player-block">
                         <div className="bar__player player">
                             <div className="player__controls">
@@ -132,7 +151,6 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                         onChange={(e) => {
                                             console.log(e.target.value);
                                             const value = Number(e.target.value)
-                                            setVolume(value)
                                             VolumeHandle(value)
                                         }}
                                         className="volume__progress-line"
