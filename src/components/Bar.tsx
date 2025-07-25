@@ -51,13 +51,17 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
         audioRef.current.volume = newVolume / 100
     }
 
+    const MuteHandle = () => {
+        audioRef.current.volume = 0
+    }
+
     const RepeatHandle = () => {
+        console.log(audioRef.current.loop);
         if (isRepeated) {
             setRepeat(false)
             audioRef.current.loop = "false"
         } else {
             setRepeat(true)
-            console.log(audioRef.current);
             audioRef.current.loop = "true"
         }
     }
@@ -151,7 +155,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                         </div>
                         <div className="bar__volume-block volume">
                             <div className="volume__content">
-                                <div className="volume__image">
+                                <div onClick={MuteHandle} className="volume__image">
                                     <svg className="volume__svg">
                                         <use xlinkHref="/img/icon/sprite.svg#icon-volume"></use>
                                     </svg>
@@ -159,7 +163,6 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                                 <div className="volume__progress">
                                     <input
                                         onChange={(e) => {
-                                            console.log(e.target.value);
                                             const value = Number(e.target.value)
                                             VolumeHandle(value)
                                         }}
