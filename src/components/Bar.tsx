@@ -27,7 +27,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const VolumeHandle = (newVolume: number) => {
-        audioRef.current.volume = newVolume
+        audioRef.current.volume = newVolume / 100
     }
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
