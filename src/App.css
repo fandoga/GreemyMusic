@@ -791,7 +791,7 @@ body {
 }
 
 .bar__player-progress {
-  --progress-height: 8px;
+  --progress-height: 6px;
   --progress-color: #b672ff;
   --progress-bg-color: #2e2e2e;
 
