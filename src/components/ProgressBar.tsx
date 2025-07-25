@@ -3,10 +3,14 @@ import { useState } from "react";
 interface ProgressBarProps {
     duration: number
     currentTime: number
+    onChangeTime: (time: number) => void
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime }) => {
-    const [currentTimes, setCurrentTime] = useState(70);
+const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime, onChangeTime }) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newTime = parseFloat(e.target.value)
+        onChangeTime(newTime)
+    }
 
     return (
         <input
@@ -16,7 +20,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime }) => {
             max={duration}
             value={currentTime}
             step={0.01}
-            onChange={(e: any) => setCurrentTime(e.target.value)}
+            onChange={handleChange}
             color="#ff0000"
         />
 

@@ -75,7 +75,15 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
             <div className="bar">
                 <div className="bar__content">
-                    <ProgressBar duration={audioRef.current?.duration} currentTime={currentTime}></ProgressBar>
+                    <ProgressBar
+                        duration={audioRef.current?.duration}
+                        currentTime={currentTime}
+                        onChangeTime={(newTime) => {
+                            if (audioRef.current) {
+                                audioRef.current.currentTime = newTime;
+                            }
+                        }}
+                    ></ProgressBar>
                     <div className="bar__player-block">
                         <div className="bar__player player">
                             <div className="player__controls">
