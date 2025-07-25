@@ -54,9 +54,11 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     const RepeatHandle = () => {
         if (isRepeated) {
             setRepeat(false)
+            audioRef.current?.loop(false)
         } else {
             setRepeat(true)
             console.log(audioRef.current);
+            audioRef.current?.loop(true);
         }
     }
 
