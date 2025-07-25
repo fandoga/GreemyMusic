@@ -16,7 +16,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     const [isPlaying, setPlaying] = useState(false);
     const [isRepeated, setRepeat] = useState(false);
     const [currentTime, setCurrentTime] = useState(0)
-    const audio = audioRef.current
+
 
     useEffect(() => {
         let animationFrameId: number;
@@ -38,17 +38,17 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }, [isPlaying])
 
     const PlayHandle = () => {
-        audio?.play()
+        audioRef.current.play()
         setPlaying(true)
     }
 
     const StopHandle = () => {
-        audio?.pause()
+        audioRef.current.pause()
         setPlaying(false)
     }
 
     const VolumeHandle = (newVolume: number) => {
-        audio.volume = newVolume / 100
+        audioRef.current.volume = newVolume / 100
     }
 
     const RepeatHandle = () => {
@@ -56,7 +56,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
             setRepeat(false)
         } else {
             setRepeat(true)
-            console.log(audio);
+            console.log(audioRef.current);
         }
     }
 
@@ -75,7 +75,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
             <div className="bar">
                 <div className="bar__content">
-                    <ProgressBar duration={audio?.duration} currentTime={currentTime}></ProgressBar>
+                    <ProgressBar duration={audioRef.current?.duration} currentTime={currentTime}></ProgressBar>
                     <div className="bar__player-block">
                         <div className="bar__player player">
                             <div className="player__controls">
