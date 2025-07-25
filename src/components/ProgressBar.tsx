@@ -1,11 +1,14 @@
 import { useState } from "react";
 
-const ProgressBar = () => {
-    const [currentTime, setCurrentTime] = useState(70);
-    const duration = 230;
+interface ProgressBarProps {
+    duration: number
+    currentTime: number
+}
+
+const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime }) => {
+    const [currentTimes, setCurrentTime] = useState(70);
 
     return (
-
         <input
             className="bar__player-progress"
             type="range"
