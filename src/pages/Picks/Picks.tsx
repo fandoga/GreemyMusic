@@ -14,6 +14,7 @@ const Picks = () => {
     const { id } = useParams();
     const num = Number(id)
     const playlist = picksPlaylists[num].data
+    console.log(playlist);
     const title = playlist.name
     setTracks(playlist.tracks.items)
 
