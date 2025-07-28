@@ -20,11 +20,15 @@ const Main = () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
-            searchTracks.length ? `https://api.spotify.com/v1/search?q=track%3A${searchTracks}&type=track` : `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
+            searchTracks.length > 0 ? `https://api.spotify.com/v1/search?q=track%3A${searchTracks}&type=track` : `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        setTracks(prev => [...prev, data]);
+        if (searchTracks.length) {
+            setTracks(prev => [...prev, data]);
+        } else {
+            setTracks(data.items)
+        }
         console.log(tracks);
         setOffset(prev => prev + limit);
         setLoading(false);
