@@ -28,9 +28,8 @@ const Main = () => {
         if (searchTracks.length === 0) {
             setTracks(data.items);
         } else {
-            setTracks(data.items)
+            setTracks(data.track.items)
         }
-        console.log(tracks);
         setOffset(prev => prev + limit);
         setLoading(false);
     };
@@ -55,7 +54,6 @@ const Main = () => {
         };
     });
     console.log(searchTracks);
-    console.log(tracks);
 
     return (
         <div className="container">
