@@ -41,19 +41,20 @@ const Main = () => {
 
 
 
-    adaptedTracks = tracks.map(item => {
-        const track = item.track;
-        return {
-            Img: track.album.images[2].url || "",
-            ImgMed: track.album.images[1].url || "",
-            ImgBig: track.album.images[0].url || "",
+    adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
+        .filter((track: any) => track && track.album)
+        .map((track: any): TrackData => ({
+            Img: track.album.images?.[2]?.url || "",
+            ImgMed: track.album.images?.[1]?.url || "",
+            ImgBig: track.album.images?.[0]?.url || "",
             Name: track.name,
-            Author: track.artists.map((a: any) => a.name).join(', '),
+            Author: track.artists?.map((a: any) => a.name).join(', ') || "",
             Album: track.album.name,
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
             Info: '',
-        };
-    });
+        }));
+
+
     console.log(searchTracks);
 
     return (
