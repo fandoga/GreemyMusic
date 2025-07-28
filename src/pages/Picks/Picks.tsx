@@ -7,40 +7,39 @@ import { usePlaylist } from "../../context/PlaylistContext";
 
 const Picks = () => {
     const { picksPlaylists } = usePlaylist()
-    const [tracks, setTracks] = useState([]);
+    const [tracks, setTracks] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
+    let adaptedTracks
 
     const { id } = useParams();
-    let title = ""
-    let url = ""
+    const num = Number(id)
+    const playlist = picksPlaylists[num].data
+    const title = playlist.name
+    setTracks(playlist.tracks.items)
 
-    switch (id) {
-        case '1':
-            title = "Плейлист дня"
-            url = "/data/picks1.json"
-            break;
-        case '2':
-            title = "100 танцевальных хитов"
-            url = "/data/picks2.json"
-            break;
-        case '3':
-            title = "Инди заряд"
-            url = "/data/picks3.json"
-            break;
-
-        default:
-            break;
-    }
+    adaptedTracks = tracks.map(item => {
+        const track = item.track;
+        return {
+            Img: track.album.images[2].url || "",
+            ImgMed: track.album.images[1].url || "",
+            ImgBig: track.album.images[0].url || "",
+            Name: track.name,
+            Author: track.artists.map((a: any) => a.name).join(', '),
+            Album: track.album.name,
+            Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
+            Info: '',
+        };
+    });
 
     useEffect(() => {
         console.log(picksPlaylists);
-    }, [url]);
+    }, []);
 
     return (
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title={title} tracks={tracks} loading={loading} />
+                <Center title={title} tracks={adaptedTracks} loading={loading} />
             </main>
             <Bar />
             <footer className="footer"></footer>

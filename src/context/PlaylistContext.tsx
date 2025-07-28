@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext } from "react";
 interface PlaylistContextType {
     playlistId: string;
     playlistTitle: string;
-    picksPlaylists: {}
+    picksPlaylists: Record<string, { data: SpotifyApi.SinglePlaylistResponse }>;
     setPlaylistId: React.Dispatch<React.SetStateAction<string>>;
     setPlaylistTitle: React.Dispatch<React.SetStateAction<string>>;
     setPicksPlaylists: React.Dispatch<React.SetStateAction<{}>>;
