@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
     const [loading, setLoading] = useState(false);
     const [user, SetUser] = useState(null);
+    const [Img, SetImg] = useState();
 
     const loadTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
@@ -16,6 +17,7 @@ const Sidebar = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
+        SetImg(data.images[0].url)
         console.log(data);
         setLoading(false);
     };
@@ -72,7 +74,7 @@ const Sidebar = () => {
                         <Link className="sidebar__link" to="/picks/1">
                             <img
                                 className="sidebar__img"
-                                src="/img/playlist01.png"
+                                src={Img}
                                 alt="day's playlist"
                             />
                         </Link>
