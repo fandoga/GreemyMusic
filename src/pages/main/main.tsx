@@ -35,11 +35,11 @@ const Main = () => {
             );
         }
         const data = await res.json();
-
+        console.log(searchTracks.trim());
         if (searchTracks.trim() === "") {
             setTracks(data.items);
         } else {
-            setTracks(data.tracks.items || []); // подстраховка
+            setTracks(data.tracks.items || []);
         }
         setOffset(prev => prev + limit);
         setLoading(false);
