@@ -25,7 +25,7 @@ const Main = () => {
         );
         const data = await res.json();
         if (searchTracks.length === 0) {
-            setTracks(prev => [...prev, data]);
+            setTracks(data);
         } else {
             setTracks(data.items)
         }
