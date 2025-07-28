@@ -14,36 +14,48 @@ const Main = () => {
     const [searchTracks, setSeatch] = useState<string>('');
     const limit = 25;
 
-    const loadTracks = async () => {
+    const loadDefaultTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
-        setTracks([])
-        let res;
-        if (searchTracks.trim() === "") {
-            // Загрузка стандартного плейлиста
-            res = await fetch(
-                `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
-                { headers: { Authorization: `Bearer ${accessToken}` } }
-            );
-        } else {
-            // Загрузка по поиску
-            res = await fetch(
-                `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track`,
-                { headers: { Authorization: `Bearer ${accessToken}` } }
-            );
-        }
+
+        const res = await fetch(
+            `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=25`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
         const data = await res.json();
-        console.log(searchTracks.trim());
+        setTracks(data.items);
+        setLoading(false);
+    };
+
+
+    const loadSearchTracks = async () => {
+        const accessToken = localStorage.getItem('access-token');
+        setLoading(true);
+
+        // Не делаем запрос если значение пустое (на всякий случай)
         if (searchTracks.trim() === "") {
-            setTracks(data.items);
-        } else {
-            setTracks(data.tracks.items || []);
+            setTracks([]);
+            setLoading(false);
+            return;
         }
+
+        const res = await fetch(
+            `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        const data = await res.json();
+        setTracks(data.tracks.items || []);
         setLoading(false);
     };
 
     useEffect(() => {
-        loadTracks();
+        if (searchTracks.trim() === "") {
+            // Загружаем плейлист только если поле очищено
+            loadDefaultTracks();
+        } else {
+            // Выполняем поиск
+            loadSearchTracks();
+        }
     }, [searchTracks]);
 
 
