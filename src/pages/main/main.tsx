@@ -24,11 +24,12 @@ const Main = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        console.log(data);
         if (searchTracks.length === 0) {
             setTracks(data.items);
+            console.log(tracks);
         } else {
             setTracks(data.tracks.items)
+            console.log(tracks);
         }
         setOffset(prev => prev + limit);
         setLoading(false);
