@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLoading } from "../context/LoadingContext";
 import SidebarSkeleton from "./SidebarSkeleton";
 import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+    const playlistIds = [
+        '1CnDCN10TJZjw6K2H3gNRv',
+        '4JbSoqC2zjkAFiaN8K4NYy',
+        '357fWKFTiDhpt9C69CMG4q'
+    ];
+    const [playlists, setPlaylists] = useState<{ id: string; image: string }[]>([]);
     const [loading, setLoading] = useState(false);
     const [user, SetUser] = useState(null);
     const [Img, SetImg] = useState();
@@ -12,28 +17,35 @@ const Sidebar = () => {
     const loadData = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
-        const res = await fetch(
-            `https://api.spotify.com/v1/playlists/1CnDCN10TJZjw6K2H3gNRv/`,
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-        const data = await res.json();
-        SetImg(data.images[0].url)
-        console.log(data);
 
-        fetch('https://api.spotify.com/v1/me', {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                SetUser(data.display_name)
-                setLoading(false)
-            })
+        try {
+            // Загружаем данные по всем плейлистам
+            const playlistData = await Promise.all(
+                playlistIds.map(async (id) => {
+                    const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+                        headers: { Authorization: `Bearer ${accessToken}` }
+                    });
+                    const data = await res.json();
+                    return {
+                        id,
+                        image: data.images[0]?.url || '/img/default-playlist.png',
+                    };
+                })
+            );
 
-            .catch(err => {
-                console.error('Ошибка:', err);
+            setPlaylists(playlistData); // сохраняем массив плейлистов с image
+
+            // Загружаем пользователя
+            const userRes = await fetch('https://api.spotify.com/v1/me', {
+                headers: { Authorization: `Bearer ${accessToken}` }
             });
+            const userData = await userRes.json();
+            SetUser(userData.display_name);
+        } catch (err) {
+            console.error('Ошибка:', err);
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -66,33 +78,17 @@ const Sidebar = () => {
 
             <div className="sidebar__block">
                 <div className="sidebar__list">
-                    <div className="sidebar__item">
-                        <Link className="sidebar__link" to="/picks/1">
-                            <img
-                                className="sidebar__img"
-                                src={Img}
-                                alt="day's playlist"
-                            />
-                        </Link>
-                    </div>
-                    <div className="sidebar__item">
-                        <Link className="sidebar__link" to="/picks/2">
-                            <img
-                                className="sidebar__img"
-                                src="/img/playlist02.png"
-                                alt="day's playlist"
-                            />
-                        </Link>
-                    </div>
-                    <div className="sidebar__item">
-                        <Link className="sidebar__link" to="/picks/3">
-                            <img
-                                className="sidebar__img"
-                                src="/img/playlist03.png"
-                                alt="day's playlist"
-                            />
-                        </Link>
-                    </div>
+                    {playlists.map((pl, index) => (
+                        <div className="sidebar__item" key={pl.id}>
+                            <Link className="sidebar__link" to={`/picks/${index + 1}`}>
+                                <img
+                                    className="sidebar__img"
+                                    src={pl.image}
+                                    alt={`playlist ${index + 1}`}
+                                />
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
