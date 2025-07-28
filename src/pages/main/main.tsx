@@ -25,7 +25,7 @@ const Main = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        searchTracks ? setTracks(searchTracks) : setTracks(prev => [...prev, ...data.items]);
+        searchTracks.length ? setTracks(searchTracks) : setTracks(prev => [...prev, ...data.items]);
         setOffset(prev => prev + limit);
         setLoading(false);
     };
