@@ -24,7 +24,7 @@ const Main = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        if (searchTracks.length === 0) {
+        if (searchTracks === "") {
             setTracks(data.items);
             console.log(data.items);
         } else {
