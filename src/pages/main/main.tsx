@@ -26,7 +26,7 @@ const Main = () => {
         );
         const data = await res.json();
         if (searchTracks.length === 0) {
-            console.log(123);
+            console.log(searchTracks.length);
             setTracks(data.items);
         } else {
             setTracks(data.tracks.items)
