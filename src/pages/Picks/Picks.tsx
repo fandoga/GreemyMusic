@@ -7,16 +7,24 @@ import { usePlaylist } from "../../context/PlaylistContext";
 
 const Picks = () => {
     const { picksPlaylists } = usePlaylist()
+    const [title, setTitle] = useState<string>("")
     const [tracks, setTracks] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const { id } = useParams();
     let adaptedTracks
 
-    const { id } = useParams();
-    const num = Number(id)
-    const playlist = picksPlaylists[num].data
-    console.log(playlist);
-    const title = playlist.name
-    setTracks(playlist.tracks.items)
+    useEffect(() => {
+        setLoading(true)
+        const num = Number(id)
+        const playlist = picksPlaylists[num].data
+        console.log(playlist);
+        setTitle(playlist.name)
+        setTracks(playlist.tracks.items)
+
+        return (
+            setLoading(false)
+        )
+    }, []);
 
     adaptedTracks = tracks.map(item => {
         const track = item.track;
@@ -32,9 +40,7 @@ const Picks = () => {
         };
     });
 
-    useEffect(() => {
-        console.log(picksPlaylists);
-    }, []);
+
 
     return (
         <div className="container">
