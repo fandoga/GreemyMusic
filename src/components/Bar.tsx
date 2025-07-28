@@ -66,7 +66,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
 
-    if (loadingGlobal || state) {
+    if (loadingGlobal || state || loading) {
         return (
             <BarSkeleton />
         )
