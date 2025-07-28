@@ -727,7 +727,7 @@ body {
 
 .sidebar__block {
   height: 100%;
-  padding: 240px 0 0 0;
+  padding: 100px 0 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -754,8 +754,11 @@ body {
 }
 
 .sidebar__item {
+  overflow: hidden;
+  box-shadow: 0 0 4px 2px #181818;
+  border-radius: 8px;
   width: 250px;
-  height: 150px;
+  height: 250px;
 }
 
 .sidebar__item:not(:last-child) {
