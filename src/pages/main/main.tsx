@@ -28,7 +28,7 @@ const Main = () => {
         if (searchTracks.length === 0) {
             setTracks(data.items);
         } else {
-            setTracks(data.track.items)
+            setTracks(data.tracks.items)
         }
         setOffset(prev => prev + limit);
         setLoading(false);
