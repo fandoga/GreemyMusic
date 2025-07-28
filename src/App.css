@@ -757,9 +757,9 @@ body {
   overflow: hidden;
   box-shadow: 0 0 4px 2px #181818;
   border-radius: 8px;
-  width: 240px;
-  height: 250px;
-  transition: transform-scale 0.2s ease;
+  width: 250px;
+  height: 240px;
+  transition: transform 0.2s ease;
 
   &:hover {
     transform: scale(0.1);
