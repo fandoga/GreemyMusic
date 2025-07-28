@@ -3,9 +3,10 @@ import Nav from "../../components/Nav";
 import Center from "../../components/Center";
 import Bar from "../../components/Bar";
 import { useParams } from "react-router-dom";
+import { usePlaylist } from "../../context/PlaylistContext";
 
 const Picks = () => {
-
+    const { picksPlaylists } = usePlaylist()
     const [tracks, setTracks] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -32,14 +33,7 @@ const Picks = () => {
     }
 
     useEffect(() => {
-        if (!url) return;
-        setLoading(true)
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setTracks(data)
-                setLoading(false)
-            });
+        console.log(picksPlaylists);
     }, [url]);
 
     return (
