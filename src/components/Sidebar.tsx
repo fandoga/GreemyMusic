@@ -79,10 +79,9 @@ const Sidebar = () => {
                     {playlists.map((pl, index) => (
                         <div className="sidebar__item" key={pl.id}>
                             <Link className="sidebar__link" to={`/picks/${index + 1}`}>
-                                <img
+                                <div
                                     className="sidebar__img"
-                                    src={pl.image}
-                                    alt={`playlist ${index + 1}`}
+                                    style={{ backgroundImage: `url(${pl.image})` }}
                                 />
                             </Link>
                         </div>
