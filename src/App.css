@@ -762,7 +762,7 @@ body {
   transition: transform 0.2s ease;
 
   &:hover {
-    transform: scale(0.1);
+    transform: scale(1.1);
   }
 }
 

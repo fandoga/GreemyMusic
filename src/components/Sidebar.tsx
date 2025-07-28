@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import SidebarSkeleton from "./SidebarSkeleton";
 import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
+import { usePlaylist } from "../context/PlaylistContext";
 
 const Sidebar = () => {
+    const { setPicksPlaylists } = usePlaylist()
+
     const playlistIds = [
         '1CnDCN10TJZjw6K2H3gNRv',
         '4JbSoqC2zjkAFiaN8K4NYy',
@@ -30,8 +33,11 @@ const Sidebar = () => {
                     };
                 })
             );
+            setPicksPlaylists({
 
-            setPlaylists(playlistData); // сохраняем массив плейлистов с image
+            })
+            console.log(playlistData);
+            setPlaylists(playlistData);
 
             // Загружаем пользователя
             const userRes = await fetch('https://api.spotify.com/v1/me', {
