@@ -19,33 +19,36 @@ const Main = () => {
     const loadTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
-        setTracks([])
+
         let res;
+
         if (searchTracks.trim() === "") {
             // Загрузка стандартного плейлиста
             res = await fetch(
                 `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }
             );
+            const data = await res.json();
+            setTracks(prev => offset === 0 ? data.items : [...prev, ...data.items]);
         } else {
-            // Загрузка по поиску
+            // Поиск
             res = await fetch(
-                `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track`,
+                `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track&limit=25`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }
             );
-        }
-        const data = await res.json();
-        console.log(searchTracks.trim());
-        if (searchTracks.trim() === "") {
-            setTracks(data.items);
-        } else {
+            const data = await res.json();
             setTracks(data.tracks.items || []);
         }
+
         setOffset(prev => prev + limit);
         setLoading(false);
     };
 
     useEffect(() => {
+        if (searchTracks.trim() === "") {
+            setOffset(0);
+        }
+
         loadTracks();
     }, [searchTracks]);
 
