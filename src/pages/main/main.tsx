@@ -20,16 +20,26 @@ const Main = () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         setTracks([])
-        const res = await fetch(
-            searchTracks.length === 0 ? `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}` : `https://api.spotify.com/v1/search?q=track%3A${searchTracks}&type=track`,
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
+        let res;
+        if (searchTracks.trim() === "") {
+            // Загрузка стандартного плейлиста
+            res = await fetch(
+                `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
+                { headers: { Authorization: `Bearer ${accessToken}` } }
+            );
+        } else {
+            // Загрузка по поиску
+            res = await fetch(
+                `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track`,
+                { headers: { Authorization: `Bearer ${accessToken}` } }
+            );
+        }
         const data = await res.json();
-        console.log(searchTracks.length);
-        if (searchTracks.length === 0) {
+
+        if (searchTracks.trim() === "") {
             setTracks(data.items);
         } else {
-            setTracks(data.tracks.items)
+            setTracks(data.tracks.items || []); // подстраховка
         }
         setOffset(prev => prev + limit);
         setLoading(false);
