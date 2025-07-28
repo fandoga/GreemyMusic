@@ -24,7 +24,7 @@ const Main = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        if (searchTracks.length) {
+        if (searchTracks.length === 0) {
             setTracks(prev => [...prev, data]);
         } else {
             setTracks(data.items)
@@ -36,7 +36,7 @@ const Main = () => {
 
     useEffect(() => {
         loadTracks();
-    }, []);
+    }, [searchTracks]);
 
 
 
