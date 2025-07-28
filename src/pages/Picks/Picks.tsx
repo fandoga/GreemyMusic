@@ -4,8 +4,10 @@ import Center from "../../components/Center";
 import Bar from "../../components/Bar";
 import { useParams } from "react-router-dom";
 import { usePlaylist } from "../../context/PlaylistContext";
+import TrackData from "../main/TrackData";
 
 const Picks = () => {
+    const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const { picksPlaylists } = usePlaylist()
     const [title, setTitle] = useState<string>("")
     const [tracks, setTracks] = useState<any[]>([]);
@@ -40,15 +42,15 @@ const Picks = () => {
         };
     });
 
-
-
     return (
         <div className="container">
             <main className="main">
                 <Nav />
                 <Center title={title} tracks={adaptedTracks} loading={loading} />
             </main>
-            <Bar />
+            {currentTrack && (
+                <Bar track={currentTrack} />
+            )}
             <footer className="footer"></footer>
         </div>
     );
