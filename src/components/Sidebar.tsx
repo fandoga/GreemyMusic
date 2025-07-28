@@ -9,7 +9,7 @@ const Sidebar = () => {
     const [user, SetUser] = useState(null);
     const [Img, SetImg] = useState();
 
-    const loadTracks = async () => {
+    const loadData = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
@@ -19,15 +19,7 @@ const Sidebar = () => {
         const data = await res.json();
         SetImg(data.images[0].url)
         console.log(data);
-        setLoading(false);
-    };
 
-    useEffect(() => {
-        const accessToken = localStorage.getItem('access-token');
-        if (!accessToken) return;
-
-        setLoading(true)
-        loadTracks();
         fetch('https://api.spotify.com/v1/me', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -42,6 +34,10 @@ const Sidebar = () => {
             .catch(err => {
                 console.error('Ошибка:', err);
             });
+    };
+
+    useEffect(() => {
+        loadData();
     }, []);
 
     if (loading) {
