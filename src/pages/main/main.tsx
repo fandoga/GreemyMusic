@@ -44,6 +44,7 @@ const Main = () => {
         const query = searchTracks.trim();
 
         const handler = setTimeout(() => {
+            setLoading(true)
             if (query === "") {
                 loadDefaultTracks();
             } else {
@@ -51,7 +52,10 @@ const Main = () => {
             }
         }, 400);
 
-        return () => clearTimeout(handler);
+        return () => {
+            clearTimeout(handler)
+            setLoading(false)
+        };
     }, [searchTracks]);
 
 
