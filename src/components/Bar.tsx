@@ -11,7 +11,8 @@ interface BarProps {
 }
 
 const Bar: React.FC<BarProps> = ({ state, track }) => {
-    const loading = useLoading();
+    const loadingGlobal = useLoading();
+    const [loading, setLoading] = useState(false)
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
     const [isRepeated, setRepeat] = useState(false);
@@ -20,6 +21,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     useEffect(() => {
         let animationFrameId: number;
+        setLoading(true)
 
         const updateTime = () => {
             if (audioRef.current && !audioRef.current.paused) {
@@ -34,6 +36,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
         return () => {
             cancelAnimationFrame(animationFrameId);
+            setLoading(false)
         };
     }, [isPlaying])
 
@@ -63,7 +66,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
 
-    if (loading || state) {
+    if (loadingGlobal || state) {
         return (
             <BarSkeleton />
         )
