@@ -24,8 +24,8 @@ const Main = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        console.log(data);
         setTracks(prev => [...prev, data]);
+        console.log(tracks);
         setOffset(prev => prev + limit);
         setLoading(false);
     };
