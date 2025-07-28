@@ -56,15 +56,9 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
     }
 
     const RepeatHandle = () => {
-        console.log(audioRef.current.loop);
-        console.log(isRepeated);
-        if (isRepeated === true) {
-            audioRef.current.loop = false
-            setRepeat(false)
-        } else {
-            audioRef.current.loop = true
-            setRepeat(true)
-        }
+        const newValue = !isRepeated;
+        audioRef.current.loop = newValue;
+        setRepeat(newValue);
     }
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;

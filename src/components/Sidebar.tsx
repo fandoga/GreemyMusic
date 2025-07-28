@@ -5,15 +5,27 @@ import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-    const loadingGlobal = useLoading();
     const [loading, setLoading] = useState(false);
     const [user, SetUser] = useState(null);
+
+    const loadTracks = async () => {
+        const accessToken = localStorage.getItem('access-token');
+        setLoading(true);
+        const res = await fetch(
+            `https://api.spotify.com/v1/playlists/1CnDCN10TJZjw6K2H3gNRv/`,
+            { headers: { Authorization: `Bearer ${accessToken}` } }
+        );
+        const data = await res.json();
+        console.log(data);
+        setLoading(false);
+    };
 
     useEffect(() => {
         const accessToken = localStorage.getItem('access-token');
         if (!accessToken) return;
 
         setLoading(true)
+        loadTracks();
         fetch('https://api.spotify.com/v1/me', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -30,7 +42,7 @@ const Sidebar = () => {
             });
     }, []);
 
-    if (loadingGlobal) {
+    if (loading) {
         return (
             <SidebarSkeleton />
         );
