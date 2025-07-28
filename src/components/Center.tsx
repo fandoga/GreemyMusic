@@ -11,15 +11,16 @@ interface CenterProps {
     title: string;
     tracks: TrackData[];
     loaderRef?: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
+    searchTracks?: React.Dispatch<React.SetStateAction<any>> | undefined;
     onTrackSelect?: (track: TrackData) => void
 }
 
-const Center: React.FC<CenterProps> = ({ title, tracks, loading, loaderRef, onTrackSelect }) => {
+const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, loaderRef, onTrackSelect }) => {
 
 
     return (
         <div className="main__centerblock centerblock">
-            <Searchbar />
+            <Searchbar setSearch={searchTracks} />
             <h2 className="centerblock__h2">{title}</h2>
             <FilterBar />
             <div className="centerblock__content">

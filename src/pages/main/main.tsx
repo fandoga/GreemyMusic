@@ -12,10 +12,12 @@ const Main = () => {
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [offset, setOffset] = useState(0);
+    const [searchTracks, setSeatch] = useState<any[]>([]);
     const [hasMore, setHasMore] = useState(true);
     const limit = 50;
 
     const loadTracks = async () => {
+        console.log(searchTracks);
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
@@ -23,10 +25,9 @@ const Main = () => {
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        setTracks(prev => [...prev, ...data.items]);
+        searchTracks ? setTracks(searchTracks) : setTracks(prev => [...prev, ...data.items]);
         setOffset(prev => prev + limit);
         setLoading(false);
-        if (!data.next) setHasMore(false);
     };
 
     useEffect(() => {
@@ -60,6 +61,7 @@ const Main = () => {
                     tracks={adaptedTracks}
                     loading={loading}
                     onTrackSelect={setCurrentTrack}
+                    searchTracks={setSeatch}
                 />
                 <Sidebar />
             </main>
