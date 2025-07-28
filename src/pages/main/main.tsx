@@ -16,7 +16,6 @@ const Main = () => {
 
     const loadDefaultTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
-        setLoading(true);
         const res = await fetch(
             `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -30,7 +29,6 @@ const Main = () => {
     const loadSearchTracks = async (query: string) => {
         if (!query.trim()) return;
         const accessToken = localStorage.getItem('access-token');
-        setLoading(true);
         const res = await fetch(
             `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(query)}&type=track`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
@@ -42,9 +40,8 @@ const Main = () => {
 
     useEffect(() => {
         const query = searchTracks.trim();
-
+        setLoading(true)
         const handler = setTimeout(() => {
-            setLoading(true)
             if (query === "") {
                 loadDefaultTracks();
             } else {
@@ -54,7 +51,7 @@ const Main = () => {
 
         return () => {
             clearTimeout(handler)
-            setLoading(false)
+
         };
     }, [searchTracks]);
 
