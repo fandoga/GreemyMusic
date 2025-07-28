@@ -26,10 +26,10 @@ const Main = () => {
         const data = await res.json();
         if (searchTracks.length === 0) {
             setTracks(data.items);
-            console.log(tracks);
+            console.log(data.items);
         } else {
             setTracks(data.tracks.items)
-            console.log(tracks);
+            console.log(data.tracks.items);
         }
         setOffset(prev => prev + limit);
         setLoading(false);
