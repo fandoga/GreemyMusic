@@ -11,44 +11,38 @@ const Main = () => {
     const [loading, setLoading] = useState(false);
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
-    const [offset, setOffset] = useState(0);
     const [searchTracks, setSeatch] = useState<string>('');
-    const [hasMore, setHasMore] = useState(true);
     const limit = 25;
 
     const loadTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
-
+        setTracks([])
         let res;
-
         if (searchTracks.trim() === "") {
             // Загрузка стандартного плейлиста
             res = await fetch(
-                `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
+                `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }
             );
-            const data = await res.json();
-            setTracks(prev => offset === 0 ? data.items : [...prev, ...data.items]);
         } else {
-            // Поиск
+            // Загрузка по поиску
             res = await fetch(
-                `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track&limit=25`,
+                `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }
             );
-            const data = await res.json();
+        }
+        const data = await res.json();
+        console.log(searchTracks.trim());
+        if (searchTracks.trim() === "") {
+            setTracks(data.items);
+        } else {
             setTracks(data.tracks.items || []);
         }
-
-        setOffset(prev => prev + limit);
         setLoading(false);
     };
 
     useEffect(() => {
-        if (searchTracks.trim() === "") {
-            setOffset(0);
-        }
-
         loadTracks();
     }, [searchTracks]);
 
