@@ -48,8 +48,6 @@ const Main = () => {
             Info: '',
         };
     });
-    console.log(tracks);
-    console.log(adaptedTracks);
 
     return (
         <div className="container">

@@ -18,8 +18,7 @@ const Picks = () => {
     useEffect(() => {
         setLoading(true)
         const num = Number(id)
-        const playlist = picksPlaylists[num].data
-        console.log(playlist);
+        const playlist = picksPlaylists[num - 1].data
         setTitle(playlist.name)
         setTracks(playlist.tracks.items)
 

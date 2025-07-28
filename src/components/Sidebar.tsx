@@ -36,7 +36,6 @@ const Sidebar = () => {
             );
             setPicksPlaylists(playlistData)
             setPlaylists(playlistData);
-            console.log(playlistData);
 
             // Загружаем пользователя
             const userRes = await fetch('https://api.spotify.com/v1/me', {
