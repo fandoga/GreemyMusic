@@ -727,7 +727,7 @@ body {
 
 .sidebar__block {
   height: 100%;
-  padding: 100px 0 0 0;
+  padding: 70px 0 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -757,8 +757,13 @@ body {
   overflow: hidden;
   box-shadow: 0 0 4px 2px #181818;
   border-radius: 8px;
-  width: 250px;
+  width: 240px;
   height: 250px;
+  transition: transform-scale 0.2s ease;
+
+  &:hover {
+    transform: scale(0.1);
+  }
 }
 
 .sidebar__item:not(:last-child) {
