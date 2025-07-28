@@ -21,12 +21,12 @@ const Main = () => {
         setLoading(true);
         setTracks([])
         const res = await fetch(
-            searchTracks.length !== 0 ? `https://api.spotify.com/v1/search?q=track%3A${searchTracks}&type=track` : `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}`,
+            searchTracks.length === 0 ? `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}&offset=${offset}` : `https://api.spotify.com/v1/search?q=track%3A${searchTracks}&type=track`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
+        console.log(searchTracks.length);
         if (searchTracks.length === 0) {
-            console.log(searchTracks.length);
             setTracks(data.items);
         } else {
             setTracks(data.tracks.items)
