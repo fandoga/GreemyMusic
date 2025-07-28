@@ -12,14 +12,12 @@ const Sidebar = () => {
     const [playlists, setPlaylists] = useState<{ id: string; image: string }[]>([]);
     const [loading, setLoading] = useState(false);
     const [user, SetUser] = useState(null);
-    const [Img, SetImg] = useState();
 
     const loadData = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
 
         try {
-            // Загружаем данные по всем плейлистам
             const playlistData = await Promise.all(
                 playlistIds.map(async (id) => {
                     const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
@@ -28,7 +26,7 @@ const Sidebar = () => {
                     const data = await res.json();
                     return {
                         id,
-                        image: data.images[0]?.url || '/img/default-playlist.png',
+                        image: data.images[0]?.url || `/img/playlist0${id + 1}`,
                     };
                 })
             );
