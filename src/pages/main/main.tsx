@@ -12,7 +12,7 @@ const Main = () => {
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [offset, setOffset] = useState(0);
-    const [searchTracks, setSeatch] = useState<any[]>([]);
+    const [searchTracks, setSeatch] = useState<string>('');
     const [hasMore, setHasMore] = useState(true);
     const limit = 50;
 

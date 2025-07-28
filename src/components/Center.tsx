@@ -11,7 +11,7 @@ interface CenterProps {
     title: string;
     tracks: TrackData[];
     loaderRef?: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
-    searchTracks?: React.Dispatch<React.SetStateAction<any>> | undefined;
+    searchTracks?: React.Dispatch<React.SetStateAction<string>> | undefined;
     onTrackSelect?: (track: TrackData) => void
 }
 

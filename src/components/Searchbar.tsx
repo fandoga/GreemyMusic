@@ -1,6 +1,6 @@
 
 interface SearchbarProps {
-    setSearch?: React.Dispatch<React.SetStateAction<any>> | undefined;
+    setSearch?: React.Dispatch<React.SetStateAction<string>> | undefined;
 }
 
 const Searchbar: React.FC<SearchbarProps> = ({ setSearch }) => {
