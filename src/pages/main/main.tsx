@@ -17,7 +17,6 @@ const Main = () => {
     const limit = 50;
 
     const loadTracks = async () => {
-        console.log(searchTracks);
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
         const res = await fetch(
@@ -49,7 +48,7 @@ const Main = () => {
             Info: '',
         };
     });
-
+    console.log(searchTracks);
     console.log(tracks);
 
     return (
