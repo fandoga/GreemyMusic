@@ -28,15 +28,13 @@ const Sidebar = () => {
                     });
                     const data = await res.json();
                     return {
+                        data,
                         id,
                         image: data.images[0]?.url || `/img/playlist0${id + 1}`,
                     };
                 })
             );
-            setPicksPlaylists({
-
-            })
-            console.log(playlistData);
+            setPicksPlaylists(playlistData)
             setPlaylists(playlistData);
 
             // Загружаем пользователя
