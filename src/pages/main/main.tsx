@@ -49,6 +49,8 @@ const Main = () => {
         };
     });
 
+    console.log(tracks);
+
     return (
         <div className="container">
             <main className="main">

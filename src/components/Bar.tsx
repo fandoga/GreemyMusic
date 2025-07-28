@@ -21,7 +21,6 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     useEffect(() => {
         let animationFrameId: number;
-        setLoading(true)
 
         const updateTime = () => {
             if (audioRef.current && !audioRef.current.paused) {
@@ -36,7 +35,6 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
         return () => {
             cancelAnimationFrame(animationFrameId);
-            setLoading(false)
         };
     }, [isPlaying])
 
