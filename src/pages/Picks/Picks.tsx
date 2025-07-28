@@ -46,7 +46,12 @@ const Picks = () => {
         <div className="container">
             <main className="main">
                 <Nav />
-                <Center title={title} tracks={adaptedTracks} loading={loading} />
+                <Center
+                    title={title}
+                    tracks={adaptedTracks}
+                    loading={loading}
+                    onTrackSelect={setCurrentTrack}
+                />
             </main>
             {currentTrack && (
                 <Bar track={currentTrack} />
