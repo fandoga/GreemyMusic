@@ -17,45 +17,41 @@ const Main = () => {
     const loadDefaultTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
-
         const res = await fetch(
-            `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=25`,
+            `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        setTracks(data.items);
+        setTracks(data.items || []);
         setLoading(false);
     };
 
 
-    const loadSearchTracks = async () => {
+    const loadSearchTracks = async (query: string) => {
+        if (!query.trim()) return;
         const accessToken = localStorage.getItem('access-token');
         setLoading(true);
-
-        // Не делаем запрос если значение пустое (на всякий случай)
-        if (searchTracks.trim() === "") {
-            setTracks([]);
-            setLoading(false);
-            return;
-        }
-
         const res = await fetch(
-            `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(searchTracks)}&type=track`,
+            `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(query)}&type=track`,
             { headers: { Authorization: `Bearer ${accessToken}` } }
         );
         const data = await res.json();
-        setTracks(data.tracks.items || []);
+        setTracks(data.tracks?.items || []);
         setLoading(false);
     };
 
     useEffect(() => {
-        if (searchTracks.trim() === "") {
-            // Загружаем плейлист только если поле очищено
-            loadDefaultTracks();
-        } else {
-            // Выполняем поиск
-            loadSearchTracks();
-        }
+        const query = searchTracks.trim();
+
+        const handler = setTimeout(() => {
+            if (query === "") {
+                loadDefaultTracks();
+            } else {
+                loadSearchTracks(query);
+            }
+        }, 400);
+
+        return () => clearTimeout(handler);
     }, [searchTracks]);
 
 
