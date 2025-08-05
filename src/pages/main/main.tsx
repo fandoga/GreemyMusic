@@ -70,6 +70,7 @@ const Main = () => {
             Info: '',
         }));
     console.log(searchTracks);
+    console.log(adaptedTracks);
 
     return (
         <div className="container">

@@ -26,15 +26,18 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
                     </div>
                     <div className="track__title-text">
                         <a className="track__title-link" href="http://">
-                            {Name}
+                            {Name && Name.length > 38
+                                ? Name.slice(0, 38) + "..." : Name || ""}
                             <span className="track__title-span"> {Info}</span></a>
                     </div>
                 </div>
                 <div className="track__author">
-                    <a className="track__author-link" href="http://">{Author}</a>
+                    <a className="track__author-link" href="http://">{Author && Author.length > 35
+                        ? Author.slice(0, 35) + "..." : Author || ""}</a>
                 </div>
                 <div className="track__album">
-                    <a className="track__album-link" href="http://">{Album}</a>
+                    <a className="track__album-link" href="http://">{Album && Album.length > 38
+                        ? Album.slice(0, 38) + "..." : Album || ""}</a>
                 </div>
                 <div className="track__time">
                     <svg className="track__time-svg" >
