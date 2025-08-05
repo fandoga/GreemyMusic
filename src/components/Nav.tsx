@@ -77,7 +77,7 @@ const Nav = () => {
                         </li>
                     </ul>
                     <ul className="playlist__list">
-                        {1 === 1 ? <NavSkeleton /> :
+                        {loading ? <NavSkeleton /> :
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
