@@ -1,5 +1,5 @@
 import React from "react";
-import './notfound.css'
+import '/notfound.css'
 
 const NoLocalLogin = () => {
     const clientId = '5de0e892cfa54797a83e15261b1dadae'
