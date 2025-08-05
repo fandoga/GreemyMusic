@@ -1,26 +1,41 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import NeedVpn from '../pages/IpCheck/NeedVpn';
-
-
+import NeedVpnPage from '../pages/IpCheck/NeedVpnPage';
 
 const isAuthenticated = () => {
     return !!localStorage.getItem('access-token');
 };
 
 const PrivateRoute = ({ children }: { children: ReactElement }) => {
-    const [vpn, setVpn] = useState(false);
+    const [vpn, setVpn] = useState<boolean | null>(null); // null = проверка ещё идёт
 
     useEffect(() => {
-        fetch('https://ipinfo.io/json?token=663adf1cf972e9')
-            .then(res => res.json())
-            .then(data => {
+        const checkVpn = async () => {
+            try {
+                const res = await fetch('https://ipinfo.io/json?token=663adf1cf972e9');
+                const data = await res.json();
                 const country = data.country;
-                country === "RU" ? setVpn(false) : setVpn(true);
-            });
-    }, [])
+                setVpn(country !== "RU");
+            } catch (e) {
+                // В случае ошибки считаем, что VPN неактивен (или выводим другую страницу)
+                setVpn(false);
+            }
+        };
 
-    return isAuthenticated() ? (vpn ? children : <NeedVpn />) : <Navigate to="/login" replace />;
+        checkVpn();
+    }, []);
+
+    if (vpn === null) {
+        // Пока проверка идёт — можно вернуть null или прелоадер
+        return <div>Проверка VPN...</div>;
+    }
+
+    // После проверки
+    if (!isAuthenticated()) {
+        return <Navigate to="/login" replace />;
+    }
+
+    return vpn ? children : <NeedVpnPage />;
 };
 
 export default PrivateRoute;
