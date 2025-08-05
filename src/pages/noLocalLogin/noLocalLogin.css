@@ -1,0 +1,44 @@
+.local__title {
+    font-family: "StratosSkyeng", sans-serif;
+    font-weight: 400;
+    font-size: 70px;
+    line-height: 105%;
+    color: #fff;
+}
+
+.local__subtitle {
+    font-family: "StratosSkyeng", sans-serif;
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 125%;
+    color: #fff;
+    padding-bottom: 8px;
+}
+
+.spotify-link__button {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 133%;
+    letter-spacing: 0em;
+    color: #fff;
+
+    border-radius: 10px;
+    width: 250px;
+    height: 45px;
+    background: #1ED760;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background: #2ec965;
+    }
+
+    &:active {
+        background: #32bd63;
+    }
+}
