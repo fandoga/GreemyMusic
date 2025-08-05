@@ -8,6 +8,8 @@ import Picks from "./pages/Picks/Picks";
 import NotFoundPage from "./pages/404/NotFoundPage";
 import NeedVpn from "./pages/IpCheck/NeedVpnPage";
 import { useState } from "react";
+import NoLocalLogin from "./pages/noLocalLogin/NoLocalLogin";
+import NoLocalLoginPage from "./pages/noLocalLogin/NoLocalLoginPage";
 
 const AppRoutes = () => {
 
@@ -36,6 +38,7 @@ const AppRoutes = () => {
                 }
             />
             <Route path="/login" element={<Login />} />
+            <Route path="/local-login" element={<NoLocalLoginPage />} />
             <Route path="/playlist" element={
                 <PrivateRoute>
                     <Playlist />
