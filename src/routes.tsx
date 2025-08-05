@@ -31,7 +31,7 @@ const AppRoutes = () => {
                 <>
                     <Route path="/" element={
                         <PrivateRoute>
-                            {accessToken ? <NeedVpn /> : <Login />}
+                            {accessToken ? <Main /> : <Login />}
                         </PrivateRoute>
                     } />
                     <Route path="/playlist" element={
