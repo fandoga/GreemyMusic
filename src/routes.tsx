@@ -38,7 +38,7 @@ const AppRoutes = () => {
                 }
             />
             <Route path="/login" element={<Login />} />
-            <Route path="/local-login" element={<NoLocalLoginPage />} />
+            <Route path="/locallogin" element={<NoLocalLoginPage />} />
             <Route path="/playlist" element={
                 <PrivateRoute>
                     <Playlist />

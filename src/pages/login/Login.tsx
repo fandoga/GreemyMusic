@@ -45,7 +45,7 @@ const Login = () => {
     const handleLogin = () => {
         if (password !== '' && email !== '') {
             if (localStorage.getItem('email') === email && localStorage.getItem('password') === password) {
-                navigate('/local-login');
+                navigate('/locallogin');
             } else {
                 setError('Аккаунт не найден')
             }
