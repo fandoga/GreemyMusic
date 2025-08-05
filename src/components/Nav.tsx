@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { usePlaylist } from "../context/PlaylistContext";
+import NavSkeleton from "./NavSkeleton";
 
 
 
@@ -76,7 +77,7 @@ const Nav = () => {
                         </li>
                     </ul>
                     <ul className="playlist__list">
-                        {loading ? loading :
+                        {loading ? <NavSkeleton /> :
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
