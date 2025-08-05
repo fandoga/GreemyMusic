@@ -24,31 +24,30 @@ const AppRoutes = () => {
 
     return (
         <Routes>
+            <Route path="/"
+                element={
+                    <PrivateRoute>
+                        {
+                            accessToken ?
+                                <Main />
+                                : <Login />
+                        }
+                    </PrivateRoute>
+                }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/locallogin" element={<NoLocalLoginPage />} />
-
-            {vpn ? (
-                <>
-                    <Route path="/" element={
-                        <PrivateRoute>
-                            {accessToken ? <Main /> : <Login />}
-                        </PrivateRoute>
-                    } />
-                    <Route path="/playlist" element={
-                        <PrivateRoute>
-                            <Playlist />
-                        </PrivateRoute>
-                    } />
-                    <Route path="/picks/:id" element={
-                        <PrivateRoute>
-                            <Picks />
-                        </PrivateRoute>
-                    } />
-                    <Route path="*" element={<NotFoundPage />} />
-                </>
-            ) : (
-                <Route path="*" element={<NeedVpn />} />
-            )}
+            <Route path="/playlist" element={
+                <PrivateRoute>
+                    <Playlist />
+                </PrivateRoute>
+            } />
+            <Route path="/picks/:id" element={
+                <PrivateRoute>
+                    <Picks />
+                </PrivateRoute>
+            } />
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );
 }
