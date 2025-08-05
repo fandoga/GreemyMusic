@@ -13,12 +13,12 @@ const NavSkeleton = () => {
                 <div className="nav__menu menu">
                     <ul className="menu__list">
                         <li className="menu__item">
-                            <button className="skeleton__text"></button>
+                            <p className="skeleton__text"></p>
                         </li>
                     </ul>
                     <ul className="playlist__list">
                         <li className="playlist-list__item">
-                            <button className="skeleton__text"></button>
+                            <p className="skeleton__text"></p>
                         </li>
                     </ul>
                 </div>
