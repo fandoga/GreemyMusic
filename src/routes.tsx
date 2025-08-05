@@ -24,12 +24,12 @@ const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path="/"
+            (vpn ? <Route path="/"
                 element={
                     <PrivateRoute>
                         {
                             accessToken ?
-                                (vpn ? <Main /> : <NeedVpn />)
+                                <NeedVpn />
                                 : <Login />
                         }
                     </PrivateRoute>
@@ -47,7 +47,7 @@ const AppRoutes = () => {
                     <Picks />
                 </PrivateRoute>
             } />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} /> : <NeedVpn />)
         </Routes>
     );
 }
