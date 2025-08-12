@@ -802,7 +802,8 @@ body {
 
 }
 
-.bar__content:after {
+.bar__content::after {
+  content: "";
   position: absolute;
   width: 100px;
   height: 60px;
