@@ -857,10 +857,11 @@ body {
     height: var(--progress-height);
   }
 
-  &::after:hover {
+  &::after {
     content: "2:19";
     position: absolute;
     border-radius: 4px;
+    opacity: 0;
     width: 60px;
     height: 32px;
     background-color: #383838;
@@ -868,6 +869,11 @@ body {
     right: 0;
     padding: 4px 8px;
     margin: 0 15px 10px 0;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
