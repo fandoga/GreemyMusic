@@ -791,6 +791,7 @@ body {
 }
 
 .bar__content {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
