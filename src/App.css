@@ -854,18 +854,18 @@ body {
     background-color: var(--progress-color);
     height: var(--progress-height);
   }
+
+  &:after {
+    position: absolute;
+    width: 100px;
+    height: 60px;
+    background-color: #a53939;
+    top: 0;
+    right: 50%;
+
+  }
 }
 
-.bar__player-progress::after {
-  position: absolute;
-  width: 100px;
-  height: 60px;
-  background-color: #a53939;
-  top: 0;
-  right: 50%;
-
-
-}
 
 .bar__player-block {
   height: 73px;
