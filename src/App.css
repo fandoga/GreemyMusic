@@ -860,7 +860,10 @@ body {
   position: absolute;
   width: 100px;
   height: 60px;
+  background-color: #a53939;
   top: 0;
+  right: 50%;
+
 
 }
 
