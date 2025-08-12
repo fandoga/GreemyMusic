@@ -802,7 +802,7 @@ body {
 
 }
 
-.bar__content::after {
+.bar__content.open::after {
   content: "2:19";
   position: absolute;
   border-radius: 4px;
