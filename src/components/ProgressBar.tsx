@@ -14,7 +14,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime, onChan
 
     return (
         <>
-            <div className="track-time">{Math.floor(duration / 60000) + ':' + String(Math.floor((duration % 60000) / 1000)).padStart(2, '0')}</div>
+            <div className="track-time">{duration}</div>
             <input
                 className="bar__player-progress"
                 type="range"
