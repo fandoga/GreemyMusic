@@ -13,17 +13,19 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime, onChan
     }
 
     return (
-        <input
-            className="bar__player-progress"
-            type="range"
-            min={0}
-            max={duration}
-            value={currentTime}
-            step={0.01}
-            onChange={handleChange}
-            color="#ff0000"
-        />
-
+        <>
+            <div className="track-time"></div>
+            <input
+                className="bar__player-progress"
+                type="range"
+                min={0}
+                max={duration}
+                value={currentTime}
+                step={0.01}
+                onChange={handleChange}
+                color="#ff0000"
+            />
+        </>
     );
 }
 

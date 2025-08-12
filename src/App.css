@@ -858,7 +858,11 @@ body {
   }
 }
 
-.bar__player-progress::after {
+.track-time {
+  position: relative;
+}
+
+.track-time::after {
   content: "2:19";
   position: absolute;
   border-radius: 4px;
