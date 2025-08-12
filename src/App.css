@@ -859,14 +859,9 @@ body {
 }
 
 .track-time {
-  position: relative;
-}
-
-.track-time::after {
-  content: "2:19";
   position: absolute;
   border-radius: 4px;
-  opacity: 0;
+  opacity: 0.7;
   width: 60px;
   height: 32px;
   background-color: #383838;
