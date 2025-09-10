@@ -21,7 +21,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Status, Time, I
 
     return (
         <div className="playlist__item">
-            <div onClick={() => onSelect} className="playlist__track track">
+            <div onClick={onSelect} className="playlist__track track">
                 <div className="track__title">
                     <div className="track__title-image">
                         <img src={Img} alt="" />
