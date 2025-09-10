@@ -41,7 +41,8 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, l
                             <Track
                                 key={idx}
                                 {...track}
-                                onSelect={() => onTrackSelect && onTrackSelect(track)}
+                                onSelect={() => onTrackSelect && onTrackSelect(track)
+                                }
                             />
                         ))}
                     <div ref={loaderRef} style={{ height: 1 }}></div>

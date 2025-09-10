@@ -14,10 +14,6 @@ const Main = () => {
     const [searchTracks, setSeatch] = useState<string>('');
     const limit = 25;
 
-    const setTrack = () => {
-
-    }
-
     const loadDefaultTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
         const res = await fetch(
