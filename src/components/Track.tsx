@@ -8,7 +8,7 @@ interface TrackProps extends TrackData {
     onSelect?: () => void;
 }
 
-const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
+const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Status, Time, Info, onSelect }) => {
     const loading = useLoading();
 
     if (loading) {
@@ -17,12 +17,14 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
         )
     }
 
+
+
     return (
         <div className="playlist__item">
-            <div onClick={onSelect} className="playlist__track track">
+            <div onClick={() => !Status.selected && onSelect} className="playlist__track track">
                 <div className="track__title">
                     <div className="track__title-image">
-                        <img src={Img} alt="" />
+                        <img src={Status.selected ? Img : undefined} alt="" />
                     </div>
                     <div className="track__title-text">
                         <a className="track__title-link" href="http://">
@@ -46,7 +48,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
                     <span className="track__time-text">{Time}</span>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

@@ -14,6 +14,10 @@ const Main = () => {
     const [searchTracks, setSeatch] = useState<string>('');
     const limit = 25;
 
+    const setTrack = () => {
+
+    }
+
     const loadDefaultTracks = async () => {
         const accessToken = localStorage.getItem('access-token');
         const res = await fetch(
@@ -64,6 +68,7 @@ const Main = () => {
             ImgMed: track.album.images?.[1]?.url || "",
             ImgBig: track.album.images?.[0]?.url || "",
             Name: track.name,
+            Status: { selected: false },
             Author: track.artists?.map((a: any) => a.name).join(', ') || "",
             Album: track.album.name,
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
