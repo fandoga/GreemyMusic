@@ -21,10 +21,10 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Status, Time, I
 
     return (
         <div className="playlist__item">
-            <div onClick={() => !Status?.selected && onSelect} className="playlist__track track">
+            <div onClick={() => onSelect} className="playlist__track track">
                 <div className="track__title">
                     <div className="track__title-image">
-                        <img src={Status?.selected ? Img : undefined} alt="" />
+                        <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">
                         <a className="track__title-link" href="http://">
