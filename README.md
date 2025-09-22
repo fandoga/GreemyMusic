@@ -2,7 +2,7 @@
 
 FandyMusic player — это музыкальный плеер вдохновленный Spotify и использующий spotify api для реализации функционала плейлистов и подбора музыки.
 
-Проект доступен по адресу - https://my-news-app-ruddy.vercel.app/
+Проект доступен по адресу - https://fandymusic.vercel.app
 
 ## Стек технологий
  
