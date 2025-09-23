@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LoadingContext } from './context/LoadingContext';
 import { PlaylistProvider } from './context/PlaylistContext';
 import './App.css';
-import AppRoutes from './routes';
+import AppRoutes from './routes/routes';
 
 
 function App() {
