@@ -24,6 +24,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !loading) {
+            console.log(tracks);
             dispatch(fetchRecomendations({offset: 25, limit: 25}))
           }
         },
@@ -35,8 +36,6 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
         if (loaderRef.current) observer.unobserve(loaderRef.current);
       };
     }, [dispatch]);
-
-    console.log(tracks);
 
     return (
         <div className="main__centerblock centerblock">
