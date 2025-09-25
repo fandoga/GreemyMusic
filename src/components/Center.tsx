@@ -24,6 +24,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !loading) {
+            console.log(tracks.length);
             dispatch(fetchRecomendations({offset: 25, limit: 25}))
           }
         },
@@ -55,15 +56,18 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                 <div className="content__playlist playlist">
                     {loading
                         ? Array.from({ length: 10 }).map((_, i) => <TrackSkeleton key={i} />)
-                        : tracks.map((track, idx) => (
-                            <Track
-                                key={idx}
-                                {...track}
-                                onSelect={() => onTrackSelect && onTrackSelect(track)
-                                }
-                            />
-                        ))}
+                        :
+                            tracks.map((track, idx) => (
+                                <Track
+                                    key={idx}
+                                    {...track}
+                                    onSelect={() => onTrackSelect && onTrackSelect(track)
+                                    }
+                                />
+                            ))
+                    } 
                     <div ref={loaderRef} style={{ height: 1 }}></div>
+                    {Array.from({ length: 10 }).map((_, i) => <TrackSkeleton key={i} />)}       
                 </div>
             </div>
         </div>
