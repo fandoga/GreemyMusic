@@ -42,9 +42,12 @@ export const trackSlice = createSlice({
                   } else {
                     // догружаем
                     state.AllTracks = [...state.AllTracks, ...action.payload.data.items];
-                    if ((action.payload.data.items.length) < action.payload.limit) {
+                    if (action.payload.data.next === null) {
                         state.hasMoreTracks = false
                     }
+                    // if ((action.payload.data.items.length) < action.payload.limit) {
+                    //     state.hasMoreTracks = false
+                    // }
                   }
                 state.isLoading = false;
                 state.error = ''
