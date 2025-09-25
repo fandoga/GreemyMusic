@@ -1,30 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Bar from '../../components/Bar';
 import Nav from '../../components/Nav';
 import Center from '../../components/Center';
 import Sidebar from '../../components/Sidebar';
 import TrackData from "./TrackData";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { fetchRecomendations } from "../../store/reducers/actionCreators";
 
 
 const Main = () => {
+    const dispatch = useAppDispatch()
+    const { AllTracks } = useAppSelector(state => state.track)
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const [loading, setLoading] = useState(false);
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
-    const [searchTracks, setSeatch] = useState<string>('');
-    const limit = 25;
+    const [searchTracks, setSearch] = useState<string>('');
+    // const limit = 25;
 
-    const loadDefaultTracks = async () => {
-        const accessToken = localStorage.getItem('access-token');
-        const res = await fetch(
-            `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-        const data = await res.json();
-        setTracks(data.items || []);
-        setLoading(false);
-    };
-
+    // const loadDefaultTracks = async () => {
+    //     const accessToken = localStorage.getItem('access-token');
+    //     const res = await fetch(
+    //         `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
+    //         { headers: { Authorization: `Bearer ${accessToken}` } }
+    //     );
+    //     const data = await res.json();
+    //     setTracks(data.items || []);
+    //     setLoading(false);
+    // };
 
     const loadSearchTracks = async (query: string) => {
         if (!query.trim()) return;
@@ -43,7 +46,8 @@ const Main = () => {
         setLoading(true)
         const handler = setTimeout(() => {
             if (query === "") {
-                loadDefaultTracks();
+                dispatch(fetchRecomendations())
+                setTracks(AllTracks.tracks?.items || [])
             } else {
                 loadSearchTracks(query);
             }
@@ -51,11 +55,8 @@ const Main = () => {
 
         return () => {
             clearTimeout(handler)
-
         };
     }, [searchTracks]);
-
-
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)
@@ -82,7 +83,7 @@ const Main = () => {
                     tracks={adaptedTracks}
                     loading={loading}
                     onTrackSelect={setCurrentTrack}
-                    searchTracks={setSeatch}
+                    searchTracks={setSearch}
                 />
                 <Sidebar />
             </main>

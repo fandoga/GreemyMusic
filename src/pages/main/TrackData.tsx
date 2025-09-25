@@ -3,7 +3,7 @@ export default interface TrackData {
     ImgMed?: string;
     ImgBig?: string
     Name: string;
-    Status?: {
+    Status: {
         selected: boolean;
     }
     Author: string;

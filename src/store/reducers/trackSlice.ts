@@ -1,0 +1,40 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import TrackData from "../../pages/main/TrackData"
+import { fetchRecomendations } from "./actionCreators";
+
+interface TrackState {
+    AllTracks: any;
+    DisplayedTracks: TrackData[];
+    isLoading: boolean;
+    error: string
+}
+
+const initialState: TrackState = {
+    AllTracks: [],
+    DisplayedTracks: [],
+    isLoading: false,
+    error: ""
+}
+
+export const trackSlice = createSlice({
+    name: 'track',
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchRecomendations.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<any>) => {
+                state.isLoading = false
+                state.error = ''
+                state.AllTracks = action.payload
+            })
+            .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<string>) => {
+                state.isLoading = false
+                state.error = action.payload
+            })
+    },
+})
+
+export default trackSlice.reducer;
