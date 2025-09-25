@@ -48,6 +48,7 @@ const Main = () => {
             if (query === "") {
                 dispatch(fetchRecomendations())
                 setTracks(AllTracks.items || [])
+                console.log(tracks);
             } else {
                 loadSearchTracks(query);
             }
@@ -71,7 +72,6 @@ const Main = () => {
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
             Info: '',
         }));
-    console.log(searchTracks);
     console.log(adaptedTracks);
 
     return (
