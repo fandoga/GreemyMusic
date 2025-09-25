@@ -63,8 +63,8 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                                 }
                             />
                         ))}
+                    <div ref={loaderRef} style={{ height: 1 }}></div>
                 </div>
-                <div ref={loaderRef} style={{ height: 1 }}></div>
             </div>
         </div>
     );
