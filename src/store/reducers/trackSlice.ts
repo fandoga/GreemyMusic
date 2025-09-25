@@ -30,9 +30,9 @@ export const trackSlice = createSlice({
                 state.error = ''
                 state.AllTracks = action.payload
             })
-            .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<string>) => {
+            .addCase(fetchRecomendations.rejected, (state, action) => {
                 state.isLoading = false
-                state.error = action.payload
+                state.error = action.payload ?? 'Неизвестная ошибка'
             })
     },
 })
