@@ -47,7 +47,7 @@ const Main = () => {
         const handler = setTimeout(() => {
             if (query === "") {
                 dispatch(fetchRecomendations())
-                setTracks(AllTracks.tracks?.items || [])
+                setTracks(AllTracks.items || [])
             } else {
                 loadSearchTracks(query);
             }
