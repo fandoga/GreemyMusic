@@ -48,6 +48,7 @@ const Main = () => {
             if (query === "") {
                 dispatch(fetchRecomendations())
                 setTracks(AllTracks?.items || [])
+                console.log(AllTracks);
                 // ожидаем пока AllTracks обновиться
             } else {
                 loadSearchTracks(query);
