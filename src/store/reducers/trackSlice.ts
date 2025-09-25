@@ -10,7 +10,7 @@ interface TrackState {
 }
 
 const initialState: TrackState = {
-    AllTracks: [],
+    AllTracks: { items: [] },
     DisplayedTracks: [],
     isLoading: false,
     error: ""

@@ -47,8 +47,7 @@ const Main = () => {
         const handler = setTimeout(() => {
             if (query === "") {
                 dispatch(fetchRecomendations())
-                setTracks(AllTracks.items || [])
-                console.log(AllTracks.items);
+                // wait for AllTracks update
             } else {
                 loadSearchTracks(query);
             }
@@ -58,6 +57,13 @@ const Main = () => {
             clearTimeout(handler)
         };
     }, [searchTracks]);
+
+    useEffect(() => {
+        if (searchTracks.trim() === "") {
+            setTracks(AllTracks?.items || [])
+            setLoading(false)
+        }
+    }, [AllTracks, searchTracks])
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)
