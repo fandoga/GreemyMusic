@@ -24,7 +24,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !loading) {
-            dispatch(fetchRecomendations({offset: tracks.length, limit: 25}))
+            dispatch(fetchRecomendations({offset: 25, limit: 25}))
           }
         },
         { threshold: 1.0 }
