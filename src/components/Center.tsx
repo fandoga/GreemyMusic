@@ -4,7 +4,7 @@ import Searchbar from "./Searchbar";
 import Track from "./Track";
 import TrackSkeleton from "./TrackSkeleton";
 import TrackData from "../pages/main/TrackData";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchRecomendations } from "../store/reducers/trackThunks";
 
 
@@ -18,6 +18,7 @@ interface CenterProps {
 
 const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, onTrackSelect }) => {
     const dispatch = useAppDispatch()
+    const {hasMoreTracks} = useAppSelector(state => state.trackReducer)
     const loaderRef = useRef<HTMLDivElement | null>(null);
     const tracksRef = useRef<TrackData[]>(tracks);
   
@@ -29,7 +30,6 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !loading) {
-            console.log('tracks length:', tracksRef.current.length);
             dispatch(fetchRecomendations({offset: tracksRef.current.length, limit: 25}))
           }
         },
@@ -73,7 +73,9 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                             ))
                     } 
                     <div ref={loaderRef} style={{ height: 1 }}></div>
-                    {Array.from({ length: 10 }).map((_, i) => <TrackSkeleton key={i} />)}       
+                    {hasMoreTracks && (
+                        Array.from({ length: 10 }).map((_, i) => <TrackSkeleton key={i} />)
+                    )}
                 </div>
             </div>
         </div>

@@ -6,14 +6,16 @@ interface TrackState {
     AllTracks: any;
     DisplayedTracks: TrackData[];
     isLoading: boolean;
-    error: string
+    error: string;
+    hasMoreTracks: boolean;
 }
 
 const initialState: TrackState = {
     AllTracks: [],
     DisplayedTracks: [],
     isLoading: false,
-    error: ""
+    error: "",
+    hasMoreTracks: true
 }
 
 export const trackSlice = createSlice({
@@ -36,9 +38,13 @@ export const trackSlice = createSlice({
                 if (action.payload.offset === 0) {
                     // первая загрузка
                     state.AllTracks = action.payload.data.items;
+                    state.hasMoreTracks = true
                   } else {
                     // догружаем
                     state.AllTracks = [...state.AllTracks, ...action.payload.data.items];
+                    if (action.payload.data.items.length > action.payload.limit) {
+                        state.hasMoreTracks = false
+                    }
                   }
                 state.isLoading = false;
                 state.error = ''
