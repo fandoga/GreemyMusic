@@ -6,13 +6,14 @@ import Sidebar from '../../components/Sidebar';
 import TrackData from "./TrackData";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchRecomendations } from "../../store/reducers/trackThunks";
+import { trackSlice } from "../../store/reducers/trackSlice";
 
 
 const Main = () => {
     const dispatch = useAppDispatch()
     const { AllTracks, isLoading } = useAppSelector(state => state.trackReducer)
+    const { startLoading } = trackSlice.actions
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
-    const [loading, setLoading] = useState(false);
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [searchTracks, setSearch] = useState<string>('');
@@ -38,12 +39,11 @@ const Main = () => {
         );
         const data = await res.json();
         setTracks(data.tracks?.items || []);
-        setLoading(false);
     };
 
     useEffect(() => {
         const query = searchTracks.trim();
-        setLoading(true)
+        dispatch(startLoading())
         const handler = setTimeout(() => {
             if (query === "") {
                 dispatch(fetchRecomendations())

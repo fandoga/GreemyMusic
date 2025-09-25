@@ -19,7 +19,15 @@ const initialState: TrackState = {
 export const trackSlice = createSlice({
     name: 'track',
     initialState,
-    reducers: {},
+    reducers: {
+        startLoading(state) {
+            state.isLoading = true
+        },
+
+        finishLoading(state) {
+            state.isLoading = false
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchRecomendations.pending, (state) => {
@@ -36,5 +44,7 @@ export const trackSlice = createSlice({
             })
     },
 })
+
+export { startLoading, finishLoading }
 
 export default trackSlice.reducer;
