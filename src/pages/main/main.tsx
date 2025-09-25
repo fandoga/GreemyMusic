@@ -17,18 +17,6 @@ const Main = () => {
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [searchTracks, setSearch] = useState<string>('');
-    // const limit = 25;
-
-    // const loadDefaultTracks = async () => {
-    //     const accessToken = localStorage.getItem('access-token');
-    //     const res = await fetch(
-    //         `https://api.spotify.com/v1/playlists/3xMQTDLOIGvj3lWH5e5x6F/tracks?limit=${limit}`,
-    //         { headers: { Authorization: `Bearer ${accessToken}` } }
-    //     );
-    //     const data = await res.json();
-    //     setTracks(data.items || []);
-    //     setLoading(false);
-    // };
 
     const loadSearchTracks = async (query: string) => {
         if (!query.trim()) return;

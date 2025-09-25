@@ -45,6 +45,5 @@ export const trackSlice = createSlice({
     },
 })
 
-export { startLoading, finishLoading }
 
 export default trackSlice.reducer;
