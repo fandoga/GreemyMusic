@@ -47,7 +47,7 @@ const Main = () => {
         const handler = setTimeout(() => {
             if (query === "") {
                 dispatch(fetchRecomendations())
-                setTracks(AllTracks)
+                setTracks(AllTracks || [])
                 // ожидаем пока AllTracks обновиться
             } else {
                 loadSearchTracks(query);
