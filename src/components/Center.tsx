@@ -19,23 +19,29 @@ interface CenterProps {
 const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, onTrackSelect }) => {
     const dispatch = useAppDispatch()
     const loaderRef = useRef<HTMLDivElement | null>(null);
+    const tracksRef = useRef<TrackData[]>(tracks);
+  
+    useEffect(() => {
+      tracksRef.current = tracks;
+    }, [tracks]);
   
     useEffect(() => {
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !loading) {
-            console.log(tracks);
-            dispatch(fetchRecomendations({offset: 25, limit: 25}))
+            console.log('tracks length:', tracksRef.current.length);
+            dispatch(fetchRecomendations({offset: tracksRef.current.length, limit: 25}))
           }
         },
         { threshold: 1.0 }
       );
   
-      if (loaderRef.current) observer.observe(loaderRef.current);
+      const observed = loaderRef.current;
+      if (observed) observer.observe(observed);
       return () => {
-        if (loaderRef.current) observer.unobserve(loaderRef.current);
+        if (observed) observer.unobserve(observed);
       };
-    }, [dispatch]);
+    }, [dispatch, loading]);
 
     return (
         <div className="main__centerblock centerblock">
