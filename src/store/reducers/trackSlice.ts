@@ -31,7 +31,6 @@ export const trackSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchRecomendations.pending, (state) => {
-                state.isLoading = true
             })
             .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<any>) => {
                 if (action.payload.offset === 0) {
