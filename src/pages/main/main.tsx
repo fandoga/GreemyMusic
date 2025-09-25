@@ -10,7 +10,7 @@ import { fetchRecomendations } from "../../store/reducers/trackThunks";
 
 const Main = () => {
     const dispatch = useAppDispatch()
-    const { AllTracks } = useAppSelector(state => state.trackReducer)
+    const { AllTracks, isLoading } = useAppSelector(state => state.trackReducer)
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const [loading, setLoading] = useState(false);
     let adaptedTracks
@@ -47,7 +47,8 @@ const Main = () => {
         const handler = setTimeout(() => {
             if (query === "") {
                 dispatch(fetchRecomendations())
-                // wait for AllTracks update
+                setTracks(AllTracks)
+                // ожидаем пока AllTracks обновиться
             } else {
                 loadSearchTracks(query);
             }
@@ -58,12 +59,12 @@ const Main = () => {
         };
     }, [searchTracks]);
 
-    useEffect(() => {
-        if (searchTracks.trim() === "") {
-            setTracks(AllTracks?.items || [])
-            setLoading(false)
-        }
-    }, [AllTracks, searchTracks])
+    // useEffect(() => {
+    //     if (searchTracks.trim() === "") {
+    //         setTracks(AllTracks?.items || [])
+    //         setLoading(false)
+    //     }
+    // }, [AllTracks, searchTracks])
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)
@@ -87,7 +88,7 @@ const Main = () => {
                 <Center
                     title="Главная"
                     tracks={adaptedTracks}
-                    loading={loading}
+                    loading={isLoading}
                     onTrackSelect={setCurrentTrack}
                     searchTracks={setSearch}
                 />
