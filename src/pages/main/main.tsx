@@ -47,9 +47,7 @@ const Main = () => {
         const handler = setTimeout(() => {
             if (query === "") {
                 dispatch(fetchRecomendations())
-                setTracks(AllTracks?.items || [])
-                console.log(AllTracks);
-                // ожидаем пока AllTracks обновиться
+                // setTracks(AllTracks?.items || [])
             } else {
                 loadSearchTracks(query);
             }
@@ -60,12 +58,11 @@ const Main = () => {
         };
     }, [searchTracks]);
 
-    // useEffect(() => {
-    //     if (searchTracks.trim() === "") {
-    //         setTracks(AllTracks?.items || [])
-    //         setLoading(false)
-    //     }
-    // }, [AllTracks, searchTracks])
+    useEffect(() => {
+        if (searchTracks.trim() === "") {
+            setTracks(AllTracks?.items || [])
+        }
+    }, [AllTracks, searchTracks])
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)
