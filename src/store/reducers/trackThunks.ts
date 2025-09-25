@@ -1,12 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AppDispatch } from "../store";
-import { trackSlice } from "./trackSlice";
+
+interface fetchTrackArgs {
+    offset : number,
+    limit : number,
+}
 
 
-export const fetchRecomendations = createAsyncThunk<any, void, { rejectValue: string }>(
+export const fetchRecomendations = createAsyncThunk<
+        any,
+        fetchTrackArgs,
+        { rejectValue: string }
+    >(
     "track/fetchRecomend",
-    async (_, thunkAPI) => {
-        const limit = 25;
+    async ({offset, limit = 25}, thunkAPI) => {
         const accessToken = localStorage.getItem('access-token');
         try {
             const res = await fetch(
@@ -14,7 +20,7 @@ export const fetchRecomendations = createAsyncThunk<any, void, { rejectValue: st
                 { headers: { Authorization: `Bearer ${accessToken}` } }
             );
             const data = await res.json();
-            return data
+            return { data, offset }
         } catch (e: any) {
             return thunkAPI.rejectWithValue(`Не удалось выполнить загрузку. ${e.message}`)
         }

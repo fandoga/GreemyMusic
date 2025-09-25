@@ -34,8 +34,7 @@ const Main = () => {
         dispatch(startLoading())
         const handler = setTimeout(() => {
             if (query === "") {
-                dispatch(fetchRecomendations())
-                // setTracks(AllTracks?.items || [])
+                dispatch(fetchRecomendations({offset: 0, limit: 25}))
             } else {
                 loadSearchTracks(query);
             }

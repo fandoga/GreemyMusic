@@ -1,22 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import FilterBar from "./FilterBar";
 import Searchbar from "./Searchbar";
 import Track from "./Track";
 import TrackSkeleton from "./TrackSkeleton";
 import TrackData from "../pages/main/TrackData";
+import { useAppDispatch } from "../hooks/redux";
+import { fetchRecomendations } from "../store/reducers/trackThunks";
 
 
 interface CenterProps {
     loading?: boolean;
     title: string;
     tracks: TrackData[];
-    loaderRef?: React.RefObject<HTMLDivElement> | React.MutableRefObject<HTMLDivElement | null>;
     searchTracks?: React.Dispatch<React.SetStateAction<string>> | undefined;
     onTrackSelect?: (track: TrackData) => void
 }
 
-const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, loaderRef, onTrackSelect }) => {
-
+const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, onTrackSelect }) => {
+    const dispatch = useAppDispatch()
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && !loading) {
+            dispatch(fetchRecomendations({offset: tracks.length, limit: 25}))
+          }
+        },
+        { threshold: 1.0 }
+      );
+  
+      if (loaderRef.current) observer.observe(loaderRef.current);
+      return () => {
+        if (loaderRef.current) observer.unobserve(loaderRef.current);
+      };
+    }, [dispatch]);
 
     return (
         <div className="main__centerblock centerblock">

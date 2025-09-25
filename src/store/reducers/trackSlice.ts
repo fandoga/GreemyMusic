@@ -34,9 +34,13 @@ export const trackSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<any>) => {
+                if (action.payload.offset === 0) {
+                    state.AllTracks = action.payload.data
+                } else {
+                    state.AllTracks = {...state, ...action.payload.data}
+                }
                 state.isLoading = false
                 state.error = ''
-                state.AllTracks = action.payload
             })
             .addCase(fetchRecomendations.rejected, (state, action) => {
                 state.isLoading = false
