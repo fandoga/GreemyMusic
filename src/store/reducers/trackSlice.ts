@@ -34,11 +34,13 @@ export const trackSlice = createSlice({
             })
             .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<any>) => {
                 if (action.payload.offset === 0) {
-                    state.AllTracks = action.payload.data
-                } else {
-                    state.AllTracks = {...state, ...action.payload.data}
-                }
-                state.isLoading = false
+                    // первая загрузка
+                    state.AllTracks = action.payload.data;
+                  } else {
+                    // догружаем
+                    state.AllTracks = [...state.AllTracks, ...action.payload.data];
+                  }
+                state.isLoading = false;
                 state.error = ''
             })
             .addCase(fetchRecomendations.rejected, (state, action) => {
