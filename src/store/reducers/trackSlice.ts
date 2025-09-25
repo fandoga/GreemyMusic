@@ -38,7 +38,7 @@ export const trackSlice = createSlice({
                     state.AllTracks = action.payload.data.items;
                   } else {
                     // догружаем
-                    state.AllTracks = [...state.AllTracks.items, ...action.payload.data.items];
+                    state.AllTracks = [...state.AllTracks, ...action.payload.data.items];
                   }
                 state.isLoading = false;
                 state.error = ''
