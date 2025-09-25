@@ -10,7 +10,7 @@ import { fetchRecomendations } from "../../store/reducers/trackThunks";
 
 const Main = () => {
     const dispatch = useAppDispatch()
-    const { AllTracks } = useAppSelector(state => state.track)
+    const { AllTracks } = useAppSelector(state => state.trackReducer)
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const [loading, setLoading] = useState(false);
     let adaptedTracks
@@ -48,7 +48,7 @@ const Main = () => {
             if (query === "") {
                 dispatch(fetchRecomendations())
                 setTracks(AllTracks.items || [])
-                console.log(tracks);
+                console.log(AllTracks.items);
             } else {
                 loadSearchTracks(query);
             }

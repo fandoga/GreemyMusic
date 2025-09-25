@@ -3,7 +3,7 @@ import trackReducer from "./reducers/trackSlice";
 
 
 const rootReducer = combineReducers({
-    track: trackReducer
+    trackReducer
 })
 
 export const makeStore = () => {
