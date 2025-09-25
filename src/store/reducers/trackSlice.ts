@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import TrackData from "../../pages/main/TrackData"
-import { fetchRecomendations } from "./actionCreators";
+import { fetchRecomendations } from "./trackThunks";
 
 interface TrackState {
     AllTracks: any;
