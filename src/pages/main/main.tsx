@@ -48,6 +48,7 @@ const Main = () => {
     useEffect(() => {
         if (searchTracks.trim() === "") {
             setTracks(AllTracks?.items || [])
+            console.log(AllTracks);
         }
     }, [AllTracks, searchTracks])
 
