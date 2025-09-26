@@ -51,9 +51,10 @@ const Main = () => {
 
     useEffect(() => {
         if (searchTracks.trim() === "") {
-            setTracks(AllTracks || [])
-            console.log(AllTracks);
+            
         }
+        setTracks(AllTracks || [])
+            console.log(AllTracks);
     }, [AllTracks, searchTracks])
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
