@@ -52,7 +52,7 @@ const Main = () => {
     useEffect(() => {
         if (searchTracks.trim() === "") {
             setTracks(AllTracks || [])
-            console.log(currentPlaylist);
+            console.log(AllTracks);
         }
     }, [AllTracks, searchTracks])
 
@@ -69,7 +69,7 @@ const Main = () => {
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
             Info: '',
         }));
-    console.log(AllTracks);
+
 
     return (
         <div className="container">
