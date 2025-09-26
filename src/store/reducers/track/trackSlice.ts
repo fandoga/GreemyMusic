@@ -32,14 +32,14 @@ export const trackSlice = createSlice({
             .addCase(fetchRecomendations.pending, (state) => {
             })
             .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<any>) => {
-                const items = action.payload?.data?.tracks?.items || []
                 if (action.payload.offset === 0) {
-                    state.AllTracks = items;
+                    // первая загрузка
+                    state.AllTracks = action.payload.data.items;
                     state.hasMoreTracks = true
                   } else {
-                    state.AllTracks = [...state.AllTracks, ...items];
-                    const next = action.payload?.data?.tracks?.next ?? null
-                    if (next === null) {
+                    // догружаем
+                    state.AllTracks = [...state.AllTracks, ...action.payload.data.items];
+                    if (action.payload.data.next === null) {
                         state.hasMoreTracks = false
                     }
                   }
