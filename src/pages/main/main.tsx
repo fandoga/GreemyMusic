@@ -5,8 +5,8 @@ import Center from '../../components/Center';
 import Sidebar from '../../components/Sidebar';
 import TrackData from "./TrackData";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { fetchRecomendations } from "../../store/reducers/trackThunks";
-import { trackSlice } from "../../store/reducers/trackSlice";
+import { fetchRecomendations } from "../../store/reducers/track/trackThunks";
+import { trackSlice } from "../../store/reducers/track/trackSlice";
 
 
 const Main = () => {

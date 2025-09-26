@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import trackReducer from "./reducers/trackSlice";
+import trackReducer from "./reducers/track/trackSlice";
+import playlistReducer from "./reducers/playlists/playlistSlice";
 
 
 const rootReducer = combineReducers({
-    trackReducer
+    trackReducer,
+    playlistReducer
 })
 
 export const makeStore = () => {

@@ -3,11 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import { usePlaylist } from "../context/PlaylistContext";
 import NavSkeleton from "./NavSkeleton";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { fetchPlaylists } from "../store/reducers/playlists/playlistThunk";
 
 
 
 const Nav = () => {
-
+    const dispatch = useAppDispatch()
+    const { AllPlaylists } = useAppSelector(state => state.playlistReducer)
     const { setPlaylistId } = usePlaylist()
     const { setPlaylistTitle } = usePlaylist();
     const navigate = useNavigate();
@@ -30,8 +33,12 @@ const Nav = () => {
     };
 
     useEffect(() => {
-        loadPlaylists();
-    }, [])
+        if(playlists.length === 0) {
+            dispatch(fetchPlaylists({offset: 0, limit: 25}))
+        }
+        setPlaylists(AllPlaylists)
+        // loadPlaylists();
+    }, [AllPlaylists])
 
     adaptedPlaylists = playlists.map(item => {
         const playlist = item;

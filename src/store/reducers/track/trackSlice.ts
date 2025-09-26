@@ -1,10 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import TrackData from "../../pages/main/TrackData"
-import { fetchRecomendations } from "./trackThunks";
+import { fetchRecomendations } from "../track/trackThunks";
 
 interface TrackState {
     AllTracks: any;
-    DisplayedTracks: TrackData[];
     isLoading: boolean;
     error: string;
     hasMoreTracks: boolean;
@@ -12,7 +10,6 @@ interface TrackState {
 
 const initialState: TrackState = {
     AllTracks: [],
-    DisplayedTracks: [],
     isLoading: false,
     error: "",
     hasMoreTracks: true
@@ -45,9 +42,6 @@ export const trackSlice = createSlice({
                     if (action.payload.data.next === null) {
                         state.hasMoreTracks = false
                     }
-                    // if ((action.payload.data.items.length) < action.payload.limit) {
-                    //     state.hasMoreTracks = false
-                    // }
                   }
                 state.isLoading = false;
                 state.error = ''

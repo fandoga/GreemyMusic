@@ -5,7 +5,7 @@ import Track from "./Track";
 import TrackSkeleton from "./TrackSkeleton";
 import TrackData from "../pages/main/TrackData";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
-import { fetchRecomendations } from "../store/reducers/trackThunks";
+import { fetchRecomendations } from "../store/reducers/track/trackThunks";
 
 
 interface CenterProps {
@@ -74,7 +74,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                     } 
                     <div ref={loaderRef} style={{ height: 1 }}></div>
                     {hasMoreTracks && (
-                        Array.from({ length: 10 }).map((_, i) => <TrackSkeleton key={i} />)
+                        Array.from({ length: 16 }).map((_, i) => <TrackSkeleton key={i} />)
                     )}
                 </div>
             </div>
