@@ -14,6 +14,7 @@ export const fetchSearchQuery = createAsyncThunk<
     "search/fetchQuery",
     async ({offset, limit = 25, query}, thunkAPI) => {
         const accessToken = localStorage.getItem('access-token');
+        console.log(123);
         try {
             if (!query.trim()) return;
             const res = await fetch(
@@ -21,7 +22,6 @@ export const fetchSearchQuery = createAsyncThunk<
                 { headers: { Authorization: `Bearer ${accessToken}` }}
             );
             const data = await res.json();
-            console.log(123, data);
             return { data, offset }
         } catch (e: any) {
             return thunkAPI.rejectWithValue(`Не удалось выполнить загрузку. ${e.message}`)
