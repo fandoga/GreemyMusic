@@ -5,42 +5,44 @@ import { usePlaylist } from "../context/PlaylistContext";
 import NavSkeleton from "./NavSkeleton";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchPlaylists } from "../store/reducers/playlists/playlistThunk";
+import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
 
 
 
 const Nav = () => {
     const dispatch = useAppDispatch()
     const { AllPlaylists } = useAppSelector(state => state.playlistReducer)
+    const { startLoading } = playlistSlice.actions
     const { setPlaylistId } = usePlaylist()
     const { setPlaylistTitle } = usePlaylist();
     const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
-    const [loading, setLoading] = useState(false)
     const [playlists, setPlaylists] = useState<any[]>([]);
-    let adaptedPlaylists: any[]
+    let adaptedPlaylists: any[] = []
 
-    const loadPlaylists = async () => {
-        const accessToken = localStorage.getItem('access-token');
-        setLoading(true);
-        const res = await fetch(
-            `https://api.spotify.com/v1/me/playlists`,
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-        const data = await res.json();
-        setLoading(false);
-        setPlaylists(data.items)
-    };
+    // const loadPlaylists = async () => {
+    //     const accessToken = localStorage.getItem('access-token');
+    //     setLoading(true);
+    //     const res = await fetch(
+    //         `https://api.spotify.com/v1/me/playlists`,
+    //         { headers: { Authorization: `Bearer ${accessToken}` } }
+    //     );
+    //     const data = await res.json();
+    //     setLoading(false);
+    //     setPlaylists(data.items)
+    // };
 
     useEffect(() => {
         if(playlists.length === 0) {
+            dispatch(startLoading())
             dispatch(fetchPlaylists({offset: 0, limit: 25}))
         }
-        setPlaylists(AllPlaylists)
+        setPlaylists(AllPlaylists || [])
         // loadPlaylists();
     }, [AllPlaylists])
 
-    adaptedPlaylists = playlists.map(item => {
+    adaptedPlaylists = playlists?.map(item => {
         const playlist = item;
         const imgUrl = playlist.images[2] ? playlist.images[2].url || "" : playlist.images[0].url || ""
         return {
