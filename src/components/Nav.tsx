@@ -38,11 +38,12 @@ const Nav = () => {
             dispatch(startLoading())
             dispatch(fetchPlaylists({offset: 0, limit: 25}))
         }
+        console.log(playlists);
         setPlaylists(AllPlaylists || [])
         // loadPlaylists();
     }, [AllPlaylists])
 
-    adaptedPlaylists = playlists?.map(item => {
+    adaptedPlaylists = playlists.map(item => {
         const playlist = item;
         const imgUrl = playlist.images[2] ? playlist.images[2].url || "" : playlist.images[0].url || ""
         return {
