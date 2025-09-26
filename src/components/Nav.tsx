@@ -11,7 +11,7 @@ import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
 
 const Nav = () => {
     const dispatch = useAppDispatch()
-    const { AllPlaylists } = useAppSelector(state => state.playlistReducer)
+    const { AllPlaylists, isLoading } = useAppSelector(state => state.playlistReducer)
     const { startLoading } = playlistSlice.actions
     const { setPlaylistId } = usePlaylist()
     const { setPlaylistTitle } = usePlaylist();
@@ -86,7 +86,7 @@ const Nav = () => {
                         </li>
                     </ul>
                     <ul className="playlist__list">
-                        {loading ? <NavSkeleton /> :
+                        {isLoading ? <NavSkeleton /> :
                             adaptedPlaylists.map((playlist, idx) => (
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
