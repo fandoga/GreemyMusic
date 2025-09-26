@@ -73,7 +73,10 @@ const Nav = () => {
                     style={{ opacity: menuOpen ? "1" : "0", display: displayMenu ? "block" : "none" }}>
                     <ul className="menu__list">
                         <li className="menu__item">
-                            <Link to="/" className="menu__link">Главная</Link>
+                            <span style={{cursor: "pointer"}} onClick={() => {
+                                dispatch(setCurrentPlaylist({}))
+                            }} 
+                            className="menu__link">Главная</span>
                         </li>
                     </ul>
                     <ul className="playlist__list">
