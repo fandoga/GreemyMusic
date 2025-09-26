@@ -43,14 +43,17 @@ const Nav = () => {
         // loadPlaylists();
     }, [AllPlaylists])
 
-    adaptedPlaylists = playlists.map(item => {
-        const playlist = item;
-        const imgUrl = playlist.images[2] ? playlist.images[2].url || "" : playlist.images[0].url || ""
+    adaptedPlaylists = (playlists || [])
+        .filter(Boolean)
+        .map((item: any) => {
+        const playlist = item || {};
+        const images = Array.isArray(playlist.images) ? playlist.images : [];
+        const imgUrl = images?.[2]?.url || images?.[0]?.url || "";
         return {
             Img: imgUrl,
             Name: playlist.name || "",
             Id: playlist.id || "",
-            TracksUrl: playlist.tracks.href || ""
+            TracksUrl: playlist.tracks?.href || ""
         };
     });
 
