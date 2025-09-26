@@ -21,6 +21,7 @@ export const fetchRecomendations = createAsyncThunk<
             const fallbackId = "3xMQTDLOIGvj3lWH5e5x6F";
             const stateId = state.playlistReducer?.currentPlaylist?.id as string | undefined;
             const resolvedId = id || stateId || fallbackId;
+            console.log(id, stateId, fallbackId);
             const res = await fetch(
                 `https://api.spotify.com/v1/playlists/${resolvedId}/tracks?offset=${offset}&limit=${limit}`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }
