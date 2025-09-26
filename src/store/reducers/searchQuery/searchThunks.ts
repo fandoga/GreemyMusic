@@ -21,6 +21,7 @@ export const fetchSearchQuery = createAsyncThunk<
                 { headers: { Authorization: `Bearer ${accessToken}` }}
             );
             const data = await res.json();
+            console.log(123, data);
             return { data, offset }
         } catch (e: any) {
             return thunkAPI.rejectWithValue(`Не удалось выполнить загрузку. ${e.message}`)
