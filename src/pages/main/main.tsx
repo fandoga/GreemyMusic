@@ -45,17 +45,14 @@ const Main = () => {
         return () => {
             clearTimeout(handler)
         };
-    }, [searchTracks]);
+    }, [searchTracks, currentPlaylist]);
 
     useEffect(() => {
         if (searchTracks.trim() === "") {
-            if (currentPlaylist.items) {
-            } else {
-                setTracks(AllTracks || [])
-            }
+            setTracks(AllTracks || [])
             console.log(currentPlaylist);
         }
-    }, [AllTracks, searchTracks, currentPlaylist])
+    }, [AllTracks, searchTracks])
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)
