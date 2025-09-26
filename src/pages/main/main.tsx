@@ -6,6 +6,7 @@ import Sidebar from '../../components/Sidebar';
 import TrackData from "./TrackData";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { fetchRecomendations } from "../../store/reducers/track/trackThunks";
+import { fetchSearchQuery } from "../../store/reducers/searchQuery/searchThunks";
 import { trackSlice } from "../../store/reducers/track/trackSlice";
 
 
@@ -38,7 +39,7 @@ const Main = () => {
             if (query === "") {
                 dispatch(fetchRecomendations({offset: 0, limit: 25}))
             } else {
-                loadSearchTracks(query);
+                dispatch(fetchSearchQuery({offset: 0, limit: 25, query: query}))
             }
         }, 400);
         setTitle(currentPlaylist?.Name || "Главная")

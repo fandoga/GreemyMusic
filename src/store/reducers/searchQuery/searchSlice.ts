@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchRecomendations } from "../track/trackThunks";
+import { fetchSearchQuery } from "./searchThunks";
 
 interface TrackState {
     AllTracks: any;
@@ -15,8 +15,8 @@ const initialState: TrackState = {
     hasMoreTracks: true
 }
 
-export const trackSlice = createSlice({
-    name: 'track',
+export const searchSlice = createSlice({
+    name: 'search',
     initialState,
     reducers: {
         startLoading(state) {
@@ -29,9 +29,9 @@ export const trackSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchRecomendations.pending, (state) => {
+            .addCase(fetchSearchQuery.pending, (state) => {
             })
-            .addCase(fetchRecomendations.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(fetchSearchQuery.fulfilled, (state, action: PayloadAction<any>) => {
                 const items = action.payload?.data?.tracks?.items || []
                 if (action.payload.offset === 0) {
                     state.AllTracks = items;
@@ -46,7 +46,7 @@ export const trackSlice = createSlice({
                 state.isLoading = false;
                 state.error = ''
             })
-            .addCase(fetchRecomendations.rejected, (state, action) => {
+            .addCase(fetchSearchQuery.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = action.payload ?? 'Неизвестная ошибка'
             })
@@ -54,4 +54,4 @@ export const trackSlice = createSlice({
 })
 
 
-export default trackSlice.reducer;
+export default searchSlice.reducer;
