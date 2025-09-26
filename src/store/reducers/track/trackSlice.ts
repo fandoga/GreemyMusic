@@ -56,7 +56,7 @@ export const trackSlice = createSlice({
             .addCase(fetchSearchQuery.fulfilled, (state, action: PayloadAction<any>) => {
                 if (action.payload.offset === 0) {
                     // первая загрузка
-                    state.AllTracks = action.payload.data;
+                    state.AllTracks = action.payload.data.items;
                     state.hasMoreTracks = true
                   } else {
                     // догружаем

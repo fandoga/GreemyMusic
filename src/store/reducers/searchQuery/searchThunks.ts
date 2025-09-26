@@ -14,7 +14,6 @@ export const fetchSearchQuery = createAsyncThunk<
     "search/fetchQuery",
     async ({offset, limit = 25, query}, thunkAPI) => {
         const accessToken = localStorage.getItem('access-token');
-        console.log(123);
         try {
             if (!query.trim()) return;
             const res = await fetch(
