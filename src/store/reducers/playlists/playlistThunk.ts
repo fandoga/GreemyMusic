@@ -11,12 +11,12 @@ export const fetchPlaylists = createAsyncThunk<
         fetchTrackArgs,
         { rejectValue: string }
     >(
-    "track/fetchRecomend",
+    "track/fetchPlaylist",
     async ({offset, limit = 25}, thunkAPI) => {
         const accessToken = localStorage.getItem('access-token');
         try {
             const res = await fetch(
-                `https://api.spotify.com/v1/me/playlists?offset=${offset}&limit=${limit}`,
+                `https://api.spotify.com/v1/me/playlists`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }
             );
             const data = await res.json();
