@@ -15,9 +15,10 @@ export const fetchSearchQuery = createAsyncThunk<
     async ({offset, limit = 25, query}, thunkAPI) => {
         const accessToken = localStorage.getItem('access-token');
         try {
+            if (!query.trim()) return;
             const res = await fetch(
                 `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(query)}&type=track&offset=${offset}&limit=${limit}`,
-                { headers: { Authorization: `Bearer ${accessToken}` } }
+                { headers: { Authorization: `Bearer ${accessToken}` }}
             );
             const data = await res.json();
             return { data, offset }

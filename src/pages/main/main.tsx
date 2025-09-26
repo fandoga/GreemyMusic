@@ -69,7 +69,7 @@ const Main = () => {
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
             Info: '',
         }));
-    console.log(adaptedTracks);
+    console.log(AllTracks);
 
     return (
         <div className="container">
