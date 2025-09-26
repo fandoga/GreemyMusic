@@ -21,17 +21,7 @@ const Main = () => {
     const [tracks, setTracks] = useState<any[]>([]);
     const [searchTracks, setSearch] = useState<string>('');
 
-    const loadSearchTracks = async (query: string) => {
-        if (!query.trim()) return;
-        const accessToken = localStorage.getItem('access-token');
-        const res = await fetch(
-            `https://api.spotify.com/v1/search?q=track:${encodeURIComponent(query)}&type=track`,
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-        const data = await res.json();
-        setTracks(data.tracks?.items || []);
-    };
-
+    // основные запросы для поиска и обновления плейлиста
     useEffect(() => {
         const query = searchTracks.trim();
         dispatch(startLoading())
@@ -49,14 +39,13 @@ const Main = () => {
         };
     }, [searchTracks, currentPlaylist]);
 
+    // обновления списка треков
     useEffect(() => {
-        if (searchTracks.trim() === "") {
-            
-        }
         setTracks(AllTracks || [])
             console.log(AllTracks);
     }, [AllTracks, searchTracks])
 
+    //приведение треков к нужному виду
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)
         .map((track: any): TrackData => ({
@@ -82,6 +71,7 @@ const Main = () => {
                     loading={isLoading}
                     onTrackSelect={setCurrentTrack}
                     searchTracks={setSearch}
+                    query={searchTracks}
                 />
                 <Sidebar />
             </main>

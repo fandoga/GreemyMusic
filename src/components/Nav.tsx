@@ -15,7 +15,6 @@ const Nav = () => {
     const { startLoading, setCurrentPlaylist } = playlistSlice.actions
     const { setPlaylistId } = usePlaylist()
     const { setPlaylistTitle } = usePlaylist();
-    const navigate = useNavigate();
     const [menuOpen, setMenuStatus] = useState(true);
     const [displayMenu, setDisplayStatus] = useState(true);
     const [playlists, setPlaylists] = useState<any[]>([]);

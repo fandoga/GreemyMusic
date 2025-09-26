@@ -60,8 +60,10 @@ export const trackSlice = createSlice({
                     state.hasMoreTracks = true
                   } else {
                     // догружаем
-                    state.AllTracks = [...state.AllTracks, ...action.payload.data.items];
-                    if (action.payload.data.next === null) {
+                    const items = action.payload?.data?.tracks?.items || []
+                    state.AllTracks = [...state.AllTracks, ...items];
+                    const next = action.payload?.data?.tracks?.next ?? null
+                    if (next === null) {
                         state.hasMoreTracks = false
                     }
                   }

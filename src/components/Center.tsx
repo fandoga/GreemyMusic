@@ -6,6 +6,7 @@ import TrackSkeleton from "./TrackSkeleton";
 import TrackData from "../pages/main/TrackData";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchRecomendations } from "../store/reducers/track/trackThunks";
+import { fetchSearchQuery } from "../store/reducers/searchQuery/searchThunks";
 
 
 interface CenterProps {
@@ -13,15 +14,17 @@ interface CenterProps {
     title: string;
     tracks: TrackData[];
     searchTracks?: React.Dispatch<React.SetStateAction<string>> | undefined;
+    query?: string;
     onTrackSelect?: (track: TrackData) => void
 }
 
-const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, onTrackSelect }) => {
+const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, onTrackSelect, query }) => {
     const dispatch = useAppDispatch()
     const {hasMoreTracks} = useAppSelector(state => state.trackReducer)
     const loaderRef = useRef<HTMLDivElement | null>(null);
     const tracksRef = useRef<TrackData[]>(tracks);
-  
+    
+    //инфинти-скролл
     useEffect(() => {
       tracksRef.current = tracks;
     }, [tracks]);
@@ -30,7 +33,12 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !loading) {
-            dispatch(fetchRecomendations({offset: tracksRef.current.length, limit: 25}))
+            const isSearching = Boolean(query && query.trim().length > 0);
+            if (isSearching) {
+              dispatch(fetchSearchQuery({ offset: tracksRef.current.length, limit: 25, query: query!.trim() }))
+            } else {
+              dispatch(fetchRecomendations({ offset: tracksRef.current.length, limit: 25 }))
+            }
           }
         },
         { threshold: 1.0 }
@@ -41,7 +49,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
       return () => {
         if (observed) observer.unobserve(observed);
       };
-    }, [dispatch, loading]);
+    }, [dispatch, loading, query]);
 
     return (
         <div className="main__centerblock centerblock">
