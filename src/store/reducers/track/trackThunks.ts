@@ -19,7 +19,7 @@ export const fetchRecomendations = createAsyncThunk<
         try {
             const state = thunkAPI.getState() as RootState;
             const fallbackId = "3xMQTDLOIGvj3lWH5e5x6F";
-            const stateId = state.playlistReducer?.currentPlaylist?.id as string | undefined;
+            const stateId = state.playlistReducer?.currentPlaylist?.Id as string | undefined;
             const resolvedId = id || stateId || fallbackId;
             console.log(id, stateId, fallbackId);
             const res = await fetch(
