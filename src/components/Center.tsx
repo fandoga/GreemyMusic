@@ -82,7 +82,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                     } 
                     <div ref={loaderRef} style={{ height: 1 }}></div>
                     {hasMoreTracks && (
-                        Array.from({ length: 16 }).map((_, i) => <TrackSkeleton key={i} />)
+                        Array.from({ length: 16 }).map((_, i) => <TrackSkeleton  key={i} />)
                     )}
                 </div>
             </div>

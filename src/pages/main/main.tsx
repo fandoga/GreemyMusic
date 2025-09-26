@@ -29,6 +29,7 @@ const Main = () => {
             if (query === "") {
                 dispatch(fetchRecomendations({offset: 0, limit: 25}))
             } else {
+                setTitle('Главная')
                 dispatch(fetchSearchQuery({offset: 0, limit: 25, query: query}))
             }
         }, 400);

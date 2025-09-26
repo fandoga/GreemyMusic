@@ -61,9 +61,9 @@ const Nav: React.FC<NavProps> = ({ searchQuery }) => {
         <nav className="main__nav nav">
             <div className="nav__top">
                 <div className="nav__logo logo">
-                    <Link to={'/'}>
+                    <a href="./">
                         <img className="logo__image" src="/img/logo.png" alt="logo" />
-                    </Link>
+                    </a>
                 </div>
                 <div onClick={toggleMenu} className="nav__burger burger">
                     <span className="burger__line"></span>
