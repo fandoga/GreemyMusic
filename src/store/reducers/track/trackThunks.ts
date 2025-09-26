@@ -13,7 +13,7 @@ export const fetchRecomendations = createAsyncThunk<
         fetchTrackArgs,
         { rejectValue: string }
     >(
-    "track/fetchRecomend",
+    "track/fetchTracks",
     async ({offset, limit = 25, id}, thunkAPI) => {
         const accessToken = localStorage.getItem('access-token');
         try {
@@ -21,7 +21,6 @@ export const fetchRecomendations = createAsyncThunk<
             const fallbackId = "3xMQTDLOIGvj3lWH5e5x6F";
             const stateId = state.playlistReducer?.currentPlaylist?.Id as string | undefined;
             const resolvedId = id || stateId || fallbackId;
-            console.log(id, stateId, fallbackId);
             const res = await fetch(
                 `https://api.spotify.com/v1/playlists/${resolvedId}/tracks?offset=${offset}&limit=${limit}`,
                 { headers: { Authorization: `Bearer ${accessToken}` } }

@@ -41,6 +41,7 @@ const Main = () => {
                 loadSearchTracks(query);
             }
         }, 400);
+        setTitle(currentPlaylist?.name || "Главная")
 
         return () => {
             clearTimeout(handler)
