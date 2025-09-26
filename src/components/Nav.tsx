@@ -7,9 +7,11 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchPlaylists } from "../store/reducers/playlists/playlistThunk";
 import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
 
+interface NavProps {
+    searchQuery?: React.Dispatch<React.SetStateAction<string>> | undefined;
+}
 
-
-const Nav = () => {
+const Nav: React.FC<NavProps> = ({ searchQuery }) => {
     const dispatch = useAppDispatch()
     const { AllPlaylists, isLoading } = useAppSelector(state => state.playlistReducer)
     const { startLoading, setCurrentPlaylist } = playlistSlice.actions
@@ -74,6 +76,7 @@ const Nav = () => {
                         <li className="menu__item">
                             <span style={{cursor: "pointer"}} onClick={() => {
                                 dispatch(setCurrentPlaylist({}))
+                                searchQuery?.("")
                             }} 
                             className="menu__link">Главная</span>
                         </li>

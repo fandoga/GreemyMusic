@@ -42,7 +42,7 @@ const Main = () => {
     // обновления списка треков
     useEffect(() => {
         setTracks(AllTracks || [])
-            console.log(AllTracks);
+        console.log(AllTracks);
     }, [AllTracks, searchTracks])
 
     //приведение треков к нужному виду
@@ -64,7 +64,7 @@ const Main = () => {
     return (
         <div className="container">
             <main className="main">
-                <Nav />
+                <Nav searchQuery={setSearch}/>
                 <Center
                     title={title}
                     tracks={adaptedTracks}
