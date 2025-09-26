@@ -50,7 +50,7 @@ const Main = () => {
     useEffect(() => {
         if (searchTracks.trim() === "") {
             if (currentPlaylist.items) {
-                console.log(currentPlaylist);
+                console.log(currentPlaylist.items);
             } else {
                 setTracks(AllTracks || [])
             }
