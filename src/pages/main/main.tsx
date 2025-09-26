@@ -15,6 +15,7 @@ const Main = () => {
     const { currentPlaylist } = useAppSelector(state => state.playlistReducer)
     const { startLoading } = trackSlice.actions
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
+    const [title, setTitle] = useState<string>("Главная")
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [searchTracks, setSearch] = useState<string>('');
@@ -48,7 +49,7 @@ const Main = () => {
 
     useEffect(() => {
         if (searchTracks.trim() === "") {
-            if (currentPlaylist) {
+            if (currentPlaylist.items) {
                 console.log(currentPlaylist);
             } else {
                 setTracks(AllTracks || [])
@@ -76,7 +77,7 @@ const Main = () => {
             <main className="main">
                 <Nav />
                 <Center
-                    title="Главная"
+                    title={title}
                     tracks={adaptedTracks}
                     loading={isLoading}
                     onTrackSelect={setCurrentTrack}
