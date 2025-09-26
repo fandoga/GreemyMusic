@@ -12,6 +12,7 @@ import { trackSlice } from "../../store/reducers/track/trackSlice";
 const Main = () => {
     const dispatch = useAppDispatch()
     const { AllTracks, isLoading } = useAppSelector(state => state.trackReducer)
+    const { currentPlaylist } = useAppSelector(state => state.playlistReducer)
     const { startLoading } = trackSlice.actions
     const [currentTrack, setCurrentTrack] = useState<TrackData>();
     let adaptedTracks
@@ -47,9 +48,13 @@ const Main = () => {
 
     useEffect(() => {
         if (searchTracks.trim() === "") {
-            setTracks(AllTracks || [])
+            if (currentPlaylist) {
+                console.log(currentPlaylist);
+            } else {
+                setTracks(AllTracks || [])
+            }
         }
-    }, [AllTracks, searchTracks])
+    }, [AllTracks, searchTracks, currentPlaylist])
 
     adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
         .filter((track: any) => track && track.album)

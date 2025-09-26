@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchPlaylists } from "./playlistThunk";
 
 interface PlaylistState {
-    AllPlaylists: any;
+    AllPlaylists: any[];
+    currentPlaylist: any;
     isLoading: boolean;
     error: string;
     hasMorePlaylists: boolean;
@@ -10,6 +11,7 @@ interface PlaylistState {
 
 const initialState: PlaylistState = {
     AllPlaylists: [],
+    currentPlaylist: {},
     isLoading: false,
     error: "",
     hasMorePlaylists: true
@@ -19,10 +21,12 @@ export const playlistSlice = createSlice({
     name: 'playlist',
     initialState,
     reducers: {
+        setCurrentPlaylist(state, action : PayloadAction<any>) {
+            state.currentPlaylist = action.payload
+        },
         startLoading(state) {
             state.isLoading = true
         },
-
         finishLoading(state) {
             state.isLoading = false
         }

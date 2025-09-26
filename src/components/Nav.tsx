@@ -12,7 +12,7 @@ import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
 const Nav = () => {
     const dispatch = useAppDispatch()
     const { AllPlaylists, isLoading } = useAppSelector(state => state.playlistReducer)
-    const { startLoading } = playlistSlice.actions
+    const { startLoading, setCurrentPlaylist } = playlistSlice.actions
     const { setPlaylistId } = usePlaylist()
     const { setPlaylistTitle } = usePlaylist();
     const navigate = useNavigate();
@@ -21,26 +21,13 @@ const Nav = () => {
     const [playlists, setPlaylists] = useState<any[]>([]);
     let adaptedPlaylists: any[] = []
 
-    // const loadPlaylists = async () => {
-    //     const accessToken = localStorage.getItem('access-token');
-    //     setLoading(true);
-    //     const res = await fetch(
-    //         `https://api.spotify.com/v1/me/playlists`,
-    //         { headers: { Authorization: `Bearer ${accessToken}` } }
-    //     );
-    //     const data = await res.json();
-    //     setLoading(false);
-    //     setPlaylists(data.items)
-    // };
 
     useEffect(() => {
         if(playlists.length === 0) {
             dispatch(startLoading())
             dispatch(fetchPlaylists({offset: 0, limit: 25}))
         }
-        console.log(playlists);
         setPlaylists(AllPlaylists || [])
-        // loadPlaylists();
     }, [AllPlaylists])
 
     adaptedPlaylists = (playlists || [])
@@ -95,9 +82,9 @@ const Nav = () => {
                                 <li key={idx} className="playlist-list__item">
                                     <button onClick={() => {
                                         localStorage.removeItem('last-playlist')
+                                        dispatch(setCurrentPlaylist(playlist))
                                         setPlaylistId(playlist.Id)
                                         setPlaylistTitle(playlist.Name)
-                                        navigate('/playlist')
                                     }} className="playlist__button">
                                         <div className="playlist__img">
                                             <img src={playlist.Img} alt="" />
