@@ -24,8 +24,8 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
         <div className="playlist__item">
             <div onClick={(onSelect)} className="playlist__track track">
                 <div className="track__title">
-                    <div className="track__title-image">
-                        <img className={currentTrack.Name === Name ? 'track-image-active' : ''} src={Img} alt="" />
+                    <div className={`track__title-image ${currentTrack.Name === Name ? 'active' : ''}`}>
+                        <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">
                         <a className="track__title-link" href="http://">

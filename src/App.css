@@ -611,6 +611,8 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 17px;
+  position: relative;
+  overflow: hidden;
 }
 
 .track__title-image img {
@@ -621,14 +623,17 @@ body {
   display: block;
 }
 
-.track__title-image img.active::after{
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    opacity: 0.6;
+.track__title-image::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.track__title-image.active::after{
+  opacity: 0.6;
 }
 
 .track__title-svg {
