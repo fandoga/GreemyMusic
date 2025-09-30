@@ -12,7 +12,6 @@ const Sidebar = () => {
     const { startLoading, setCurrentPlaylist } = playlistSlice.actions
     const { PicksPlaylists, isLoading } = useAppSelector(state => state.playlistReducer)
     const { userName } = useAppSelector(state => state.userReducer)
-    // const { setPicksPlaylists } = usePlaylist()
 
     const [playlists, setPlaylists] = useState<{ id: string; image: string }[]>([]);
     const [user, SetUser] = useState<string>("");
@@ -39,7 +38,7 @@ const Sidebar = () => {
     adaptedPlaylists = (playlists || [])
         .filter(Boolean)
         .map((item: any) => {
-        const playlist = item || {};
+        const playlist = item.data || {};
         const images = Array.isArray(playlist.images) ? playlist.images : [];
         const imgUrl = images?.[2]?.url || images?.[0]?.url || "";
         const bigImg = images?.[0]?.url
@@ -73,7 +72,8 @@ const Sidebar = () => {
                 <div className="sidebar__list">
                     {adaptedPlaylists.map((pl) => (
                         <div className="sidebar__item" key={pl.Id}>
-                            <span style={{cursor: "pointer"}} className="sidebar__link" onClick={() => {dispatch(setCurrentPlaylist(pl))}}>
+                            <span style={{cursor: "pointer"}} className="sidebar__link"
+                             onClick={() => {dispatch(setCurrentPlaylist(pl))}}>
                                 <div
                                     className="sidebar__img"
                                     style={{ backgroundImage: `url(${pl.Img})` }}
