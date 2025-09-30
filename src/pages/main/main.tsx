@@ -43,6 +43,7 @@ const Main = () => {
     useEffect(() => {
         setTracks(AllTracks || [])
         console.log(AllTracks);
+        console.log(currentTrack);
     }, [AllTracks, searchTracks])
 
     //приведение треков к нужному виду
@@ -59,7 +60,6 @@ const Main = () => {
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
             Info: '',
         }));
-        console.log(currentTrack);
 
     return (
         <div className="container">

@@ -35,7 +35,7 @@ export const trackSlice = createSlice({
     name: 'track',
     initialState,
     reducers: {
-        setCurrentTrack(state, action: PayloadAction<any>) {
+        setCurrentTrack(state, action: PayloadAction<TrackData>) {
             state.currentTrack = action.payload
         },
         startLoading(state) {
