@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import SidebarSkeleton from "./SidebarSkeleton";
 import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
-import { usePlaylist } from "../context/PlaylistContext";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchPicks } from "../store/reducers/picks/picksThunks";
 import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
@@ -10,8 +9,8 @@ import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
 const Sidebar = () => {
     const dispatch = useAppDispatch()
     const { startLoading } = playlistSlice.actions
-    const { PicksPlaylists } = useAppSelector(state => state.playlistReducer)
-    const { setPicksPlaylists } = usePlaylist()
+    const { PicksPlaylists, isLoading } = useAppSelector(state => state.playlistReducer)
+    // const { setPicksPlaylists } = usePlaylist()
 
     const playlistIds = [
         '1CnDCN10TJZjw6K2H3gNRv',
@@ -27,21 +26,21 @@ const Sidebar = () => {
         setLoading(true);
 
         try {
-            const playlistData = await Promise.all(
-                playlistIds.map(async (id) => {
-                    const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
-                        headers: { Authorization: `Bearer ${accessToken}` }
-                    });
-                    const data = await res.json();
-                    return {
-                        data,
-                        id,
-                        image: data.images[0]?.url || `/img/playlist0${id + 1}`,
-                    };
-                })
-            );
-            setPicksPlaylists(playlistData)
-            setPlaylists(playlistData);
+            // const playlistData = await Promise.all(
+            //     playlistIds.map(async (id) => {
+            //         const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
+            //             headers: { Authorization: `Bearer ${accessToken}` }
+            //         });
+            //         const data = await res.json();
+            //         return {
+            //             data,
+            //             id,
+            //             image: data.images[0]?.url || `/img/playlist0${id + 1}`,
+            //         };
+            //     })
+            // );
+            // setPicksPlaylists(playlistData)
+            // setPlaylists(playlistData);
 
             // Загружаем пользователя
             const userRes = await fetch('https://api.spotify.com/v1/me', {
@@ -62,8 +61,7 @@ const Sidebar = () => {
             dispatch(fetchPicks({offset: 0, limit: 25}));
         }
         console.log(PicksPlaylists);
-        setPicksPlaylists(PicksPlaylists)
-        // loadData();
+        setPlaylists(PicksPlaylists)
     }, [PicksPlaylists]);
 
     if (loading) {
@@ -74,7 +72,7 @@ const Sidebar = () => {
 
     return (
         <div className="main__sidebar sidebar">
-            {loading
+            {isLoading
                 ? <UserSkeleton />
                 : (
                     <div className="sidebar__personal">
