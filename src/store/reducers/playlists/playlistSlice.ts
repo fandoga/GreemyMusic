@@ -63,11 +63,11 @@ export const playlistSlice = createSlice({
             .addCase(fetchPicks.fulfilled, (state, action: PayloadAction<any>) => {
                 if (action.payload.offset === 0) {
                     // первая загрузка
-                    state.AllPlaylists = action.payload.data.items;
+                    state.PicksPlaylists = action.payload.playlistData;
                     state.hasMorePlaylists = true
                   } else {
                     // догружаем
-                    state.AllPlaylists = [...state.AllPlaylists, ...action.payload.data.items];
+                    state.PicksPlaylists = [...state.PicksPlaylists, ...action.payload.playlistData];
                     if (action.payload.data.next === null) {
                         state.hasMorePlaylists = false
                     }
