@@ -15,7 +15,6 @@ const Sidebar = () => {
     // const { setPicksPlaylists } = usePlaylist()
 
     const [playlists, setPlaylists] = useState<{ id: string; image: string }[]>([]);
-    const [loading, setLoading] = useState(false);
     const [user, SetUser] = useState<string>("");
 
     useEffect(() => {
@@ -30,11 +29,28 @@ const Sidebar = () => {
         SetUser(userName)
     }, [PicksPlaylists, userName]);
 
-    if (loading) {
+    if (isLoading) {
         return (
             <SidebarSkeleton />
         );
     }
+
+    let adaptedPlaylists
+    adaptedPlaylists = (playlists || [])
+        .filter(Boolean)
+        .map((item: any) => {
+        const playlist = item || {};
+        const images = Array.isArray(playlist.images) ? playlist.images : [];
+        const imgUrl = images?.[2]?.url || images?.[0]?.url || "";
+        const bigImg = images?.[0]?.url
+        return {
+            Img: imgUrl,
+            BigImg: bigImg, 
+            Name: playlist.name || "",
+            Id: playlist.id || "",
+            TracksUrl: playlist.tracks?.href || ""
+        };
+    });
 
     return (
         <div className="main__sidebar sidebar">
@@ -53,15 +69,14 @@ const Sidebar = () => {
                     </div>
                 )
             }
-
             <div className="sidebar__block">
                 <div className="sidebar__list">
-                    {playlists.map((pl, index) => (
-                        <div className="sidebar__item" key={pl.id}>
-                            <span className="sidebar__link" onClick={() => {dispatch(setCurrentPlaylist(pl))}}>
+                    {adaptedPlaylists.map((pl) => (
+                        <div className="sidebar__item" key={pl.Id}>
+                            <span style={{cursor: "pointer"}} className="sidebar__link" onClick={() => {dispatch(setCurrentPlaylist(pl))}}>
                                 <div
                                     className="sidebar__img"
-                                    style={{ backgroundImage: `url(${pl.image})` }}
+                                    style={{ backgroundImage: `url(${pl.Img})` }}
                                 />
                             </span>
                         </div>
