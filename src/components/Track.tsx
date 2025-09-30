@@ -5,10 +5,10 @@ import TrackData from "../pages/main/TrackData";
 
 
 interface TrackProps extends TrackData {
-    onSelect?: () => void;
+    onSelect?: () => { payload: any; type: "track/setCurrentTrack"; };
 }
 
-const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Status, Time, Info, onSelect }) => {
+const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();
 
     if (loading) {
@@ -17,11 +17,9 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Status, Time, I
         )
     }
 
-
-
     return (
         <div className="playlist__item">
-            <div onClick={onSelect} className="playlist__track track">
+            <div onClick={(onSelect)} className="playlist__track track">
                 <div className="track__title">
                     <div className="track__title-image">
                         <img src={Img} alt="" />

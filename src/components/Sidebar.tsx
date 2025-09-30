@@ -23,7 +23,6 @@ const Sidebar = () => {
     }, [dispatch, startLoading])
 
     useEffect(() => {
-        console.log(PicksPlaylists);
         setPlaylists(PicksPlaylists)
         SetUser(userName)
     }, [PicksPlaylists, userName]);
@@ -76,7 +75,7 @@ const Sidebar = () => {
                              onClick={() => {dispatch(setCurrentPlaylist(pl))}}>
                                 <div
                                     className="sidebar__img"
-                                    style={{ backgroundImage: `url(${pl.Img})` }}
+                                    style={{ backgroundImage: `url(${pl.BigImg})` }}
                                 />
                             </span>
                         </div>

@@ -1,15 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchRecomendations } from "../track/trackThunks";
 import { fetchSearchQuery } from "../searchQuery/searchThunks";
+import TrackData from "../../../pages/main/TrackData";
+
+const EMPTY_TRACK: TrackData = {
+    Img: "",
+    ImgMed: "",
+    ImgBig: "",
+    Name: "",
+    Status: { selected: false },
+    Author: "",
+    Album: "",
+    Time: "",
+    Info: "",
+};
 
 interface TrackState {
-    AllTracks: any;
+    currentTrack: TrackData,
+    AllTracks: any[];
     isLoading: boolean;
     error: string;
     hasMoreTracks: boolean;
 }
 
 const initialState: TrackState = {
+    currentTrack: EMPTY_TRACK,
     AllTracks: [],
     isLoading: false,
     error: "",
@@ -20,6 +35,9 @@ export const trackSlice = createSlice({
     name: 'track',
     initialState,
     reducers: {
+        setCurrentTrack(state, action: PayloadAction<any>) {
+            state.currentTrack = action.payload
+        },
         startLoading(state) {
             state.isLoading = true
         },

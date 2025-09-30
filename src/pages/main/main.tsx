@@ -12,10 +12,9 @@ import { trackSlice } from "../../store/reducers/track/trackSlice";
 
 const Main = () => {
     const dispatch = useAppDispatch()
-    const { AllTracks, isLoading } = useAppSelector(state => state.trackReducer)
+    const { AllTracks, isLoading, currentTrack } = useAppSelector(state => state.trackReducer)
     const { currentPlaylist } = useAppSelector(state => state.playlistReducer)
     const { startLoading } = trackSlice.actions
-    const [currentTrack, setCurrentTrack] = useState<TrackData>();
     const [title, setTitle] = useState<string>("Главная")
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
@@ -70,13 +69,12 @@ const Main = () => {
                     title={title}
                     tracks={adaptedTracks}
                     loading={isLoading}
-                    onTrackSelect={setCurrentTrack}
                     searchTracks={setSearch}
                     query={searchTracks}
                 />
                 <Sidebar />
             </main>
-            {currentTrack && (
+            {currentTrack.Name.length && (
                 <Bar track={currentTrack} />
             )}
             <footer className="footer"></footer>

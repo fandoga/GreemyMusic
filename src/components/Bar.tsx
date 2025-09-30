@@ -3,6 +3,7 @@ import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../context/LoadingContext";
 import TrackData from "../pages/main/TrackData";
 import ProgressBar from "./ProgressBar";
+import { useAppSelector } from "../hooks/redux";
 
 
 interface BarProps {
@@ -10,9 +11,9 @@ interface BarProps {
     track?: TrackData;
 }
 
-const Bar: React.FC<BarProps> = ({ state, track }) => {
+const Bar: React.FC<BarProps> = ({ state }) => {
     const loadingGlobal = useLoading();
-    const [loading, setLoading] = useState(false)
+    const { currentTrack, isLoading } = useAppSelector(state => state.trackReducer)
     const audioRef = useRef<any>(null);
     const [isPlaying, setPlaying] = useState(false);
     const [isRepeated, setRepeat] = useState(false);
@@ -64,7 +65,7 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
 
     const togglePlay = isPlaying ? StopHandle : PlayHandle;
 
-    if (loadingGlobal || state || loading) {
+    if (loadingGlobal || state || isLoading) {
         return (
             <BarSkeleton />
         )
@@ -119,17 +120,17 @@ const Bar: React.FC<BarProps> = ({ state, track }) => {
                             <div className="player__track-play track-play">
                                 <div className="track-play__contain">
                                     <div className="track-play__image">
-                                        <img src={track?.ImgMed} alt="" />
+                                        <img src={currentTrack?.ImgMed} alt="" />
                                     </div>
                                     <div className="track-play__author">
                                         <a className="track-play__author-link" href="http://"
-                                        >{track?.Name}</a>
+                                        >{currentTrack?.Name}</a>
                                     </div>
                                     <div className="track-play__album">
                                         <a className="track-play__album-link" href="http://">{
-                                            track?.Author && track.Author.length > 28
-                                                ? track.Author.slice(0, 28) + "..."
-                                                : track?.Author || ""}</a>
+                                            currentTrack?.Author && currentTrack.Author.length > 28
+                                                ? currentTrack.Author.slice(0, 28) + "..."
+                                                : currentTrack?.Author || ""}</a>
                                     </div>
                                 </div>
 
