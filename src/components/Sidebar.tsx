@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { usePlaylist } from "../context/PlaylistContext";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchPicks } from "../store/reducers/picks/picksThunks";
+import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
 
 const Sidebar = () => {
     const dispatch = useAppDispatch()
+    const { startLoading } = playlistSlice.actions
     const { PicksPlaylists } = useAppSelector(state => state.playlistReducer)
     const { setPicksPlaylists } = usePlaylist()
 
@@ -55,10 +57,14 @@ const Sidebar = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchPicks({offset: 0, limit: 25}));
+        if(PicksPlaylists.length === 0) {
+            dispatch(startLoading())
+            dispatch(fetchPicks({offset: 0, limit: 25}));
+        }
         console.log(PicksPlaylists);
-        loadData();
-    }, []);
+        setPicksPlaylists(PicksPlaylists)
+        // loadData();
+    }, [PicksPlaylists]);
 
     if (loading) {
         return (
