@@ -642,12 +642,13 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
+  z-index: 5;
   width: 26px;
   height: 26px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background-color: #ffffff;
-  background-image: url('/public/img/icon/play.svg');
+  background-image: url('public/img/icon/play.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 9px 12px;
