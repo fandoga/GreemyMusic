@@ -3,8 +3,12 @@ import SidebarSkeleton from "./SidebarSkeleton";
 import UserSkeleton from "./UserSkeleton";
 import { Link } from "react-router-dom";
 import { usePlaylist } from "../context/PlaylistContext";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { fetchPicks } from "../store/reducers/picks/picksThunks";
 
 const Sidebar = () => {
+    const dispatch = useAppDispatch()
+    const { PicksPlaylists } = useAppSelector(state => state.playlistReducer)
     const { setPicksPlaylists } = usePlaylist()
 
     const playlistIds = [
@@ -51,6 +55,8 @@ const Sidebar = () => {
     };
 
     useEffect(() => {
+        dispatch(fetchPicks({offset: 0, limit: 25}));
+        console.log(PicksPlaylists);
         loadData();
     }, []);
 
