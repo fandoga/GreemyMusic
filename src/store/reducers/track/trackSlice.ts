@@ -37,6 +37,7 @@ export const trackSlice = createSlice({
     reducers: {
         setCurrentTrack(state, action: PayloadAction<TrackData>) {
             state.currentTrack = action.payload
+            console.log("Сработал setcurrenttrack в slice");
         },
         startLoading(state) {
             state.isLoading = true

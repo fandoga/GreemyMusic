@@ -5,8 +5,9 @@ import TrackData from "../pages/main/TrackData";
 
 
 interface TrackProps extends TrackData {
-    onSelect?: () => { payload: any; type: "track/setCurrentTrack"; };
+    onSelect?: () => void;
 }
+// { payload: any; type: "track/setCurrentTrack"; }
 
 const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();
