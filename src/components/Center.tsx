@@ -78,7 +78,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                                     key={idx}
                                     {...track}
                                     onSelect={() => {
-                                      setCurrentTrack(track)
+                                      dispatch(setCurrentTrack(track))
                                       console.log("сработал onSelect");
                                     }}
                                 />
