@@ -5,64 +5,30 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchPicks } from "../store/reducers/picks/picksThunks";
 import { playlistSlice } from "../store/reducers/playlists/playlistSlice";
+import { fetchUser } from "../store/reducers/user/userThunk";
 
 const Sidebar = () => {
     const dispatch = useAppDispatch()
-    const { startLoading } = playlistSlice.actions
+    const { startLoading, setCurrentPlaylist } = playlistSlice.actions
     const { PicksPlaylists, isLoading } = useAppSelector(state => state.playlistReducer)
+    const { userName } = useAppSelector(state => state.userReducer)
     // const { setPicksPlaylists } = usePlaylist()
 
-    const playlistIds = [
-        '1CnDCN10TJZjw6K2H3gNRv',
-        '4JbSoqC2zjkAFiaN8K4NYy',
-        '357fWKFTiDhpt9C69CMG4q'
-    ];
     const [playlists, setPlaylists] = useState<{ id: string; image: string }[]>([]);
     const [loading, setLoading] = useState(false);
-    const [user, SetUser] = useState(null);
-
-    const loadData = async () => {
-        const accessToken = localStorage.getItem('access-token');
-        setLoading(true);
-
-        try {
-            // const playlistData = await Promise.all(
-            //     playlistIds.map(async (id) => {
-            //         const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
-            //             headers: { Authorization: `Bearer ${accessToken}` }
-            //         });
-            //         const data = await res.json();
-            //         return {
-            //             data,
-            //             id,
-            //             image: data.images[0]?.url || `/img/playlist0${id + 1}`,
-            //         };
-            //     })
-            // );
-            // setPicksPlaylists(playlistData)
-            // setPlaylists(playlistData);
-
-            // Загружаем пользователя
-            const userRes = await fetch('https://api.spotify.com/v1/me', {
-                headers: { Authorization: `Bearer ${accessToken}` }
-            });
-            const userData = await userRes.json();
-            SetUser(userData.display_name);
-        } catch (err) {
-            console.error('Ошибка:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const [user, SetUser] = useState<string>("");
 
     useEffect(() => {
-        if(PicksPlaylists.length === 0) {
-            dispatch(startLoading())
-            dispatch(fetchPicks({offset: 0, limit: 25}));
-        }
+        dispatch(startLoading())
+        dispatch(fetchPicks({offset: 0, limit: 25}));
+        dispatch(fetchUser())
+    }, [dispatch, startLoading])
+
+    useEffect(() => {
         console.log(PicksPlaylists);
         setPlaylists(PicksPlaylists)
-    }, [PicksPlaylists]);
+        SetUser(userName)
+    }, [PicksPlaylists, userName]);
 
     if (loading) {
         return (
@@ -92,12 +58,12 @@ const Sidebar = () => {
                 <div className="sidebar__list">
                     {playlists.map((pl, index) => (
                         <div className="sidebar__item" key={pl.id}>
-                            <Link className="sidebar__link" to={`/picks/${index + 1}`}>
+                            <span className="sidebar__link" onClick={() => {dispatch(setCurrentPlaylist(pl))}}>
                                 <div
                                     className="sidebar__img"
                                     style={{ backgroundImage: `url(${pl.image})` }}
                                 />
-                            </Link>
+                            </span>
                         </div>
                     ))}
                 </div>

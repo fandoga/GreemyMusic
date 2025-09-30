@@ -33,9 +33,6 @@ export const fetchPicks = createAsyncThunk<
                     };
                 })
             )
-            // const data = await res.json();
-            // return { data, offset }
-            console.log(playlistData);
             return { playlistData, offset }
         } catch (e: any) {
             return thunkAPI.rejectWithValue(`Не удалось выполнить загрузку. ${e.message}`)
