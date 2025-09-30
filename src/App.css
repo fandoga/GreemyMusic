@@ -620,6 +620,11 @@ body {
   display: block;
 }
 
+.track__title-image img.active{
+  background-color: black;
+  opacity: 0.5;
+}
+
 .track__title-svg {
   width: 18px;
   height: 17px;
