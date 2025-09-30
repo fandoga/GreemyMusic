@@ -636,6 +636,41 @@ body {
   opacity: 0.6;
 }
 
+/* Play button overlay in the center */
+.track__title-image::before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: #ffffff;
+  background-image: url('/img/icon/play.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 9px 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+/* Hover state shows gentle overlay and the button */
+.track__title-image:hover::after{
+  opacity: 0.35;
+}
+
+.track__title-image:hover::before{
+  opacity: 1;
+}
+
+/* Active state keeps the overlay and button visible */
+.track__title-image.active::before{
+  opacity: 1;
+}
+
 .track__title-svg {
   width: 18px;
   height: 17px;
