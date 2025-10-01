@@ -13,7 +13,7 @@ interface TrackProps extends TrackData {
 
 const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const { togglePlayingTrack } = trackSlice.actions
     const { currentTrack, isTrackPlaying } = useAppSelector(state => state.trackReducer)
     const [isSelected, setSelected] = useState<boolean>(false)
@@ -32,7 +32,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
         <div className="playlist__item">
             <div onClick={(onSelect)} className={`playlist__track track ${isSelected ? 'active' : ''}`}>
                 <div className="track__title">
-                    <div onClick={(e) => { e.stopPropagation(); dispatch(togglePlayingTrack()) }} className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
+                    <div onClick={(e) => {  dispatch(togglePlayingTrack()) }} className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
                         <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">
