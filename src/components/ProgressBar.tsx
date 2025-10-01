@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 interface ProgressBarProps {
     duration: number

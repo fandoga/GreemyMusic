@@ -45,19 +45,37 @@ const Bar: React.FC<BarProps> = ({ state }) => {
         if (!audioRef.current) return;
         dispatch(stopPlayingTrack())
         audioRef.current.currentTime = 0
-    }, [currentTrack])
+    }, [currentTrack, dispatch, stopPlayingTrack])
 
     useEffect(() => {
         if (!audioRef.current) return;
-        if (!isTrackPlaying) {
-            audioRef.current.play();
+        if (isTrackPlaying) {
+            const playPromise = audioRef.current.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch((err: any) => {
+                    if (err?.name === 'AbortError') {
+                        return; // ignore interruption from a subsequent pause
+                    }
+                    // Optional: log other errors for diagnostics
+                    // console.error('Audio play error:', err);
+                });
+            }
         } else {
-            audioRef.current.pause();
+            try {
+                audioRef.current.pause();
+            } catch {}
         }
     }, [isTrackPlaying])
 
     const PlayHandle = () => {
-        audioRef.current.play()
+        const playPromise = audioRef.current.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch((err: any) => {
+                if (err?.name === 'AbortError') {
+                    return;
+                }
+            });
+        }
         dispatch(startPlayingTrack())
     }
 

@@ -32,7 +32,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
         <div className="playlist__item">
             <div onClick={(onSelect)} className={`playlist__track track ${isSelected ? 'active' : ''}`}>
                 <div className="track__title">
-                    <div onClick={() => dispatch(togglePlayingTrack())} className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
+                    <div onClick={(e) => { e.stopPropagation(); dispatch(togglePlayingTrack()) }} className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
                         <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">
