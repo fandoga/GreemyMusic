@@ -1,5 +1,5 @@
 import { useLoading } from "../context/LoadingContext";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TrackSkeleton from "./TrackSkeleton";
 import TrackData from "../pages/main/TrackData";
 import { useAppSelector } from "../hooks/redux";
@@ -13,6 +13,11 @@ interface TrackProps extends TrackData {
 const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();
     const { currentTrack } = useAppSelector(state => state.trackReducer)
+    const [isPlaying, setPlaying] = useState<boolean>(false)
+    
+    useEffect(() => {
+        currentTrack.Name === Name ? setPlaying(true) : setPlaying(false)
+    }, [currentTrack])
 
     if (loading) {
         return (
@@ -22,9 +27,9 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
 
     return (
         <div className="playlist__item">
-            <div onClick={(onSelect)} className="playlist__track track">
+            <div onClick={(onSelect)} className={`playlist__track track ${isPlaying ? 'active' : ''}`}>
                 <div className="track__title">
-                    <div className={`track__title-image ${currentTrack.Name === Name ? 'active' : ''}`}>
+                    <div className={`track__title-image ${isPlaying ? 'active' : ''}`}>
                         <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">

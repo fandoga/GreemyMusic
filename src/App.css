@@ -579,6 +579,11 @@ body {
   transition: background-color 0.15s ease;
 }
 
+
+.playllist__track.active {
+  background: #484848;
+}
+
 .playlist__track:hover {
   background: #2e2e2e;
 }
@@ -636,7 +641,6 @@ body {
   opacity: 0.6;
 }
 
-/* Play button overlay in the center */
 .track__title-image::before{
   content: '';
   position: absolute;
@@ -647,7 +651,7 @@ body {
   height: 26px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #b672ff;
   background-image: url('/public/img/icon/play.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -658,7 +662,7 @@ body {
   pointer-events: none;
 }
 
-/* Hover state shows gentle overlay and the button */
+
 .track__title-image:hover::after{
   opacity: 0.35;
 }
@@ -667,7 +671,6 @@ body {
   opacity: 1;
 }
 
-/* Active state keeps the overlay and button visible */
 .track__title-image.active::before{
   opacity: 1;
 }
