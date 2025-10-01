@@ -621,6 +621,7 @@ body {
 }
 
 .track__title-image img {
+  user-select: none;
   position: relative;
   width: 100%;
   height: 100%;
@@ -664,7 +665,7 @@ body {
 
 .track__title-image.playing::before{
   background-image: url('/public/img/icon/pause.svg');
-  margin-right: 2px;
+  margin-right: 4px;
 }
 
 
@@ -1085,6 +1086,7 @@ body {
 }
 
 .track-play__image {
+  user-select: none;
   width: 51px;
   height: 51px;
   background-color: #313131;
