@@ -45,7 +45,7 @@ const Bar: React.FC<BarProps> = ({ state }) => {
         if (!audioRef.current) return;
         dispatch(stopPlayingTrack())
         audioRef.current.currentTime = 0
-        setCurrentTime(0)
+        // setCurrentTime(audioRef.current.currentTime)
     }, [currentTrack])
 
     useEffect(() => {
