@@ -1099,8 +1099,6 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 12px;
-  grid-row: 1;
-  grid-column: 1;
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
