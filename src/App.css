@@ -581,7 +581,7 @@ body {
 
 
 .playlist__track.active {
-  background: #484848;
+  background: #2e2e2e;
 }
 
 .playlist__track:hover {
