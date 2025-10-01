@@ -41,6 +41,15 @@ const Bar: React.FC<BarProps> = ({ state }) => {
         };
     }, [isTrackPlaying])
 
+    useEffect(() => {
+        if (!audioRef.current) return;
+        if (isTrackPlaying) {
+            audioRef.current.play();
+        } else {
+            audioRef.current.pause();
+        }
+    }, [isTrackPlaying])
+
     const PlayHandle = () => {
         audioRef.current.play()
         dispatch(startPlayingTrack())

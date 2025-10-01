@@ -1086,7 +1086,6 @@ body {
 }
 
 .track-play__image {
-  user-select: none;
   width: 51px;
   height: 51px;
   background-color: #313131;
