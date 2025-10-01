@@ -664,6 +664,7 @@ body {
 
 .track__title-image.playing::before{
   background-image: url('/public/img/icon/pause.svg');
+  margin-right: 2px;
 }
 
 

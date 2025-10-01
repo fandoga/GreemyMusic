@@ -46,6 +46,9 @@ export const trackSlice = createSlice({
         stopPlayingTrack(state) {
             state.isTrackPlaying = false;
         },
+        togglePlayingTrack(state) {
+            state.isTrackPlaying = !state.isTrackPlaying
+        },
         startLoading(state) {
             state.isLoading = true
         },

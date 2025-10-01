@@ -2,7 +2,8 @@ import { useLoading } from "../context/LoadingContext";
 import React, { useEffect, useState } from "react";
 import TrackSkeleton from "./TrackSkeleton";
 import TrackData from "../pages/main/TrackData";
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { trackSlice } from "../store/reducers/track/trackSlice";
 
 
 interface TrackProps extends TrackData {
@@ -12,6 +13,8 @@ interface TrackProps extends TrackData {
 
 const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();
+    const dispatch = useAppDispatch()
+    const { togglePlayingTrack } = trackSlice.actions
     const { currentTrack, isTrackPlaying } = useAppSelector(state => state.trackReducer)
     const [isSelected, setSelected] = useState<boolean>(false)
     
@@ -29,7 +32,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
         <div className="playlist__item">
             <div onClick={(onSelect)} className={`playlist__track track ${isSelected ? 'active' : ''}`}>
                 <div className="track__title">
-                    <div className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
+                    <div onClick={() => dispatch(togglePlayingTrack())} className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
                         <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">
