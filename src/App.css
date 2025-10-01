@@ -580,7 +580,7 @@ body {
 }
 
 
-.playllist__track.active {
+.playlist__track.active {
   background: #484848;
 }
 
@@ -660,6 +660,10 @@ body {
   opacity: 0;
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
+}
+
+.track__title-image.playing::before{
+  background-image: url('/public/img/icon/pause.svg');
 }
 
 

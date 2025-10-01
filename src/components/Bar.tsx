@@ -3,7 +3,8 @@ import BarSkeleton from "./BarSkeleton"
 import { useLoading } from "../context/LoadingContext";
 import TrackData from "../pages/main/TrackData";
 import ProgressBar from "./ProgressBar";
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { trackSlice } from "../store/reducers/track/trackSlice";
 
 
 interface BarProps {
@@ -13,9 +14,10 @@ interface BarProps {
 
 const Bar: React.FC<BarProps> = ({ state }) => {
     const loadingGlobal = useLoading();
-    const { currentTrack, isLoading } = useAppSelector(state => state.trackReducer)
+    const dispatch = useAppDispatch()
+    const { currentTrack, isLoading, isTrackPlaying } = useAppSelector(state => state.trackReducer)
+    const { startPlayingTrack, stopPlayingTrack } = trackSlice.actions
     const audioRef = useRef<any>(null);
-    const [isPlaying, setPlaying] = useState(false);
     const [isRepeated, setRepeat] = useState(false);
     const [currentTime, setCurrentTime] = useState(0)
 
@@ -30,23 +32,23 @@ const Bar: React.FC<BarProps> = ({ state }) => {
             }
         };
 
-        if (isPlaying) {
+        if (isTrackPlaying) {
             animationFrameId = requestAnimationFrame(updateTime);
         }
 
         return () => {
             cancelAnimationFrame(animationFrameId);
         };
-    }, [isPlaying])
+    }, [isTrackPlaying])
 
     const PlayHandle = () => {
         audioRef.current.play()
-        setPlaying(true)
+        dispatch(startPlayingTrack())
     }
 
     const StopHandle = () => {
         audioRef.current.pause()
-        setPlaying(false)
+        dispatch(stopPlayingTrack())
     }
 
     const VolumeHandle = (newVolume: number) => {
@@ -63,7 +65,7 @@ const Bar: React.FC<BarProps> = ({ state }) => {
         setRepeat(newValue);
     }
 
-    const togglePlay = isPlaying ? StopHandle : PlayHandle;
+    const togglePlay = isTrackPlaying ? StopHandle : PlayHandle;
 
     if (loadingGlobal || state || isLoading) {
         return (
@@ -97,7 +99,7 @@ const Bar: React.FC<BarProps> = ({ state }) => {
                                 </div>
                                 <div onClick={togglePlay} className="player__btn-play _btn">
                                     <svg className="player__btn-play-svg" >
-                                        <use xlinkHref={isPlaying ? '/img/icon/sprite.svg#icon-pause' : '/img/icon/sprite.svg#icon-play'}></use>
+                                        <use xlinkHref={isTrackPlaying ? '/img/icon/sprite.svg#icon-pause' : '/img/icon/sprite.svg#icon-play'}></use>
                                     </svg>
                                 </div>
                                 <div className="player__btn-next">

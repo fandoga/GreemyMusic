@@ -16,6 +16,7 @@ const EMPTY_TRACK: TrackData = {
 };
 
 interface TrackState {
+    isTrackPlaying: boolean,
     currentTrack: TrackData,
     AllTracks: any[];
     isLoading: boolean;
@@ -24,6 +25,7 @@ interface TrackState {
 }
 
 const initialState: TrackState = {
+    isTrackPlaying: false,
     currentTrack: EMPTY_TRACK,
     AllTracks: [],
     isLoading: false,
@@ -37,6 +39,12 @@ export const trackSlice = createSlice({
     reducers: {
         setCurrentTrack(state, action: PayloadAction<TrackData>) {
             state.currentTrack = action.payload
+        },
+        startPlayingTrack(state) {
+            state.isTrackPlaying = true;
+        },
+        stopPlayingTrack(state) {
+            state.isTrackPlaying = false;
         },
         startLoading(state) {
             state.isLoading = true
