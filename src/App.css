@@ -673,9 +673,9 @@ body {
   opacity: 0.35;
 }
 
-.track__title-image:hover::before{
+/* .track__title-image:hover::before{
   opacity: 1;
-}
+} */
 
 .track__title-image.active::before{
   opacity: 1;
