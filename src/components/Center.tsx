@@ -86,7 +86,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                                     key={idx}
                                     {...track}
                                     onSelect={() => {
-                                      if (!isSameTrack(track, currentTrack)) dispatch(setCurrentTrack(track))
+                                      !isSameTrack(track, currentTrack) ? dispatch(setCurrentTrack(track)) : dispatch(setCurrentTrack(track))
                                     }}
                                 />
                             ))
