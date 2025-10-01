@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchRecomendations } from "../store/reducers/track/trackThunks";
 import { fetchSearchQuery } from "../store/reducers/searchQuery/searchThunks";
 import { trackSlice } from "../store/reducers/track/trackSlice";
+import { current } from "@reduxjs/toolkit";
 
 
 interface CenterProps {
@@ -22,7 +23,7 @@ interface CenterProps {
 const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, onTrackSelect, query }) => {
     const dispatch = useAppDispatch()
     const { setCurrentTrack } = trackSlice.actions
-    const {hasMoreTracks} = useAppSelector(state => state.trackReducer)
+    const {hasMoreTracks, currentTrack} = useAppSelector(state => state.trackReducer)
     const loaderRef = useRef<HTMLDivElement | null>(null);
     const tracksRef = useRef<TrackData[]>(tracks);
     
@@ -78,7 +79,9 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                                     key={idx}
                                     {...track}
                                     onSelect={() => {
-                                      dispatch(setCurrentTrack(track))
+                                      if (track !== currentTrack) {
+                                        dispatch(setCurrentTrack(track))
+                                      }
                                     }}
                                 />
                             ))
