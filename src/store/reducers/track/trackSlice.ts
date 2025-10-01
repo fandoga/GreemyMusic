@@ -91,7 +91,6 @@ export const trackSlice = createSlice({
                     // догружаем
                     const items = action.payload?.data?.tracks?.items || []
                     state.AllTracks = [...state.AllTracks, ...items];
-                    const next = action.payload?.data?.next ?? null
                     if (action.payload.data.next === null) {
                         state.hasMoreTracks = false
                     }

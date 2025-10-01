@@ -20,7 +20,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
     
     useEffect(() => {
         currentTrack.Name === Name ? setSelected(true) : setSelected(false)
-    }, [currentTrack])
+    }, [currentTrack, Name])
 
     if (loading) {
         return (

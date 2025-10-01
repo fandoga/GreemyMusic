@@ -870,6 +870,7 @@ body {
   margin: 0;
   width: 100%;
   height: var(--progress-height);
+  appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
   background: transparent;
@@ -1097,6 +1098,8 @@ body {
   -ms-flex-pack: center;
   justify-content: center;
   margin-right: 12px;
+  grid-row: 1;
+  grid-column: 1;
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
@@ -1116,6 +1119,8 @@ body {
 }
 
 .track-play__author {
+  grid-row: 1;
+  grid-column: 2;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: author;
@@ -1132,6 +1137,8 @@ body {
 
 .track-play__album {
   width: max-content;
+  grid-row: 2;
+  grid-column: 2;
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: album;
