@@ -26,6 +26,13 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
     const {hasMoreTracks, currentTrack} = useAppSelector(state => state.trackReducer)
     const loaderRef = useRef<HTMLDivElement | null>(null);
     const tracksRef = useRef<TrackData[]>(tracks);
+
+    const isSameTrack = (a?: TrackData, b?: TrackData) =>
+      !!a && !!b &&
+      a.Name === b.Name &&
+      a.Author === b.Author &&
+      a.Album === b.Album &&
+      a.Time === b.Time;
     
     //инфинти-скролл
     useEffect(() => {
@@ -79,9 +86,7 @@ const Center: React.FC<CenterProps> = ({ title, searchTracks, tracks, loading, o
                                     key={idx}
                                     {...track}
                                     onSelect={() => {
-                                      if (track !== currentTrack) {
-                                        dispatch(setCurrentTrack(track))
-                                      }
+                                      if (!isSameTrack(track, currentTrack)) dispatch(setCurrentTrack(track))
                                     }}
                                 />
                             ))
