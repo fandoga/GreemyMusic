@@ -663,7 +663,7 @@ body {
   pointer-events: none;
 }
 
-.track__title-image.playing::before{
+.track__title-image.active.playing::before{
   background-image: url('/public/img/icon/pause.svg');
   margin-right: 4px;
 }
