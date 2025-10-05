@@ -61,7 +61,7 @@ const Main = () => {
             Info: '',
         }));
 
-    dispatch(setAdaptedTracks(adaptedTracks))
+    // dispatch(setAdaptedTracks(adaptedTracks))
 
     return (
         <div className="container">
