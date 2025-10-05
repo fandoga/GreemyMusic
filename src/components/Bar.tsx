@@ -15,8 +15,8 @@ interface BarProps {
 const Bar: React.FC<BarProps> = ({ state }) => {
     const loadingGlobal = useLoading();
     const dispatch = useAppDispatch()
-    const { currentTrack, isLoading, isTrackPlaying } = useAppSelector(state => state.trackReducer)
-    const { startPlayingTrack, stopPlayingTrack } = trackSlice.actions
+    const { currentTrack, isLoading, isTrackPlaying, AllTracks } = useAppSelector(state => state.trackReducer)
+    const { startPlayingTrack, stopPlayingTrack, setCurrentTrack } = trackSlice.actions
     const audioRef = useRef<any>(null);
     const [isRepeated, setRepeat] = useState(false);
     const [currentTime, setCurrentTime] = useState(0)
@@ -97,6 +97,32 @@ const Bar: React.FC<BarProps> = ({ state }) => {
         audioRef.current.loop = newValue;
         setRepeat(newValue);
     }
+
+    const playNextTrack = React.useCallback(() => {
+        if (!AllTracks || AllTracks.length === 0) return;
+      
+        const currentIndex = AllTracks.findIndex(t => t.Name === currentTrack?.Name && t.Author === currentTrack?.Author);
+        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % AllTracks.length : 0;
+        const nextTrack = AllTracks[nextIndex];
+      
+        dispatch(setCurrentTrack(nextTrack));
+        dispatch(startPlayingTrack());
+      }, [AllTracks, currentTrack, dispatch, setCurrentTrack, startPlayingTrack]);
+      
+      // подписка на событие ended
+      useEffect(() => {
+        const el = audioRef.current as HTMLAudioElement | null;
+        if (!el) return;
+      
+        const handleEnded = () => {
+          // если включён repeat, не переключаем
+          if (el.loop) return;
+          playNextTrack();
+        };
+      
+        el.addEventListener('ended', handleEnded);
+        return () => el.removeEventListener('ended', handleEnded);
+      }, [playNextTrack]);
 
     const togglePlay = isTrackPlaying ? StopHandle : PlayHandle;
 
