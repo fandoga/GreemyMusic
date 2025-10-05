@@ -12,11 +12,11 @@ import { trackSlice } from "../../store/reducers/track/trackSlice";
 
 const Main = () => {
     const dispatch = useAppDispatch()
-    const { AllTracks, isLoading, currentTrack } = useAppSelector(state => state.trackReducer)
+    const { AllTracks, isLoading, currentTrack, AdaptedTracks } = useAppSelector(state => state.trackReducer)
     const { currentPlaylist } = useAppSelector(state => state.playlistReducer)
     const { startLoading, setAdaptedTracks } = trackSlice.actions
     const [title, setTitle] = useState<string>("Главная")
-    let adaptedTracks
+    // let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
     const [searchTracks, setSearch] = useState<string>('');
 
@@ -42,26 +42,24 @@ const Main = () => {
     // обновления списка треков
     useEffect(() => {
         setTracks(AllTracks || [])
+        dispatch(setAdaptedTracks(tracks))
         console.log(AllTracks);
-        console.log(currentTrack);
     }, [AllTracks, searchTracks])
 
     //приведение треков к нужному виду
-    adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
-        .filter((track: any) => track && track.album)
-        .map((track: any): TrackData => ({
-            Img: track.album.images?.[2]?.url || "",
-            ImgMed: track.album.images?.[1]?.url || "",
-            ImgBig: track.album.images?.[0]?.url || "",
-            Name: track.name,
-            Status: { selected: false },
-            Author: track.artists?.map((a: any) => a.name).join(', ') || "",
-            Album: track.album.name,
-            Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
-            Info: '',
-        }));
-
-    // dispatch(setAdaptedTracks(adaptedTracks))
+    // adaptedTracks = (searchTracks.length === 0 ? tracks.map((item: any) => item.track) : tracks)
+    //     .filter((track: any) => track && track.album)
+    //     .map((track: any): TrackData => ({
+    //         Img: track.album.images?.[2]?.url || "",
+    //         ImgMed: track.album.images?.[1]?.url || "",
+    //         ImgBig: track.album.images?.[0]?.url || "",
+    //         Name: track.name,
+    //         Status: { selected: false },
+    //         Author: track.artists?.map((a: any) => a.name).join(', ') || "",
+    //         Album: track.album.name,
+    //         Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
+    //         Info: '',
+    //     }));
 
     return (
         <div className="container">
@@ -69,7 +67,7 @@ const Main = () => {
                 <Nav searchQuery={setSearch}/>
                 <Center
                     title={title}
-                    tracks={adaptedTracks}
+                    tracks={AdaptedTracks}
                     loading={isLoading}
                     searchTracks={setSearch}
                     query={searchTracks}

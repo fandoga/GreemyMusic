@@ -40,7 +40,19 @@ export const trackSlice = createSlice({
     initialState,
     reducers: {
         setAdaptedTracks(state, action: PayloadAction<TrackData[]>) {
-            state.AdaptedTracks = action.payload
+            state.AdaptedTracks = (action.payload.length === 0 ? action.payload.map((item: any) => item.track) : action.payload)
+            .filter((track: any) => track && track.album)
+            .map((track: any): TrackData => ({
+                Img: track.album.images?.[2]?.url || "",
+                ImgMed: track.album.images?.[1]?.url || "",
+                ImgBig: track.album.images?.[0]?.url || "",
+                Name: track.name,
+                Status: { selected: false },
+                Author: track.artists?.map((a: any) => a.name).join(', ') || "",
+                Album: track.album.name,
+                Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
+                Info: '',
+            }));
         },
         setCurrentTrack(state, action: PayloadAction<TrackData>) {
             state.currentTrack = action.payload
