@@ -43,7 +43,7 @@ const Main = () => {
     useEffect(() => {
         setTracks(AllTracks || [])
         dispatch(setAdaptedTracks(tracks))
-        console.log(AllTracks);
+        console.log(AdaptedTracks);
     }, [AllTracks, searchTracks])
 
     //приведение треков к нужному виду

@@ -14,7 +14,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
     const loading = useLoading();
     const dispatch = useAppDispatch();
     const { togglePlayingTrack } = trackSlice.actions
-    const { currentTrack, isTrackPlaying } = useAppSelector(state => state.trackReducer)
+    const { currentTrack, isTrackPlaying, isLoading } = useAppSelector(state => state.trackReducer)
     const [isSelected, setSelected] = useState<boolean>(false)
     
     useEffect(() => {
@@ -36,7 +36,7 @@ const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onS
                         dispatch(togglePlayingTrack())
                         } 
                          }}
-                         className={`track__title-image ${isSelected ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
+                         className={`track__title-image ${isSelected && !isLoading ? 'active' : ''} ${isTrackPlaying ? 'playing' : ''}`}>
                         <img src={Img} alt="" />
                     </div>
                     <div className="track__title-text">

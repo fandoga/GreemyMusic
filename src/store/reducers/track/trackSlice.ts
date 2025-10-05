@@ -39,8 +39,8 @@ export const trackSlice = createSlice({
     name: 'track',
     initialState,
     reducers: {
-        setAdaptedTracks(state, action: PayloadAction<TrackData[]>) {
-            state.AdaptedTracks = (action.payload.length === 0 ? action.payload.map((item: any) => item.track) : action.payload)
+        setAdaptedTracks(state, action: PayloadAction<any>) {
+            state.AdaptedTracks = (action.payload.track.length === 0 ? action.payload.track.map((item: any) => item.track) : action.payload)
             .filter((track: any) => track && track.album)
             .map((track: any): TrackData => ({
                 Img: track.album.images?.[2]?.url || "",
