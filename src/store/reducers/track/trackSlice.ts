@@ -15,10 +15,36 @@ const EMPTY_TRACK: TrackData = {
     Info: "",
 };
 
+// Helpers to adapt Spotify API shapes into TrackData used by the app
+const adaptFromSpotifyTrack = (track: any): TrackData => ({
+    Img: track?.album?.images?.[2]?.url || "",
+    ImgMed: track?.album?.images?.[1]?.url || "",
+    ImgBig: track?.album?.images?.[0]?.url || "",
+    Name: track?.name || "",
+    Status: { selected: false },
+    Author: Array.isArray(track?.artists) ? track.artists.map((a: any) => a?.name).join(', ') : "",
+    Album: track?.album?.name || "",
+    Time: Math.floor((track?.duration_ms || 0) / 60000) + ':' + String(Math.floor(((track?.duration_ms || 0) % 60000) / 1000)).padStart(2, '0'),
+    Info: '',
+});
+
+const adaptFromPlaylistItems = (items: any[]): TrackData[] => {
+    return (items || [])
+        .map((item: any) => item?.track)
+        .filter((track: any) => track && track.album)
+        .map(adaptFromSpotifyTrack);
+}
+
+const adaptFromSearchTracks = (tracks: any[]): TrackData[] => {
+    return (tracks || [])
+        .filter((track: any) => track && track.album)
+        .map(adaptFromSpotifyTrack);
+}
+
 interface TrackState {
     isTrackPlaying: boolean,
     currentTrack: TrackData,
-    AdaptedTracks: any[],
+    AdaptedTracks: TrackData[],
     AllTracks: any[];
     isLoading: boolean;
     error: string;
@@ -39,20 +65,9 @@ export const trackSlice = createSlice({
     name: 'track',
     initialState,
     reducers: {
-        setAdaptedTracks(state, action: PayloadAction<any>) {
-            state.AdaptedTracks = (action.payload.track.length === 0 ? action.payload.track.map((item: any) => item.track) : action.payload)
-            .filter((track: any) => track && track.album)
-            .map((track: any): TrackData => ({
-                Img: track.album.images?.[2]?.url || "",
-                ImgMed: track.album.images?.[1]?.url || "",
-                ImgBig: track.album.images?.[0]?.url || "",
-                Name: track.name,
-                Status: { selected: false },
-                Author: track.artists?.map((a: any) => a.name).join(', ') || "",
-                Album: track.album.name,
-                Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
-                Info: '',
-            }));
+        // left for potential manual setting if ever needed
+        setAdaptedTracks(state, action: PayloadAction<TrackData[]>) {
+            state.AdaptedTracks = action.payload || [];
         },
         setCurrentTrack(state, action: PayloadAction<TrackData>) {
             state.currentTrack = action.payload
@@ -82,10 +97,15 @@ export const trackSlice = createSlice({
                 if (action.payload.offset === 0) {
                     // первая загрузка
                     state.AllTracks = action.payload.data.items;
+                    state.AdaptedTracks = adaptFromPlaylistItems(action.payload.data.items);
                     state.hasMoreTracks = true
                   } else {
                     // догружаем
                     state.AllTracks = [...state.AllTracks, ...action.payload.data.items];
+                    state.AdaptedTracks = [
+                        ...state.AdaptedTracks,
+                        ...adaptFromPlaylistItems(action.payload.data.items)
+                    ];
                     if (action.payload.data.next === null) {
                         state.hasMoreTracks = false
                     }
@@ -103,11 +123,16 @@ export const trackSlice = createSlice({
                 if (action.payload.offset === 0) {
                     // первая загрузка
                     state.AllTracks = action.payload.data.tracks.items;
+                    state.AdaptedTracks = adaptFromSearchTracks(action.payload.data.tracks.items);
                     state.hasMoreTracks = true
                   } else {
                     // догружаем
                     const items = action.payload?.data?.tracks?.items || []
                     state.AllTracks = [...state.AllTracks, ...items];
+                    state.AdaptedTracks = [
+                        ...state.AdaptedTracks,
+                        ...adaptFromSearchTracks(items)
+                    ];
                     if (action.payload.data.next === null) {
                         state.hasMoreTracks = false
                     }
