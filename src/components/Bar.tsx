@@ -106,7 +106,7 @@ const Bar: React.FC<BarProps> = ({ state }) => {
         const nextTrack = AllTracks[nextIndex];
       
         dispatch(setCurrentTrack(nextTrack));
-        console.log(currentTrack, "track");
+        console.log(nextTrack, "track");
         dispatch(startPlayingTrack());
       }, [AllTracks, currentTrack, dispatch, setCurrentTrack, startPlayingTrack]);
       
