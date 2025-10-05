@@ -41,8 +41,7 @@ const Main = () => {
 
     // обновления списка треков
     useEffect(() => {
-        setTracks(AllTracks || [])
-        dispatch(setAdaptedTracks(tracks))
+        setTracks(AdaptedTracks || [])
         console.log(AdaptedTracks);
     }, [AllTracks, searchTracks])
 

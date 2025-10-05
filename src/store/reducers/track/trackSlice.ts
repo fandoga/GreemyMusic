@@ -15,7 +15,6 @@ const EMPTY_TRACK: TrackData = {
     Info: "",
 };
 
-// Helpers to adapt Spotify API shapes into TrackData used by the app
 const adaptFromSpotifyTrack = (track: any): TrackData => ({
     Img: track?.album?.images?.[2]?.url || "",
     ImgMed: track?.album?.images?.[1]?.url || "",
