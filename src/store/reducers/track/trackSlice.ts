@@ -18,6 +18,7 @@ const EMPTY_TRACK: TrackData = {
 interface TrackState {
     isTrackPlaying: boolean,
     currentTrack: TrackData,
+    AdaptedTracks: any[],
     AllTracks: any[];
     isLoading: boolean;
     error: string;
@@ -27,6 +28,7 @@ interface TrackState {
 const initialState: TrackState = {
     isTrackPlaying: false,
     currentTrack: EMPTY_TRACK,
+    AdaptedTracks: [],
     AllTracks: [],
     isLoading: false,
     error: "",
@@ -37,6 +39,9 @@ export const trackSlice = createSlice({
     name: 'track',
     initialState,
     reducers: {
+        setAdaptedTracks(state, action: PayloadAction<TrackData[]>) {
+            state.AdaptedTracks = action.payload
+        },
         setCurrentTrack(state, action: PayloadAction<TrackData>) {
             state.currentTrack = action.payload
         },

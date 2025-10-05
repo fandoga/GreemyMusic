@@ -14,7 +14,7 @@ const Main = () => {
     const dispatch = useAppDispatch()
     const { AllTracks, isLoading, currentTrack } = useAppSelector(state => state.trackReducer)
     const { currentPlaylist } = useAppSelector(state => state.playlistReducer)
-    const { startLoading } = trackSlice.actions
+    const { startLoading, setAdaptedTracks } = trackSlice.actions
     const [title, setTitle] = useState<string>("Главная")
     let adaptedTracks
     const [tracks, setTracks] = useState<any[]>([]);
@@ -60,6 +60,8 @@ const Main = () => {
             Time: Math.floor(track.duration_ms / 60000) + ':' + String(Math.floor((track.duration_ms % 60000) / 1000)).padStart(2, '0'),
             Info: '',
         }));
+
+    dispatch(setAdaptedTracks(adaptedTracks))
 
     return (
         <div className="container">

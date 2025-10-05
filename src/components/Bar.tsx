@@ -15,7 +15,7 @@ interface BarProps {
 const Bar: React.FC<BarProps> = ({ state }) => {
     const loadingGlobal = useLoading();
     const dispatch = useAppDispatch()
-    const { currentTrack, isLoading, isTrackPlaying, AllTracks } = useAppSelector(state => state.trackReducer)
+    const { currentTrack, isLoading, isTrackPlaying, AdaptedTracks } = useAppSelector(state => state.trackReducer)
     const { startPlayingTrack, stopPlayingTrack, setCurrentTrack } = trackSlice.actions
     const audioRef = useRef<any>(null);
     const [isRepeated, setRepeat] = useState(false);
@@ -54,10 +54,8 @@ const Bar: React.FC<BarProps> = ({ state }) => {
             if (playPromise && typeof playPromise.catch === 'function') {
                 playPromise.catch((err: any) => {
                     if (err?.name === 'AbortError') {
-                        return; // ignore interruption from a subsequent pause
+                        return;
                     }
-                    // Optional: log other errors for diagnostics
-                    // console.error('Audio play error:', err);
                 });
             }
         } else {
@@ -99,16 +97,16 @@ const Bar: React.FC<BarProps> = ({ state }) => {
     }
 
     const playNextTrack = React.useCallback(() => {
-        if (!AllTracks || AllTracks.length === 0) return;
+        if (!AdaptedTracks || AdaptedTracks.length === 0) return;
       
-        const currentIndex = AllTracks.findIndex(t => t.Name === currentTrack?.Name && t.Author === currentTrack?.Author);
-        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % AllTracks.length : 0;
-        const nextTrack = AllTracks[nextIndex];
+        const currentIndex = AdaptedTracks.findIndex(t => t.Name === currentTrack?.Name && t.Author === currentTrack?.Author);
+        const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % AdaptedTracks.length : 0;
+        const nextTrack = AdaptedTracks[nextIndex];
       
         dispatch(setCurrentTrack(nextTrack));
         console.log(nextTrack, "track");
         dispatch(startPlayingTrack());
-      }, [AllTracks, currentTrack, dispatch, setCurrentTrack, startPlayingTrack]);
+      }, [AdaptedTracks, currentTrack, dispatch, setCurrentTrack, startPlayingTrack]);
       
       // подписка на событие ended
       useEffect(() => {
