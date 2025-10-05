@@ -9,7 +9,6 @@ import { trackSlice } from "../store/reducers/track/trackSlice";
 interface TrackProps extends TrackData {
     onSelect?: () => void;
 }
-// { payload: any; type: "track/setCurrentTrack"; }
 
 const Track: React.FC<TrackProps> = ({ Img, Name, Album, Author, Time, Info, onSelect }) => {
     const loading = useLoading();

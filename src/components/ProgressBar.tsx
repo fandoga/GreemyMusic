@@ -19,7 +19,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ duration, currentTime, onChan
       }
     return (
         <>
-            <div className="track-time">{formatSeconds(duration)}</div>
+            {duration && <div className="track-time">{formatSeconds(duration)}</div>}
             <input
                 className="bar__player-progress"
                 type="range"
